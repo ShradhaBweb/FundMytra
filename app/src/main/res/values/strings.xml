@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Fund Mytra</string>
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Home Loans</string>
+    <string name="slide_1_desc">Online Loans Partner \nDreams at your door step</string>
+
+    <string name="slide_2_title">Education Loans</string>
+    <string name="slide_2_desc">Get custom deals and special \ndiscounts tailored just for you!</string>
+
+    <string name="slide_3_title">Car Loans</string>
+    <string name="slide_3_desc">Online Loans Partner\n Dreams at your door step</string>
+
+    <string name="slide_4_title">Business Loans</string>
+    <string name="slide_4_desc">Online Loans Partner\nDreams at your door step</string>
+
+    <string name="slide_5_title">All Credit Cards</string>
+    <string name="slide_5_desc">Apply Credit Cards Online \nDreams at your door step</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
 </resources>
