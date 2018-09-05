@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Fund Mytra</string>
+
+
+    <string name="logtext_1">fundmytra</string>
+    <string name="email_phone">EMAIL ID/PHONE NO</string>
+    <string name="password">PASSWORD</string>
+    <string name="sinup">NO ACCOUNT? SIGN UP</string>
+    <string name="login">LOGIN</string>
+    <string name="forget">FORGET PASSWORD</string>
+    <string name="hint"></string>
 </resources>

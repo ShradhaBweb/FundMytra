@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_top_horizantal">20dp</dimen>
+    <dimen name="margin_right_horizantal">20dp</dimen>
+    <dimen name="margin_left_horizantal">20dp</dimen>
+    <dimen name="margin_bottom_horizantal">20dp</dimen>
+    <dimen name="padding_bottom_horizantal">100dp</dimen>
+    <dimen name="margin_logIcon_horizantal">15dp</dimen>
+</resources>
