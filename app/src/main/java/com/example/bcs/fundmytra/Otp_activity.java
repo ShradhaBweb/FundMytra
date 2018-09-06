@@ -20,8 +20,6 @@ public class Otp_activity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_activity);
-        getSupportActionBar().hide();
-
 
         editText1=(EditText)findViewById(R.id.otp_text1);
         editText2=(EditText)findViewById(R.id.otp_text2);
