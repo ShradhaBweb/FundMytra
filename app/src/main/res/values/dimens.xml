@@ -10,9 +10,10 @@
     <dimen name="slide_desc">16dp</dimen>
     <dimen name="desc_padding">40dp</dimen>
     <dimen name="margin_top_horizantal">20dp</dimen>
-    <dimen name="margin_right_horizantal">20dp</dimen>
-    <dimen name="margin_left_horizantal">20dp</dimen>
+    <dimen name="margin_right_horizantal">25dp</dimen>
+    <dimen name="margin_left_horizantal">25dp</dimen>
     <dimen name="margin_bottom_horizantal">20dp</dimen>
     <dimen name="padding_bottom_horizantal">100dp</dimen>
     <dimen name="margin_logIcon_horizantal">15dp</dimen>
+    <dimen name="margin_gridTop_horizantal">5dp</dimen>
 </resources>

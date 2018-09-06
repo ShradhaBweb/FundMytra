@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/margin_bottom_horizantal"
+    android:layout_marginEnd="@dimen/margin_right_horizantal"
+    android:layout_marginStart="@dimen/margin_left_horizantal"
+    android:layout_marginTop="@dimen/margin_top_horizantal"
+    android:orientation="vertical"
+    tools:context=".IntroductionActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/logtext_1"
+                android:textSize="30sp"
+                android:gravity="end"
+                android:textColor="@color/fundRed"
+                android:fontFamily="@font/montserrat"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/logtext_2"
+                android:textSize="30sp"
+                android:gravity="start"
+                android:textColor="@color/fundRed"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_bottom_horizantal"
+        android:layout_weight="0.3"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/email_phone"
+                android:textColor="@color/fundRed"
+                android:textSize="20sp"
+                app:fontFamily="@font/montserrat"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_gridTop_horizantal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/hint"
+                    android:src="@drawable/email_id"
+                    android:layout_marginEnd="@dimen/margin_logIcon_horizantal" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/fundRed"
+                    android:hint="@string/hint"
+                    android:inputType="text">
+                </EditText>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/margin_gridTop_horizantal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/password"
+                android:textColor="@color/fundRed"
+                android:textSize="20sp"
+                app:fontFamily="@font/montserrat" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_gridTop_horizantal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/hint"
+                    android:src="@drawable/password"
+                    android:layout_marginEnd="@dimen/margin_logIcon_horizantal" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/fundRed"
+                    android:hint="@string/hint"
+                    android:inputType="text">
+                </EditText>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/margin_left_horizantal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/buttonradius"
+                android:paddingLeft="@dimen/padding_bottom_horizantal"
+                android:paddingRight="@dimen/padding_bottom_horizantal"
+                android:text="@string/login"
+                android:textColor="@color/fundWhite"
+                android:textSize="20sp"
+                app:fontFamily="@font/montserrat"/>
+
+            <Button
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/forget"
+                android:textColor="@color/fundRed"
+                android:textSize="15sp"
+                app:fontFamily="@font/montserrat"/>
+
+            <Button
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sinup"
+                android:textColor="@color/fundRed"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/montserrat"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
