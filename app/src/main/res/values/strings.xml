@@ -31,4 +31,11 @@
     <string name="login">LOGIN</string>
     <string name="forget">FORGET PASSWORD</string>
     <string name="hint"></string>
+    <string name="fund">fund</string>
+    <string name="mytra">mytra</string>
+    <string name="signup">sign up</string>
+    <string name="already_registered">Already Registered? </string>
+    <string name="click_here_to_login">Click here to login</string>
+    <string name="phone_no">Phone No</string>
+    <string name="email_id">Email id</string>
 </resources>
