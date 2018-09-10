@@ -7,10 +7,7 @@
                 android:topRightRadius="100dp"
                 android:bottomRightRadius="100dp"
                 />
-            <gradient android:angle="-90"
-                android:startColor="@color/fundRed"
-                android:centerColor="@color/fundRed"
-                android:endColor="@color/fundRed"/>
+            <solid android:color="@color/fundRed"></solid>
         </shape>
     </item>
 </selector>

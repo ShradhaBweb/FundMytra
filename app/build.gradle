@@ -16,13 +16,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets {
-        main { assets.srcDirs = ['src/main/assets', 'src/main/assets/', 'src/main/assets/fonts'] }
-    }
-    compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
-    }
+//    sourceSets {
+//        main { assets.srcDirs = ['src/main/assets', 'src/main/assets/', 'src/main/assets/fonts'] }
+//    }
+//    compileOptions {
+//        targetCompatibility 1.8
+//        sourceCompatibility 1.8
+//    }
 }
 
 dependencies {
@@ -33,6 +33,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    compile 'com.android.support:percent:27.1.1'
+
     implementation 'com.fxn769:numpad:1.0'
 }
