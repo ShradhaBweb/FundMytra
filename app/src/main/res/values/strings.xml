@@ -52,6 +52,6 @@
 
     <string name="verification_code">Verification Code</string>
     <string name="code2">Please type the verification code</string>
-    <string name="sent">sent to </string>
+    <string name="sent">sent to +</string>
 
 </resources>

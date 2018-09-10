@@ -16,4 +16,23 @@
     <dimen name="padding_bottom_horizantal">100dp</dimen>
     <dimen name="margin_logIcon_horizantal">15dp</dimen>
     <dimen name="margin_gridTop_horizantal">5dp</dimen>
+
+
+                    <!--For normal spacer medium -->
+    <dimen name="spacing_medium">5dp</dimen>
+
+                     <!--For Large Screen-->
+    <dimen name="margin_largTop_verticle">40dp</dimen>
+    <dimen name="margin_largeBottom_verticle">40dp</dimen>
+    <dimen name="margin_largeLeft_horizantal">40dp</dimen>
+    <dimen name="margin_largeRight_horizantal">40dp</dimen>
+
+                    <!--For large spacer medium-->
+    <dimen name="large_space_medium">35dp</dimen>
+    <dimen name="large_space_mediumTop"></dimen>
+
+                        <!--For botton margin-->
+    <dimen name="margin_bottonLeft_horizantal">40dp</dimen>
+    <dimen name="margin_bottonRight_horizantal">30dp</dimen>
+
 </resources>
