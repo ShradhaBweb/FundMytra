@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
-public class login_activity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private Button signup, login;
 
     @Override

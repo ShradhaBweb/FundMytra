@@ -16,23 +16,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login_Signup">
-
-        </activity>
-        <activity android:name=".signup_screen">
-
-        </activity>
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-        <activity android:name=".Activity.otpscreen"></activity>
+        <activity android:name=".Login_Signup"></activity>
+        <activity android:name=".signup_screen"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".login_activity" />
-        <activity android:name=".Otp_activity"></activity>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".Otp_activity" />
+        <activity android:name=".HomeActivity"></activity>
     </application>
 
 </manifest>
