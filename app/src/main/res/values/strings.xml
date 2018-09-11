@@ -47,4 +47,13 @@
 
     <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
     <string name="play_again">Play Again</string>
+
+
+    <string name="fund">fund</string>
+    <string name="mytra">mytra</string>
+    <string name="signup">Login</string>
+    <string name="already_registered">Already Registered? </string>
+    <string name="click_here_to_login">Click here to login</string>
+    <string name="phone_no">EMAIL ID/PHONE NO</string>
+    <string name="email_id">PASSWORD</string>
 </resources>
