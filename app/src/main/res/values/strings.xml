@@ -56,4 +56,6 @@
     <string name="click_here_to_login">Click here to login</string>
     <string name="phone_no">EMAIL ID/PHONE NO</string>
     <string name="email_id">PASSWORD</string>
+
+    <string name="content"></string>
 </resources>

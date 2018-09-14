@@ -45,7 +45,7 @@ public class IntroductionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent=new Intent(this,LoginActivity.class);
+        Intent intent=new Intent(this,DashboardActivity.class);
         startActivity(intent);
 
         // Checking for first time launch - before calling setContentView()
