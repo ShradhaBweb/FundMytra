@@ -16,7 +16,7 @@
             android:layout_width="300dp"
             android:layout_height="200dp"
             android:layout_gravity="center"/>
-        
+
     </me.crosswall.lib.coverflow.core.PagerContainer>
     <com.viewpagerindicator.CirclePageIndicator
         android:id="@+id/circlePagerIndicator"
