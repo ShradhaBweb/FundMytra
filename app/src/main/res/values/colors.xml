@@ -43,4 +43,9 @@
         <item>@color/dot_dark_screen3</item>
         <item>@color/dot_dark_screen4</item>
     </array>
+
+    <color name="fundRed">#D12138</color>
+    <color name="fundWhite">#FFFF</color>
+
+    <color name="fundBlack">#0a0000</color>
 </resources>
