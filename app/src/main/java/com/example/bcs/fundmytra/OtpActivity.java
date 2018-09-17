@@ -27,8 +27,6 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
 
         setContentView(R.layout.activity_otp);
 
-        getSupportActionBar().hide();
-
         txt1=(TextView)findViewById(R.id.phone_number);
         txt2=(TextView)findViewById(R.id.text1);
         txt3=(TextView)findViewById(R.id.text2);
