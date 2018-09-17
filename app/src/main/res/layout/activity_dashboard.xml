@@ -93,7 +93,11 @@
             android:id="@+id/test_button_text1"
             android:layout_width="wrap_content"
             android:text="Complete Profile"
+<<<<<<< HEAD
             android:background="#000000"
+=======
+            android:background="@drawable/background_card"
+>>>>>>> 5bfa5ba9ad4c4486d0704ea18e699e6db718ffbb
             android:textColor="#fff"
             android:padding="5dp"
             android:fontFamily="@font/montserrat"

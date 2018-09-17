@@ -65,4 +65,8 @@
                 card_view:fontFamily="@font/montserrat" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
+<<<<<<< HEAD
 </LinearLayout>
+=======
+</LinearLayout>
+>>>>>>> 5bfa5ba9ad4c4486d0704ea18e699e6db718ffbb
