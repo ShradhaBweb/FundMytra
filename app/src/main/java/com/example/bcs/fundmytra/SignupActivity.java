@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class signup_screen extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity {
     public EditText phone_num,email_id;
     public TextView click_here_to_login;
     @Override
@@ -13,11 +13,12 @@ public class signup_screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        phone_num=(EditText)findViewById(R.id.input_phone);
-        email_id=(EditText)findViewById(R.id.input_email);
-        click_here_to_login=(TextView)findViewById(R.id.click_here_to_login);
+        init();
+        listeners();
 
+    }
 
+    private void listeners() {
         phone_num.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,4 +40,10 @@ public class signup_screen extends AppCompatActivity {
             }
         });
     }
+
+    private void init() {
+        phone_num=(EditText)findViewById(R.id.input_phone);
+        email_id=(EditText)findViewById(R.id.input_email);
+        click_here_to_login=(TextView)findViewById(R.id.click_here_to_login);
     }
+}

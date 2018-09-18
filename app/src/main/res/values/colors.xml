@@ -50,4 +50,8 @@
     <color name="fundBlack">#0a0000</color>
 
     <color name="grey">#e9e7e7</color>
+    <!-- My Accounts. -->
+    <color name="text_colors">#DEDEDE</color>
+    <color name="black">#000</color>
+    <color name="verify">#4CC480</color>
 </resources>

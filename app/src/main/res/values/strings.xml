@@ -53,4 +53,32 @@
     <string name="verification_code">Verification Code</string>
     <string name="code2">Please type the verification code</string>
     <string name="sent">sent to +</string>
+
+    <string name="content"></string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- My Accounts. -->
+    <string name="my_accounts">My Accounts</string>
+    <string name="my_profile">My Profile</string>
+    <string name="my_searches">My Searches</string>
+    <string name="my_applications">My Applications</string>
+    <string name="contact_information">Contact Information</string>
+    <string name="name">Jayaram</string>
+    <string name="email">ram2527@gmail.com</string>
+    <string name="phone">8123387992</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="general_information">General Information</string>
+    <string name="door_num">Door No</string>
+    <string name="address_1">Address 1</string>
+    <string name="pincode">Pincode</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="landmark">Landmark</string>
 </resources>
