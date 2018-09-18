@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,11 +15,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
+
 
 public class MyAccountsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    FrameLayout simpleFrameLayout;
     TabLayout tabLayout;
     ViewPager viewPager;
     FragmentAdapter adapter;
@@ -64,30 +61,18 @@ public class MyAccountsActivity extends AppCompatActivity implements NavigationV
         init();
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-      //  First Tab
-//        TabLayout.Tab firstTab = tabLayout.newTab();
-//        firstTab.setText(R.string.my_profile);
-//        tabLayout.addTab(firstTab);
-//
-//        //Second Tab
-//        TabLayout.Tab secondTab = tabLayout.newTab();
-//        secondTab.setText(R.string.my_searches);
-//        tabLayout.addTab(secondTab);
-//
-//       //Third Tab
-//        TabLayout.Tab thirdTab = tabLayout.newTab();
-//        thirdTab.setText(R.string.my_applications);
-//        tabLayout.addTab(thirdTab);
-
-      //  listeners();
-
+        listeners();
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         }
 
     private void init() {
-       // simpleFrameLayout = (FrameLayout) findViewById(R.id.simpleFrameLayout);
+        TabItem  tabprofile = findViewById(R.id.my_profile);
+        TabItem tabsearches = findViewById(R.id.my_searches);
+        TabItem tabaplication = findViewById(R.id.my_application);
+        TabItem tabinterest = findViewById(R.id.your_interest);
         tabLayout = (TabLayout) findViewById(R.id.simpleTabLayout);
          viewPager = (ViewPager) findViewById(R.id.viewpager);
-         adapter = new FragmentAdapter(this, getSupportFragmentManager());
+         adapter = new FragmentAdapter(this, getSupportFragmentManager(),tabLayout.getTabCount());
 
     }
 
@@ -95,27 +80,9 @@ public class MyAccountsActivity extends AppCompatActivity implements NavigationV
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
 
-                Fragment fragment=null;
-                switch (tab.getPosition()) {
-                    case 0:
-                        fragment = new MyProfileFragment();
-                        break;
-                    case 1:
-                        fragment = new MySearchesFragment();
-                        break;
-                    case 2:
-                        fragment = new MyApplicationsFragment();
-                        break;
-
-                        }
-                FragmentManager fm = getSupportFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-               // ft.replace(R.id.simpleFrameLayout, fragment);
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                ft.commit();
             }
-
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
 
