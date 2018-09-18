@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@android:color/white"
     android:orientation="vertical"
+    android:layout_marginTop="50dp"
     tools:context=".DashboardActivity">
 
     <me.crosswall.lib.coverflow.core.PagerContainer
@@ -94,7 +95,6 @@
             android:layout_width="wrap_content"
             android:text="Complete Profile"
             android:background="#000000"
-            android:background="@drawable/background_card"
             android:textColor="#fff"
             android:padding="5dp"
             android:fontFamily="@font/montserrat"
