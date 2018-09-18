@@ -69,7 +69,8 @@ public class MyAccountsActivity extends AppCompatActivity implements NavigationV
         TabItem  tabprofile = findViewById(R.id.my_profile);
         TabItem tabsearches = findViewById(R.id.my_searches);
         TabItem tabaplication = findViewById(R.id.my_application);
-        TabItem tabinterest = findViewById(R.id.your_interest);
+        TabItem tabinterest = findViewById(R.id.salary_info);
+        TabItem tabsalaryinformation = findViewById(R.id.documents);
         tabLayout = (TabLayout) findViewById(R.id.simpleTabLayout);
          viewPager = (ViewPager) findViewById(R.id.viewpager);
          adapter = new FragmentAdapter(this, getSupportFragmentManager(),tabLayout.getTabCount());

@@ -20,6 +20,10 @@ public class FragmentAdapter extends FragmentPagerAdapter {
             case 2:
                 return mContext.getString(R.string.my_applications);
             case 3:
+                return mContext.getString(R.string.salary_info);
+            case 4:
+                return mContext.getString(R.string.documents);
+            case 5:
                 return mContext.getString(R.string.your_interest);
             default:
                 return null;
@@ -49,7 +53,11 @@ public class FragmentAdapter extends FragmentPagerAdapter {
             case 2:
                 return new MyApplicationsFragment();
             case 3:
-            return new YourInterestsFragment();
+            return new SalaryInformationFragment();
+            case 4:
+                return new DocumentsFragment();
+            case 5:
+                return new YourInterestsFragment();
             default:
                 return null;
         }
