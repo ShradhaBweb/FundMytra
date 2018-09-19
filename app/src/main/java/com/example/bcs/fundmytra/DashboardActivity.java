@@ -1,9 +1,11 @@
 package com.example.bcs.fundmytra;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,12 +19,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ExpandableListView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -46,6 +52,10 @@ public class DashboardActivity extends AppCompatActivity
     int i;
     int k;
 
+    ExpandableListAdapter expandableListAdapter;
+    ExpandableListView expandableListView;
+    List<MenuModel> headerList = new ArrayList<>();
+    HashMap<MenuModel, List<MenuModel>> childList = new HashMap<>();
 
     private static final String TAG = "MainActivity";
 
@@ -77,10 +87,27 @@ public class DashboardActivity extends AppCompatActivity
 //            }
 //        });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        prepareMenuData();
+        populateExpandableList();
+
+
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
+        toggle.setDrawerIndicatorEnabled(false);
+        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.menu, getApplicationContext().getTheme());
+        toggle.setHomeAsUpIndicator(drawable);
+        toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (drawer.isDrawerVisible(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                } else {
+                    drawer.openDrawer(GravityCompat.START);
+                }
+            }
+        });
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -222,6 +249,8 @@ public class DashboardActivity extends AppCompatActivity
 
         final ViewPager pager = mContainer.getViewPager();
 
+        expandableListView = findViewById(R.id.expandableListView);
+
         PageAdapter adapter = new PageAdapter(this, arrayList);
         pager.setAdapter(adapter);
 
@@ -329,22 +358,141 @@ public class DashboardActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_accounts) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_applications) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_products) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_referEarn) {
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void prepareMenuData() {
+
+        MenuModel menuModel = new MenuModel("Home", true, false); //Menu of Android Tutorial. No sub menus
+        headerList.add(menuModel);
+
+        menuModel = new MenuModel("My Accounts", true, false);
+        headerList.add(menuModel);
+
+        menuModel = new MenuModel("My Applications", true, false);
+        headerList.add(menuModel);
+
+        menuModel = new MenuModel("Our All Products", true, false);
+        headerList.add(menuModel);
+
+        menuModel = new MenuModel("Refer & Earn", true, false);
+        headerList.add(menuModel);
+        if (!menuModel.hasChildren) {
+            childList.put(menuModel, null);
+        }
+
+        menuModel = new MenuModel("Loans", true, true); //Menu of Java Tutorials
+        headerList.add(menuModel);
+        List<MenuModel> childModelsList = new ArrayList<>();
+        MenuModel childModel = new MenuModel("Core Java Tutorial", false, false);
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Java FileInputStream", false, false);
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Java FileReader", false, false);
+        childModelsList.add(childModel);
+
+        if (menuModel.hasChildren) {
+            Log.d("API123","here");
+            childList.put(menuModel, childModelsList);
+        }
+
+        childModelsList = new ArrayList<>();
+        menuModel = new MenuModel("Secured Loans", true, true); //Menu of Python Tutorials
+        headerList.add(menuModel);
+        childModel = new MenuModel("Python AST – Abstract Syntax Tree", false, false);
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Python Fractions", false, false);
+        childModelsList.add(childModel);
+        if (menuModel.hasChildren) {
+            Log.d("API123","here");
+            childList.put(menuModel, childModelsList);
+        }
+
+        childModelsList = new ArrayList<>();
+        menuModel = new MenuModel("Cards", true, true); //Menu of Python Tutorials
+        headerList.add(menuModel);
+        childModel = new MenuModel("Python AST – Abstract Syntax Tree", false, false);
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Python Fractions", false, false);
+        childModelsList.add(childModel);
+        if (menuModel.hasChildren) {
+            Log.d("API123","here");
+            childList.put(menuModel, childModelsList);
+        }
+
+        childModelsList = new ArrayList<>();
+        menuModel = new MenuModel("Tools", true, true); //Menu of Python Tutorials
+        headerList.add(menuModel);
+        childModel = new MenuModel("Python AST – Abstract Syntax Tree", false, false);
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Python Fractions", false, false);
+        childModelsList.add(childModel);
+
+        if (menuModel.hasChildren) {
+            Log.d("API123","here");
+            childList.put(menuModel, childModelsList);
+        }
+
+        if (menuModel.hasChildren) {
+            childList.put(menuModel, childModelsList);
+        }
+    }
+
+    private void populateExpandableList() {
+
+        expandableListAdapter = new ExpandableListAdapter(this, headerList, childList);
+        expandableListView.setAdapter(expandableListAdapter);
+
+        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+
+                if (headerList.get(groupPosition).isGroup) {
+//                    if (!headerList.get(groupPosition).hasChildren) {
+//                        WebView webView = findViewById(R.id.webView);
+//                        webView.loadUrl(headerList.get(groupPosition).url);
+//                        onBackPressed();
+//                    }
+                }
+
+                return false;
+            }
+        });
+
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+
+                if (childList.get(headerList.get(groupPosition)) != null) {
+                    MenuModel model = childList.get(headerList.get(groupPosition)).get(childPosition);
+//                    if (model.url.length() > 0) {
+//                        WebView webView = findViewById(R.id.webView);
+//                        webView.loadUrl(model.url);
+//                        onBackPressed();
+//                    }
+                }
+
+                return false;
+            }
+        });
     }
 }
