@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
+    tools:context=".Document_activity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Address proof"
+        android:textStyle="bold"
+        android:fontFamily="@font/montserrat"
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:id="@+id/txt_proof"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rel_adharfront"
+        android:layout_below="@+id/txt_proof"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/montserrat"
+            android:text="Adhar Card-front"
+            android:textColor="#000"
+            android:textSize="20dp"
+            />
+
+        <ImageView
+            android:id="@+id/img_cam"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/credit_card"
+            android:layout_alignParentRight="true"
+            android:buttonTint="#000"
+
+            />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rel-adharback"
+        android:layout_below="@+id/rel_adharfront"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/montserrat"
+            android:text="Adhar Card-back"
+            android:textColor="#000"
+            android:textSize="20dp"
+            />
+
+        <ImageView
+            android:id="@+id/img_cam1"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/credit_card"
+            android:layout_alignParentRight="true"
+            android:buttonTint="#000"
+
+            />
+
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ID Proof"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:id="@+id/txt_idproof"
+        android:textColor="#000"
+        android:fontFamily="@font/montserrat"
+        android:layout_below="@+id/rel-adharback"
+        android:layout_marginTop="20dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rel-drivefront"
+        android:layout_below="@+id/txt_idproof"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/montserrat"
+            android:text="Driving License-Front"
+            android:textColor="#000"
+            android:textSize="20dp"
+            />
+
+        <ImageView
+            android:id="@+id/img_cam2"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/credit_card"
+            android:layout_alignParentRight="true"
+            android:buttonTint="#000"
+
+            />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rel-driveback"
+        android:layout_below="@+id/rel-drivefront"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/montserrat"
+            android:text="Driving License-Back"
+            android:textColor="#000"
+            android:textSize="20dp"
+            />
+
+        <ImageView
+            android:id="@+id/img_cam3"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/credit_card"
+            android:layout_alignParentRight="true"
+            android:buttonTint="#000"
+
+            />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rel-passportfront"
+        android:layout_below="@+id/rel-driveback"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/montserrat"
+            android:text="Passport - front"
+            android:textColor="#000"
+            android:textSize="20dp"
+            />
+
+        <ImageView
+            android:id="@+id/img_cam4"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/credit_card"
+            android:layout_alignParentRight="true"
+            android:buttonTint="#000"
+
+            />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rel-passportback"
+        android:layout_below="@+id/rel-passportfront"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/montserrat"
+            android:text="Passport - back"
+            android:textColor="#000"
+            android:textSize="20dp"
+            />
+
+        <ImageView
+            android:id="@+id/img_cam5"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/credit_card"
+            android:layout_alignParentRight="true"
+            android:buttonTint="#000"
+            />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rel-pancard"
+        android:layout_below="@+id/rel-passportback"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/montserrat"
+            android:text="PAN Card"
+            android:textColor="#000"
+            android:textSize="20dp"
+            />
+
+        <ImageView
+            android:id="@+id/img_cam6"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/credit_card"
+            android:layout_alignParentRight="true"
+            android:buttonTint="#000"
+            />
+
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bank Cancelled Cheque"
+        android:textStyle="bold"
+        android:fontFamily="@font/montserrat"
+        android:layout_below="@+id/rel-pancard"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:textColor="#000"
+        android:id="@+id/txt_bank"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rel_bankcheque"
+        android:layout_below="@+id/txt_bank"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/montserrat"
+            android:text="Bank Cancelled Cheque"
+            android:textColor="#000"
+            android:textSize="20dp"
+            />
+
+        <ImageView
+            android:id="@+id/img_cam7"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/credit_card"
+            android:layout_alignParentRight="true"
+            android:buttonTint="#000"
+
+            />
+
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

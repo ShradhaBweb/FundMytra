@@ -8,10 +8,10 @@
     <color name="bg_screen2">#20d2bb</color>
     <color name="bg_screen3">#3395ff</color>
     <color name="bg_screen4">#c873f4</color>
+
     <color name="white">#FFF</color>
     <color name="red">#fa0840</color>
     <color name="color">#CF2239</color>
-
 
     <color name="fred">#C82636</color>
     <color name="fgrey">#D4D5D9</color>
@@ -29,8 +29,6 @@
     <color name="dot_light_screen2">#8cf9eb</color>
     <color name="dot_light_screen3">#93c6fd</color>
     <color name="dot_light_screen4">#e4b5fc</color>
-
-    <color name="grey">#e9e7e7</color>
 
     <array name="array_dot_active">
         <item>@color/dot_light_screen1</item>
@@ -50,4 +48,10 @@
     <color name="fundWhite">#FFFF</color>
 
     <color name="fundBlack">#0a0000</color>
+
+    <color name="grey">#e9e7e7</color>
+    <!-- My Accounts. -->
+    <color name="text_colors">#DEDEDE</color>
+    <color name="black">#000</color>
+    <color name="verify">#4CC480</color>
 </resources>

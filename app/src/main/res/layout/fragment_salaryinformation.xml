@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyAccountsActivity">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Employement Type"
+        android:fontFamily="@font/montserrat"
+        android:background="@null"
+        android:textStyle="bold"
+        android:layout_marginLeft="30dp"
+        android:id="@+id/edit_employee"
+        android:textColor="#FFE4E3E3"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:id="@+id/view_emp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="#D12138"
+        android:layout_below="@+id/edit_employee"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat"
+        android:id="@+id/edit_annual"
+        android:layout_marginLeft="30dp"
+        android:layout_below="@+id/view_emp"
+        android:text="Annual Income"
+        android:textColor="#FFE4E3E3"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/view_annual"
+        android:background="#D12138"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/edit_annual"/>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SAVE"
+        android:background="@drawable/curved_corner"
+        android:layout_below="@+id/view_annual"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:padding="10dp"
+        android:textColor="#fff"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+
+
+
+
+</RelativeLayout>

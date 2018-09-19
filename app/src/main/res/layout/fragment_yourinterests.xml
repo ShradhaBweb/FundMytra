@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyAccountsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/lin_shop"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="60dp">
+
+        <ImageView
+            android:id="@+id/img_shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/car_loan"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/img_shop"
+            android:fontFamily="@font/montserrat"
+            android:text="Shopaholic"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:layout_toRightOf="@+id/img_shop" />
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:layout_alignParentRight="true"
+            android:buttonTint="#000"
+
+            />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rel_movie"
+        android:layout_below="@+id/lin_shop"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="60dp">
+
+        <ImageView
+            android:id="@+id/img_movie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/car_loan" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/img_movie"
+            android:fontFamily="@font/montserrat"
+            android:text="Movie Buff"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:layout_toRightOf="@+id/img_movie" />
+
+        <CheckBox
+            android:id="@+id/checkbox_movie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:layout_alignParentRight="true"
+            android:buttonTint="#000" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rel_food"
+        android:layout_below="@+id/rel_movie"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="60dp">
+
+        <ImageView
+            android:id="@+id/img_food"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/car_loan"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/img_food"
+            android:fontFamily="@font/montserrat"
+            android:text="Foodie"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:layout_toRightOf="@+id/img_food" />
+
+        <CheckBox
+            android:id="@+id/checkbox_food"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:layout_alignParentRight="true"
+            android:buttonTint="#000"
+
+
+
+            />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rel_travel"
+        android:layout_below="@+id/rel_food"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="60dp">
+
+        <ImageView
+            android:id="@+id/img_travel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/car_loan"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/img_travel"
+            android:fontFamily="@font/montserrat"
+            android:text="Traveller"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:layout_toRightOf="@+id/img_travel" />
+
+        <CheckBox
+            android:id="@+id/checkbox_travel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:layout_alignParentRight="true"
+            android:buttonTint="#000"
+
+            />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rel_fitness"
+        android:layout_below="@+id/rel_travel"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="60dp">
+
+        <ImageView
+            android:id="@+id/img_fitness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/car_loan"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/img_fitness"
+            android:fontFamily="@font/montserrat"
+            android:text="Fitness Freak"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:layout_toRightOf="@+id/img_fitness" />
+
+        <CheckBox
+            android:id="@+id/checkbox_fitness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:layout_alignParentRight="true"
+            android:buttonTint="#000"
+
+            />
+
+
+    </RelativeLayout>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_fitness"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="SAVE"
+        android:padding="10dp"
+        android:textColor="#ffff"
+        android:textSize="22dp"
+        android:background="@drawable/curved_corner"
+        android:layout_centerHorizontal="true"
+        />
+
+</RelativeLayout>
