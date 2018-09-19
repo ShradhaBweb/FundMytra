@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
+
     <dimen name="margin_top_horizantal">20dp</dimen>
     <dimen name="margin_right_horizantal">25dp</dimen>
     <dimen name="margin_left_horizantal">25dp</dimen>
