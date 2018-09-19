@@ -40,7 +40,7 @@ public class DataModel {
         this.time_date = time_date;
     }
 
-    // Constructor that is used to create an instance of the Movie object
+    // Constructor that is used to create an instance of the DataModel object
     public DataModel(int product, String name, String searched_on,String time_date) {
 
         this.prdouct = product;

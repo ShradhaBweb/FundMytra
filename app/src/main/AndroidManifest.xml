@@ -40,6 +40,7 @@
         <activity android:name=".OtpActivity" />
         <activity android:name=".DashboardActivity"/>
         <activity android:name=".MyAccountsActivity"/>
+        <activity android:name=".TrackApplicationActivity"/>
     </application>
 
 </manifest>

@@ -43,6 +43,7 @@ public class CustomAdapter extends ArrayAdapter<DataModel> {
 
         TextView release = (TextView) listItem.findViewById(R.id.search);
         release.setText(details.getSearched_on());
+
         TextView time = (TextView) listItem.findViewById(R.id.time);
         time.setText(details.getTime_date());
 
