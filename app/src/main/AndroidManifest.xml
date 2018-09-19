@@ -27,6 +27,8 @@
 
 
         <activity android:name=".HomeActivity" />
+        <activity android:name=".Login_Signup" />
+        <activity android:name=".signup_screen" />
 
 
         <activity android:name=".LoginSignupActivity"/>
@@ -42,7 +44,13 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".LoginActivity" />
+        <activity android:name=".HomeActivity" />
         <activity android:name=".OtpActivity" />
+        <activity
+            android:name=".DashboardActivity"
+            android:label="@string/title_activity_dashboard"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".AllProductsActivity"></activity>
         <activity android:name=".DashboardActivity"/>
         <activity android:name=".MyAccountsActivity"/>
         <activity android:name=".TrackApplicationActivity"/>
