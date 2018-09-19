@@ -87,4 +87,24 @@
     <string name="landmark">Landmark</string>
     <string name="myapplication">Cannot see your application here? Let us help you!</string>
     <string name="trackapp">Enter your Application ID and Mobile Number</string>
+
+    <string name="loan_disb">Loan Disbursed</string>
+    <string name="k">89.12k</string>
+    <string name="credit">Credit card</string>
+    <string name="number">75</string>
+    <string name="uniqe">Unique Products</string>
+    <string name="quality">Pre Qualified Offers</string>
+    <string name="help">Help Us Tailor Your Offer</string>
+    <string name="refer_earn">Refer Earn</string>
+    <string name="view">View All</string>
+
+    <string name="offere">18 offere</string>
+    <string name="complete">Complete Profile</string>
+    <!--<string name="refer">Refer & Earn</string>-->
+    <string name="refer_freind">Refer your freind to win gifts</string>
+    <string name="my_application">My Applications</string>
+    <string name="jaya">Jayaram suresh</string>
+    <string name="under_process">Under Process</string>
+    <string name="my_facts">Mytra Facts</string>
+    <string name="cr">2227.57cr</string>
 </resources>
