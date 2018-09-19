@@ -48,7 +48,7 @@ import me.crosswall.lib.coverflow.CoverFlow;
 import me.crosswall.lib.coverflow.core.PageItemClickListener;
 import me.crosswall.lib.coverflow.core.PagerContainer;
 
-public class DashboardActivity extends AppCompatActivity implements View.OnClickListener {
+
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -74,28 +74,13 @@ public class DashboardActivity extends AppCompatActivity
 
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<Integer> mImageUrls = new ArrayList<>();
-<<<<<<<<< Temporary merge branch 1
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard2);
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
-        imgbtn1=(ImageButton)findViewById(R.id.backButton);
-        imgbtn2=(ImageButton)findViewById(R.id.frontButton);
-        imgbtn1.setVisibility(View.INVISIBLE);
-
-        getImages();
-        arrayList=new ArrayList<>();
-        arrayList=populateList();
-        init();
-
-    }
-    @Override
+expandableListView=(ExpandableListView)findViewById(R.id.expandableListView);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -117,7 +102,7 @@ public class DashboardActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(false);
-        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.menu, getApplicationContext().getTheme());
+        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.menu3, getApplicationContext().getTheme());
         toggle.setHomeAsUpIndicator(drawable);
         toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override
@@ -340,7 +325,7 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
     }
-<<<<<<<<< Temporary merge branch 1
+
 
     @Override
     public void onBackPressed() {
