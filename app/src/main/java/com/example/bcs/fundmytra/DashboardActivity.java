@@ -1,5 +1,6 @@
 package com.example.bcs.fundmytra;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -362,6 +363,7 @@ public class DashboardActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_accounts) {
 
+
         } else if (id == R.id.nav_applications) {
 
         } else if (id == R.id.nav_products) {
@@ -467,6 +469,11 @@ public class DashboardActivity extends AppCompatActivity
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
 
                 if (headerList.get(groupPosition).isGroup) {
+                    System.out.println("Group position : "+groupPosition);
+                    if(groupPosition == 1){
+                        Intent intent = new Intent(DashboardActivity.this, MyAccountsActivity.class);
+                        startActivity(intent);
+                    }
 //                    if (!headerList.get(groupPosition).hasChildren) {
 //                        WebView webView = findViewById(R.id.webView);
 //                        webView.loadUrl(headerList.get(groupPosition).url);
