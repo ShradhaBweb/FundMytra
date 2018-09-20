@@ -7,12 +7,17 @@
     android:background="@android:color/white"
     android:orientation="vertical"
     android:layout_marginTop="50dp"
-    android:scrollbarThumbVertical="@color/fundRed"
-    tools:context=".DashboardActivity">
-
-        <RelativeLayout
+    android:fillViewport="true"
+    android:scrollbarThumbVertical="@color/fundRed">
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+
             <LinearLayout
                 android:id="@+id/relative"
                 android:layout_width="match_parent"
@@ -388,11 +393,13 @@
                             android:textColor="@color/fblack"
                             android:fontFamily="@font/montserrat"
                             />
+
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </RelativeLayout>
 
+        </RelativeLayout>
+    </FrameLayout>
 </ScrollView>
 
 

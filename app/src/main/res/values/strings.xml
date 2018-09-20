@@ -55,7 +55,26 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="car_loan">aaaaaaaaaaa</string>
+    <string name="offere">18 offere</string>
+    <string name="complete">Complete Profile</string>
+    <!--<string name="refer">Refer & Earn</string>-->
+    <string name="refer_freind">Refer your freind to win gifts</string>
+    <string name="my_application">My Applications</string>
+    <string name="jaya">Jayaram suresh</string>
+    <string name="under_process">Under Process</string>
+    <string name="my_facts">Mytra Facts</string>
+    <string name="cr">2227.57cr</string>
 
+    <string name="loan_disb">Loan Disbursed</string>
+    <string name="k">89.12k</string>
+    <string name="credit">Credit card</string>
+    <string name="number">75</string>
+    <string name="uniqe">Unique Products</string>
+    <string name="quality">Pre Qualified Offers</string>
+    <string name="help">Help Us Tailor Your Offer</string>
+    <string name="refer_earn">Refer Earn</string>
+    <string name="view">View All</string>
 
     <!-- My Accounts. -->
     <string name="my_accounts">My Accounts</string>

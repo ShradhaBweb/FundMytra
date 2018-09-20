@@ -3,8 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:background="@color/color"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.Toolbar>
     <android.support.design.widget.TabLayout
         android:id="@+id/simpleTabLayout"
+        android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/tab_line"
@@ -24,35 +31,29 @@
         <android.support.design.widget.TabItem
             android:id="@+id/my_searches"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-           />
+            android:layout_height="wrap_content" />
 
         <android.support.design.widget.TabItem
             android:id="@+id/my_application"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-          />
+            android:layout_height="wrap_content" />
         <android.support.design.widget.TabItem
             android:id="@+id/your_interest"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
         <android.support.design.widget.TabItem
             android:id="@+id/salary_info"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
         <android.support.design.widget.TabItem
             android:id="@+id/documents"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
     </android.support.design.widget.TabLayout>
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_below="@+id/simpleTabLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 
 </RelativeLayout>
