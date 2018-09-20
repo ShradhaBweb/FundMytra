@@ -143,9 +143,9 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/margin_bottonRight_horizantal"
-                    android:layout_marginRight="@dimen/margin_bottonRight_horizantal"
-                    android:layout_marginLeft="@dimen/margin_bottonRight_horizantal">
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp">
 
                     <LinearLayout
                         android:id="@+id/referBox"

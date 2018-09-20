@@ -76,8 +76,8 @@ public class DashboardActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent=new Intent(this,AllProductsActivity.class);
-        startActivity(intent);
+//        Intent intent=new Intent(this,AllProductsActivity.class);
+//        startActivity(intent);
         setContentView(R.layout.activity_dashboard2);
 
 
