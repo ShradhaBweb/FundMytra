@@ -37,9 +37,6 @@ public class MyAccountsActivity extends AppCompatActivity implements NavigationV
         toolbar1.setTitle(R.string.my_accounts);
         setSupportActionBar(toolbar1);
 
-        Toolbar toolbar2 = (Toolbar) findViewById(R.id.toolbar2);
-        toolbar2.setTitle("");
-        setSupportActionBar(toolbar2);
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
