@@ -6,13 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-public class Login_Signup extends AppCompatActivity {
+public class LoginSignupActivity extends AppCompatActivity {
     private Button signup, login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login__signup);
+        setContentView(R.layout.activity_loginsignup);
 
         init();
         listeners();
@@ -27,16 +27,17 @@ public class Login_Signup extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Login_Signup.this, LoginActivity.class);
+                Intent intent = new Intent(LoginSignupActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Login_Signup.this,signup_screen.class);
+                Intent intent=new Intent(LoginSignupActivity.this,SignupActivity.class);
                 startActivity(intent);
             }
         });
     }
+
 }

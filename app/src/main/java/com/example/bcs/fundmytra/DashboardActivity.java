@@ -2,10 +2,12 @@ package com.example.bcs.fundmytra;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -33,12 +35,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ExpandableListView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -64,8 +69,11 @@ public class DashboardActivity extends AppCompatActivity
     RecyclerViewAdapter adapter;
     int i;
     int k;
-    int l;
 
+    ExpandableListAdapter expandableListAdapter;
+    ExpandableListView expandableListView;
+    List<MenuModel> headerList = new ArrayList<>();
+    HashMap<MenuModel, List<MenuModel>> childList = new HashMap<>();
 
     private static final String TAG = "MainActivity";
 
@@ -76,8 +84,8 @@ public class DashboardActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Intent intent=new Intent(this,AllProductsActivity.class);
-//        startActivity(intent);
+        Intent intent=new Intent(this,AllProductsActivity.class);
+        startActivity(intent);
         setContentView(R.layout.activity_dashboard2);
 
 
@@ -91,32 +99,48 @@ public class DashboardActivity extends AppCompatActivity
         txt2.setText("Personal Loan");
         txt2.append(" | 559506");
 
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitle(null);
-
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.fred));
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-
         getImages();
         arrayList=new ArrayList<>();
         arrayList=populateList();
         init();
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
+
+        prepareMenuData();
+        populateExpandableList();
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.setDrawerIndicatorEnabled(false);
+        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.menu, getApplicationContext().getTheme());
+        toggle.setHomeAsUpIndicator(drawable);
+        toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (drawer.isDrawerVisible(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                } else {
+                    drawer.openDrawer(GravityCompat.START);
+                }
+            }
+        });
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
-
-
 
     public void onClick(View v) {
         switch (v.getId()) {
@@ -334,27 +358,27 @@ public class DashboardActivity extends AppCompatActivity
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.dashboard, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.dashboard, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -379,5 +403,131 @@ public class DashboardActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void prepareMenuData() {
+
+        MenuModel menuModel = new MenuModel("Home", true, false); //Menu of Android Tutorial. No sub menus
+        headerList.add(menuModel);
+
+        menuModel = new MenuModel("My Accounts", true, false);
+        headerList.add(menuModel);
+
+        menuModel = new MenuModel("My Applications", true, false);
+        headerList.add(menuModel);
+
+        menuModel = new MenuModel("Our All Products", true, false);
+        headerList.add(menuModel);
+
+        menuModel = new MenuModel("Refer & Earn", true, false);
+        headerList.add(menuModel);
+        if (!menuModel.hasChildren) {
+            childList.put(menuModel, null);
+        }
+
+        menuModel = new MenuModel("Loans", true, true); //Menu of Java Tutorials
+        headerList.add(menuModel);
+        List<MenuModel> childModelsList = new ArrayList<>();
+        MenuModel childModel = new MenuModel("Core Java Tutorial", false, false);
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Java FileInputStream", false, false);
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Java FileReader", false, false);
+        childModelsList.add(childModel);
+
+        if (menuModel.hasChildren) {
+            Log.d("API123","here");
+            childList.put(menuModel, childModelsList);
+        }
+
+        childModelsList = new ArrayList<>();
+        menuModel = new MenuModel("Secured Loans", true, true); //Menu of Python Tutorials
+        headerList.add(menuModel);
+        childModel = new MenuModel("Python AST – Abstract Syntax Tree", false, false);
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Python Fractions", false, false);
+        childModelsList.add(childModel);
+        if (menuModel.hasChildren) {
+            Log.d("API123","here");
+            childList.put(menuModel, childModelsList);
+        }
+
+        childModelsList = new ArrayList<>();
+        menuModel = new MenuModel("Cards", true, true); //Menu of Python Tutorials
+        headerList.add(menuModel);
+        childModel = new MenuModel("Python AST – Abstract Syntax Tree", false, false);
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Python Fractions", false, false);
+        childModelsList.add(childModel);
+        if (menuModel.hasChildren) {
+            Log.d("API123","here");
+            childList.put(menuModel, childModelsList);
+        }
+
+        childModelsList = new ArrayList<>();
+        menuModel = new MenuModel("Tools", true, true); //Menu of Python Tutorials
+        headerList.add(menuModel);
+        childModel = new MenuModel("Python AST – Abstract Syntax Tree", false, false);
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Python Fractions", false, false);
+        childModelsList.add(childModel);
+
+        if (menuModel.hasChildren) {
+            Log.d("API123","here");
+            childList.put(menuModel, childModelsList);
+        }
+
+        if (menuModel.hasChildren) {
+            childList.put(menuModel, childModelsList);
+        }
+    }
+
+    private void populateExpandableList() {
+
+        expandableListAdapter = new ExpandableListAdapter(this, headerList, childList);
+        expandableListView.setAdapter(expandableListAdapter);
+
+        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+
+                if (headerList.get(groupPosition).isGroup) {
+                    System.out.println("Group position : "+groupPosition);
+                    if(groupPosition == 1){
+                        Intent intent = new Intent(DashboardActivity.this, MyAccountsActivity.class);
+                        startActivity(intent);
+                    }
+//                    if (!headerList.get(groupPosition).hasChildren) {
+//                        WebView webView = findViewById(R.id.webView);
+//                        webView.loadUrl(headerList.get(groupPosition).url);
+//                        onBackPressed();
+//                    }
+                }
+
+                return false;
+            }
+        });
+
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+
+                if (childList.get(headerList.get(groupPosition)) != null) {
+                    MenuModel model = childList.get(headerList.get(groupPosition)).get(childPosition);
+//                    if (model.url.length() > 0) {
+//                        WebView webView = findViewById(R.id.webView);
+//                        webView.loadUrl(model.url);
+//                        onBackPressed();
+//                    }
+                }
+
+                return false;
+            }
+        });
     }
 }
