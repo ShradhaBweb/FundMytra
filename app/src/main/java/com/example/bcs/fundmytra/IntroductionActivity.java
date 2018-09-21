@@ -32,8 +32,8 @@ public class IntroductionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent=new Intent(this,LoginActivity.class);
-        startActivity(intent);
+//        Intent intent=new Intent(this,LoginActivity.class);
+//        startActivity(intent);
 
         // Checking for first time launch - before calling setContentView()
         prefManager = new PrefManager(this);
