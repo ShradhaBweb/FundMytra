@@ -1,6 +1,7 @@
 package com.example.bcs.fundmytra;
 
-import android.content.Context;
+
+
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -9,24 +10,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
-import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -52,12 +39,10 @@ import me.crosswall.lib.coverflow.CoverFlow;
 import me.crosswall.lib.coverflow.core.PageItemClickListener;
 import me.crosswall.lib.coverflow.core.PagerContainer;
 
-
 public class DashboardActivity extends AppCompatActivity
-        implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private ImageButton imgbtn1,imgbtn2;
-    private TextView txt1,txt2;
 
     private CirclePageIndicator circlePageIndicator;
     private int currentPage = 0;
@@ -79,25 +64,14 @@ public class DashboardActivity extends AppCompatActivity
 
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<Integer> mImageUrls = new ArrayList<>();
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent=new Intent(this,AllProductsActivity.class);
-        startActivity(intent);
         setContentView(R.layout.activity_dashboard2);
-
 
         imgbtn1=(ImageButton)findViewById(R.id.backButton);
         imgbtn2=(ImageButton)findViewById(R.id.frontButton);
-        txt1=(TextView)findViewById(R.id.referText);
-        txt2=(TextView)findViewById(R.id.referText3);
         imgbtn1.setVisibility(View.INVISIBLE);
-        txt1.setText("Refer");
-        txt1.append(" & Earn");
-        txt2.setText("Personal Loan");
-        txt2.append(" | 559506");
 
         getImages();
         arrayList=new ArrayList<>();
@@ -119,7 +93,8 @@ public class DashboardActivity extends AppCompatActivity
         prepareMenuData();
         populateExpandableList();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -242,13 +217,11 @@ public class DashboardActivity extends AppCompatActivity
                 super.onScrolled(recyclerView1, dx, dy);
                 LinearLayoutManager llm = (LinearLayoutManager) recyclerView.getLayoutManager();
                 i =llm.findFirstCompletelyVisibleItemPosition();
-                l=llm.findLastCompletelyVisibleItemPosition();
 
                 k=mImageUrls.size()-1;
                 Log.e("totalPosition", String.valueOf(k));
                 Log.e("firstPosition", String.valueOf(i));
-                Log.e("lastPosition", String.valueOf(l));
-                if (l==k ){
+                if (i==k ){
                     imgbtn2.setVisibility(View.INVISIBLE);
                     imgbtn1.setVisibility(View.VISIBLE);
                 } else if (i>0 && i<k){
@@ -278,6 +251,8 @@ public class DashboardActivity extends AppCompatActivity
         PagerContainer mContainer = (PagerContainer) findViewById(R.id.pager_container);
 
         final ViewPager pager = mContainer.getViewPager();
+
+        expandableListView = findViewById(R.id.expandableListView);
 
         PageAdapter adapter = new PageAdapter(this, arrayList);
         pager.setAdapter(adapter);
@@ -386,17 +361,16 @@ public class DashboardActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_accounts) {
 
-        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_applications) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_products) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_referEarn) {
 
         }
 
