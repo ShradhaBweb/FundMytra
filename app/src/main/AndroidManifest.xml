@@ -52,7 +52,7 @@
         <activity android:name=".AllProductsActivity"></activity>
 
 
-        <activity android:name=".TrackApplicationActivity"/>
+        <activity android:name=".TrackApplicationFragment"/>
     </application>
 
 </manifest>

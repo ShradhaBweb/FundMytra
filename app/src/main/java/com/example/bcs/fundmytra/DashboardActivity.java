@@ -1,10 +1,10 @@
 package com.example.bcs.fundmytra;
 
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
@@ -45,6 +45,9 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
         private CirclePageIndicator circlePageIndicator;
         private int currentPage = 0;
         private int NUM_PAGE = 0;
+       public static FragmentTransaction ft,pt;
+
+
         RecyclerView recyclerView;
 
         private Integer[] IMAGES = {R.drawable.employee1, R.drawable.employee1, R.drawable.employee1};
@@ -66,12 +69,23 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+
+        Intent intent= getIntent();
+        int id=intent.getIntExtra("send",2);
+            if(id==1)
+            {
+                FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.fragmentContainer,new TrackApplicationFragment()).commit();
+            }
+
+
             setContentView(R.layout.activity_dashboard2);
 
         imgbtn1=(ImageButton)findViewById(R.id.backButton);
         imgbtn2=(ImageButton)findViewById(R.id.frontButton);
         imgbtn1.setVisibility(View.INVISIBLE);
 
+            pt=getSupportFragmentManager().beginTransaction();
         getImages();
         arrayList=new ArrayList<>();
         arrayList=populateList();
@@ -494,7 +508,7 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
 
 
                             //Calling MyAccountsFragment
-                            FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+                          ft =getSupportFragmentManager().beginTransaction();
                             ft.replace(R.id.fragmentContainer, new MyAccountsFragment()).commit();
 
                                      }
@@ -527,5 +541,11 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
                     return false;
                 }
             });
+            }
+public static void callFragment(){
 
-    }}
+            pt.replace(R.id.fragmentContainer, new TrackApplicationFragment()).addToBackStack(null).commit();
+
+
+        }
+    }

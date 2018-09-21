@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
-    tools:context=".TrackApplicationActivity">
+    android:background="#fff">
 
-
-
+<LinearLayout
+    android:id="@+id/top"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,11 +34,11 @@
         android:src="@drawable/credit_card"
         android:layout_marginTop="20dp"
         />
-
+</LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/img_phone"
+        android:layout_below="@+id/top"
         android:layout_marginTop="30dp">
 
         <EditText
