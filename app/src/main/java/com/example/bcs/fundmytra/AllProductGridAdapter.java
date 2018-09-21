@@ -26,6 +26,7 @@ public class AllProductGridAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
 
+
     public AllProductGridAdapter(Context context, ArrayList<String> names, ArrayList<Integer> imageUrls) {
 
         mNames = names;
