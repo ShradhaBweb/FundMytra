@@ -19,7 +19,6 @@ public class AllProductPageAdapter  extends PagerAdapter {
     private LayoutInflater inflater;
     private Context context;
 
-    
 
 
     public AllProductPageAdapter(Context context, ArrayList<Integer> IMAGES) {

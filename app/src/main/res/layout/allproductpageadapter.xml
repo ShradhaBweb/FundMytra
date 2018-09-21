@@ -22,5 +22,4 @@
         android:fontFamily="@font/montserrat_bold"
         android:textColor="@color/fundRed"
         />
-
 </RelativeLayout>
