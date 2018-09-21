@@ -29,14 +29,15 @@
             android:layout_centerInParent="true"
             android:src="@drawable/car_loan" />
 
+        
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:fontFamily="@font/montserrat"
-            android:text="aaaaaaaaaaa"
+            android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             android:gravity="center"
             android:layout_centerInParent="true"
 

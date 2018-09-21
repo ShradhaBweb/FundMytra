@@ -75,62 +75,47 @@ public class AllProductFragmentActivity extends Fragment {
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
         mImageUrls.add(R.drawable.car_loan);
-        mNames.add("Car Loan");
+        mNames.add("Credit Card");
 
         mImageUrls.add(R.drawable.credit_card);
-        mNames.add("Credit Card");
+        mNames.add("Two Wheeler Loan");
 
         mImageUrls.add(R.drawable.personal_loan);
         mNames.add("Personal Loan");
 
         mImageUrls.add(R.drawable.car_loan);
-        mNames.add("Car Loan");
+        mNames.add("Home Loan");
 
 
         mImageUrls.add(R.drawable.credit_card);
-        mNames.add("Credit Card");
+        mNames.add("Loan Against Property");
 
         mImageUrls.add(R.drawable.car_loan);
-        mNames.add("Personal Loan");
+        mNames.add("Home Loan Balance Transfer");
 
 
         mImageUrls.add(R.drawable.car_loan);
-        mNames.add("Car Loan");
+        mNames.add("Site & Contruction Loan");
 
         mImageUrls.add(R.drawable.credit_card);
-        mNames.add("Credit Card");
-
-        mImageUrls.add(R.drawable.car_loan);
-        mNames.add("Personal Loan");
-
-        mImageUrls.add(R.drawable.car_loan);
         mNames.add("Car Loan");
 
+        mImageUrls.add(R.drawable.car_loan);
+        mNames.add("Used Car Loan");
+
+        mImageUrls.add(R.drawable.car_loan);
+        mNames.add("Top up Car Loan");
+
         mImageUrls.add(R.drawable.credit_card);
-        mNames.add("Credit Card");
+        mNames.add("Commercial Vehicle Loan");
 
         mImageUrls.add(R.drawable.personal_loan);
-        mNames.add("Personal Loan");
-
-        mImageUrls.add(R.drawable.car_loan);
-        mNames.add("Car Loan");
+        mNames.add("For Best Offeres");
 
 
-        mImageUrls.add(R.drawable.credit_card);
-        mNames.add("Credit Card");
-
-        mImageUrls.add(R.drawable.car_loan);
-        mNames.add("Personal Loan");
 
 
-        mImageUrls.add(R.drawable.car_loan);
-        mNames.add("Car Loan");
 
-        mImageUrls.add(R.drawable.credit_card);
-        mNames.add("Credit Card");
-
-        mImageUrls.add(R.drawable.car_loan);
-        mNames.add("Personal Loan");
         initGridView();
     }
     private void initGridView() {
