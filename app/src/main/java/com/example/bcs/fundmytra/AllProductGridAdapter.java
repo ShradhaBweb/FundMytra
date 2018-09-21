@@ -3,6 +3,7 @@ package com.example.bcs.fundmytra;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,10 +27,13 @@ public class AllProductGridAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
 
     public AllProductGridAdapter(Context context, ArrayList<String> names, ArrayList<Integer> imageUrls) {
+
         mNames = names;
         mImageUrls = imageUrls;
         mInflater = LayoutInflater.from(context);
     }
+
+
 
     @Override
     public int getCount() {

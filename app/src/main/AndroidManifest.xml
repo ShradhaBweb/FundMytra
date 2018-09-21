@@ -41,6 +41,7 @@
         <activity android:name=".DashboardActivity"/>
         <activity android:name=".MyAccountsActivity"/>
         <activity android:name=".TrackApplicationActivity"/>
+        <activity android:name=".AllProductsActivity"></activity>
     </application>
 
 </manifest>
