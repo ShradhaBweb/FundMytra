@@ -3,106 +3,223 @@ package com.example.bcs.fundmytra;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.Toast;
+
+import com.viewpagerindicator.CirclePageIndicator;
+
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AllProductFragmentActivity.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link AllProductFragmentActivity#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class AllProductFragmentActivity extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static final String TAG = "MainActivity";
 
-    private OnFragmentInteractionListener mListener;
+    private ArrayList<String> mNames = new ArrayList<>();
+    private ArrayList<Integer> mImageUrls = new ArrayList<>();
+    RecyclerView recyclerView;
+    GridView gridView;
+    AllProductGridAdapter adapter;
+    CirclePageIndicator circlePageIndicator;
+    private int currentPage = 0;
+    private int NUM_PAGE = 0;
+    ViewPager viewPager;
+
+    private Integer[] IMAGES = {R.drawable.prequalityone, R.drawable.prequalityone, R.drawable.prequalityone};
+    private ArrayList<Integer> arrayList;
+
 
     public AllProductFragmentActivity() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AllProductFragmentActivity.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AllProductFragmentActivity newInstance(String param1, String param2) {
-        AllProductFragmentActivity fragment = new AllProductFragmentActivity();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_all_product, container, false);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+        if (container!=null){
+            container.removeAllViews();
         }
-    }
+        View view= inflater.inflate(R.layout.fragment_all_product, container, false);
+        gridView=(GridView)view.findViewById(R.id.gridView);
+        viewPager=(ViewPager)view.findViewById(R.id.viewPage);
+        circlePageIndicator = (CirclePageIndicator)view. findViewById(R.id.circlePagerIndicator);
+        arrayList=new ArrayList<>();
+        arrayList=populateList();
+        init();
+        getImages();
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+        return view;
+    }
+    private void getImages(){
+        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+
+        mImageUrls.add(R.drawable.car_loan);
+        mNames.add("Car Loan");
+
+        mImageUrls.add(R.drawable.credit_card);
+        mNames.add("Credit Card");
+
+        mImageUrls.add(R.drawable.personal_loan);
+        mNames.add("Personal Loan");
+
+        mImageUrls.add(R.drawable.car_loan);
+        mNames.add("Car Loan");
+
+
+        mImageUrls.add(R.drawable.credit_card);
+        mNames.add("Credit Card");
+
+        mImageUrls.add(R.drawable.car_loan);
+        mNames.add("Personal Loan");
+
+
+        mImageUrls.add(R.drawable.car_loan);
+        mNames.add("Car Loan");
+
+        mImageUrls.add(R.drawable.credit_card);
+        mNames.add("Credit Card");
+
+        mImageUrls.add(R.drawable.car_loan);
+        mNames.add("Personal Loan");
+
+        mImageUrls.add(R.drawable.car_loan);
+        mNames.add("Car Loan");
+
+        mImageUrls.add(R.drawable.credit_card);
+        mNames.add("Credit Card");
+
+        mImageUrls.add(R.drawable.personal_loan);
+        mNames.add("Personal Loan");
+
+        mImageUrls.add(R.drawable.car_loan);
+        mNames.add("Car Loan");
+
+
+        mImageUrls.add(R.drawable.credit_card);
+        mNames.add("Credit Card");
+
+        mImageUrls.add(R.drawable.car_loan);
+        mNames.add("Personal Loan");
+
+
+        mImageUrls.add(R.drawable.car_loan);
+        mNames.add("Car Loan");
+
+        mImageUrls.add(R.drawable.credit_card);
+        mNames.add("Credit Card");
+
+        mImageUrls.add(R.drawable.car_loan);
+        mNames.add("Personal Loan");
+        initGridView();
+    }
+    private void initGridView() {
+        Log.d(TAG, "initRecyclerView: init recyclerview");
+        adapter=new AllProductGridAdapter(getActivity(),mNames,mImageUrls);
+        gridView.setAdapter(adapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i){
+                    case 0:
+                        Toast.makeText(getContext(),"position zero",Toast.LENGTH_LONG).show();
+                        break;
+                    case 1:
+                        Toast.makeText(getContext(),"position one",Toast.LENGTH_LONG).show();
+                        break;
+                }
+            }
+        });
+
+
+    }
+    private ArrayList<Integer> populateList(){
+
+        ArrayList<Integer> list = new ArrayList<>();
+
+        for(int i = 0; i < IMAGES.length; i++){
+
+
+            list.add(IMAGES[i]);
         }
+
+        return list;
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    public void init() {
+
+
+
+
+        AllProductPageAdapter adapter = new AllProductPageAdapter(getContext(), arrayList);
+        viewPager.setAdapter(adapter);
+
+        viewPager.setOffscreenPageLimit(adapter.getCount());
+
+        viewPager.setClipChildren(false);
+
+
+        circlePageIndicator.setViewPager(viewPager);
+        final float density = getResources().getDisplayMetrics().density;
+        circlePageIndicator.setRadius(5 * density);
+        NUM_PAGE =arrayList.size();
+
+
+        final Handler handler = new Handler();
+        final Runnable update = new Runnable() {
+            @Override
+            public void run() {
+                if (currentPage == NUM_PAGE) {
+                    currentPage = 0;
+                }
+                viewPager.setCurrentItem(currentPage++, true);
+            }
+        };
+        Timer swipeTime = new Timer();
+        swipeTime.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(update);
+            }
+        }, 3000, 3000);
+
+
+        circlePageIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                currentPage = position;
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

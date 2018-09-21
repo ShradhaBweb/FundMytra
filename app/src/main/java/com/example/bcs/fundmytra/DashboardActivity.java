@@ -1,5 +1,7 @@
 package com.example.bcs.fundmytra;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -7,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
 import android.os.Handler;
@@ -20,11 +23,15 @@ import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
+import android.view.Gravity;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.support.design.widget.NavigationView;
@@ -40,6 +47,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.github.siyamed.shapeimageview.CircularImageView;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
@@ -69,6 +77,8 @@ public class DashboardActivity extends AppCompatActivity
     RecyclerViewAdapter adapter;
     int i;
     int k;
+    int l;
+    DrawerLayout drawer;
 
     ExpandableListAdapter expandableListAdapter;
     ExpandableListView expandableListView;
@@ -79,13 +89,12 @@ public class DashboardActivity extends AppCompatActivity
 
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<Integer> mImageUrls = new ArrayList<>();
+    CircularImageView circularImageView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent=new Intent(this,AllProductsActivity.class);
-        startActivity(intent);
         setContentView(R.layout.activity_dashboard2);
 
 
@@ -98,6 +107,10 @@ public class DashboardActivity extends AppCompatActivity
         txt1.append(" & Earn");
         txt2.setText("Personal Loan");
         txt2.append(" | 559506");
+        prepareMenuData();
+        populateExpandableList();
+        Fragment yourfragment;
+
 
         getImages();
         arrayList=new ArrayList<>();
@@ -106,6 +119,7 @@ public class DashboardActivity extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -116,10 +130,8 @@ public class DashboardActivity extends AppCompatActivity
 //            }
 //        });
 
-        prepareMenuData();
-        populateExpandableList();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -140,6 +152,24 @@ public class DashboardActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public  void showMenu(View view){
+        PopupMenu popupMenu=new PopupMenu(this,view);
+        MenuInflater inflater=popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.dashboard,popupMenu.getMenu());
+        popupMenu.show();
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                int id=menuItem.getItemId();
+                if (id==R.id.action_settings){
+                    Toast.makeText(getApplicationContext(),"menuItem",Toast.LENGTH_LONG).show();
+                }
+                return false;
+            }
+        });
+
     }
 
     public void onClick(View v) {
@@ -358,22 +388,19 @@ public class DashboardActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.dashboard, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.dashboard, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Toast.makeText(getApplicationContext(),"menuItem",Toast.LENGTH_LONG).show();
             return true;
         }
 
@@ -385,23 +412,23 @@ public class DashboardActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+//
+//        if (id == R.id.nav_camera) {
+//            // Handle the camera action
+//        } else if (id == R.id.nav_gallery) {
+//
+//        } else if (id == R.id.nav_slideshow) {
+//
+//        } else if (id == R.id.nav_manage) {
+//
+//        } else if (id == R.id.nav_share) {
+//
+//        } else if (id == R.id.nav_send) {
+//
+//        }
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+//         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -488,6 +515,8 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     private void populateExpandableList() {
+        expandableListView=(ExpandableListView)findViewById(R.id.expandableListView);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         expandableListAdapter = new ExpandableListAdapter(this, headerList, childList);
         expandableListView.setAdapter(expandableListAdapter);
@@ -499,14 +528,20 @@ public class DashboardActivity extends AppCompatActivity
                 if (headerList.get(groupPosition).isGroup) {
                     System.out.println("Group position : "+groupPosition);
                     if(groupPosition == 1){
-                        Intent intent = new Intent(DashboardActivity.this, MyAccountsActivity.class);
-                        startActivity(intent);
+
                     }
 //                    if (!headerList.get(groupPosition).hasChildren) {
 //                        WebView webView = findViewById(R.id.webView);
 //                        webView.loadUrl(headerList.get(groupPosition).url);
 //                        onBackPressed();
 //                    }
+                    if (groupPosition == 3){
+                        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.fragmentContainer,new AllProductFragmentActivity());
+                        fragmentTransaction.commit();
+                        drawer.closeDrawer(GravityCompat.START);
+
+                    }
                 }
 
                 return false;
