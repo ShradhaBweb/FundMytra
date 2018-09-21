@@ -37,6 +37,7 @@ public class AllProductFragmentActivity extends Fragment {
     private int NUM_PAGE = 0;
     ViewPager viewPager;
 
+
     private Integer[] IMAGES = {R.drawable.prequalityone, R.drawable.prequalityone, R.drawable.prequalityone};
     private ArrayList<Integer> arrayList;
 

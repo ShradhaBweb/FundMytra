@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,12 +8,13 @@
     android:layout_marginStart="@dimen/margin_right_horizantal"
     android:layout_marginEnd="@dimen/margin_right_horizantal"
     android:orientation="vertical"
-    tools:context=".AllProductsActivity">
+    tools:context=".AllProductFragmentActivity">
 
     <RelativeLayout
         android:id="@+id/headerImage"
         android:layout_width="match_parent"
-        android:layout_height="120dp">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPage"
             android:layout_width="match_parent"
@@ -29,16 +30,19 @@
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="10dp"
             android:layout_marginEnd="20dp"
+            android:paddingLeft="5dp"
             app:fillColor="#f20606"
             app:pageColor="#f20606"
             />
     </RelativeLayout>
 
+
     <RelativeLayout
         android:layout_below="@+id/headerImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:layout_weight="0.3">
 
         <GridView
             android:id="@+id/gridView"
@@ -50,4 +54,4 @@
             >
         </GridView>
     </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>
