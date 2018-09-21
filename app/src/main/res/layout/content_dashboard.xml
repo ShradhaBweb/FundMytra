@@ -7,7 +7,6 @@
     android:background="@android:color/white"
     android:orientation="vertical"
     android:layout_marginTop="50dp"
-    android:scrollbarThumbVertical="@color/fundRed"
     tools:context=".DashboardActivity">
     <FrameLayout
         android:id="@+id/fragmentContainer"
@@ -15,7 +14,8 @@
         android:layout_height="wrap_content">
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:scrollbarThumbVertical="@color/fundRed">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

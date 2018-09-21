@@ -29,7 +29,7 @@
             android:layout_centerInParent="true"
             android:src="@drawable/car_loan" />
 
-        
+
 
         <TextView
             android:id="@+id/name"
