@@ -21,10 +21,14 @@
             <!--app:popupTheme="@style/AppTheme.PopupOverlay" >-->
             <!---->
         <!--</android.support.v7.widget.Toolbar>-->
-        <include layout="@layout/toolbar"></include>
+        <include
+            layout="@layout/toolbar">
+        </include>
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_dashboard" />
+    <include
+        layout="@layout/content_dashboard" />
+
 
 </android.support.design.widget.CoordinatorLayout>

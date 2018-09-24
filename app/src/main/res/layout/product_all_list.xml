@@ -13,33 +13,35 @@
     <RelativeLayout
         android:id="@+id/cardLinear"
         android:layout_width="wrap_content"
-        android:layout_height="181dp"
+        android:layout_height="90dp"
+        android:padding="5dp"
         android:background="@drawable/radiustwo"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/image_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_above="@+id/name"
-            android:adjustViewBounds="true"
-            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:padding="5dp"
+            android:adjustViewBounds="true"
+            android:scaleType="center"
+            android:layout_centerInParent="true"
             android:src="@drawable/car_loan" />
-        
+
+
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="4dp"
-            android:layout_marginStart="4dp"
-            android:fontFamily="@font/montserrat"
-            android:gravity="center"
-            android:text="aaaaaaaaaaaaaa"
-            android:textColor="@color/fundBlack"
             android:layout_alignParentBottom="true"
+            android:fontFamily="@font/montserrat"
+            android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+
+            android:textColor="@color/fundBlack"
             android:textSize="12sp" />
 
     </RelativeLayout>
