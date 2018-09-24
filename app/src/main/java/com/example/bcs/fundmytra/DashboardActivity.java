@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
@@ -24,6 +25,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +52,8 @@ import android.widget.Toast;
 import com.github.siyamed.shapeimageview.CircularImageView;
 import com.viewpagerindicator.CirclePageIndicator;
 
+import net.skoumal.fragmentback.BackFragmentAppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -61,8 +65,10 @@ import me.crosswall.lib.coverflow.core.PageItemClickListener;
 import me.crosswall.lib.coverflow.core.PagerContainer;
 
 
-public class DashboardActivity extends AppCompatActivity
+public class DashboardActivity extends BackFragmentAppCompatActivity
         implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+
+private AllProductFragmentActivity allProductFragmentActivity;
 
     private ImageButton imgbtn1,imgbtn2;
     private TextView txt1,txt2;
@@ -79,11 +85,13 @@ public class DashboardActivity extends AppCompatActivity
     int k;
     int l;
     DrawerLayout drawer;
+    private final static String TAG_FRAGMENT = "TAG_FRAGMENT";
 
     ExpandableListAdapter expandableListAdapter;
     ExpandableListView expandableListView;
     List<MenuModel> headerList = new ArrayList<>();
     HashMap<MenuModel, List<MenuModel>> childList = new HashMap<>();
+    private AllProductFragmentActivity selectedFragment;
 
     private static final String TAG = "MainActivity";
 
@@ -97,28 +105,38 @@ public class DashboardActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard2);
 
+        if (savedInstanceState == null){
+            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentContainer,new DashBoardFragmentActivity(),"DashboadrFragment");
+            fragmentTransaction.commit();
+        }
 
-        imgbtn1=(ImageButton)findViewById(R.id.backButton);
-        imgbtn2=(ImageButton)findViewById(R.id.frontButton);
-        txt1=(TextView)findViewById(R.id.referText);
-        txt2=(TextView)findViewById(R.id.referText3);
-        imgbtn1.setVisibility(View.INVISIBLE);
-        txt1.setText("Refer");
-        txt1.append(" & Earn");
-        txt2.setText("Personal Loan");
-        txt2.append(" | 559506");
+
+//        imgbtn1=(ImageButton)findViewById(R.id.backButton);
+//        imgbtn2=(ImageButton)findViewById(R.id.frontButton);
+//        txt1=(TextView)findViewById(R.id.referText);
+//        txt2=(TextView)findViewById(R.id.referText3);
+//        imgbtn1.setVisibility(View.INVISIBLE);
+//        txt1.setText("Refer");
+//        txt1.append(" & Earn");
+//        txt2.setText("Personal Loan");
+//        txt2.append(" | 559506");
         prepareMenuData();
         populateExpandableList();
         Fragment yourfragment;
 
 
-        getImages();
-        arrayList=new ArrayList<>();
-        arrayList=populateList();
-        init();
+//        getImages();
+//        arrayList=new ArrayList<>();
+//        arrayList=populateList();
+//        init();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+
+
 
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -386,7 +404,21 @@ public class DashboardActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+
+        //Toast.makeText(getApplicationContext(),"backPress",Toast.LENGTH_LONG).show();
+
+
+
+//        if (getSupportFragmentManager().getBackStackEntryCount()>0){
+//            getSupportFragmentManager().popBackStackImmediate();
+//        }
+
+        super.onBackPressed();
+
+
     }
+
+
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
@@ -538,8 +570,10 @@ public class DashboardActivity extends AppCompatActivity
                     if (groupPosition == 3){
                         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.fragmentContainer,new AllProductFragmentActivity());
+                        fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.commit();
                         drawer.closeDrawer(GravityCompat.START);
+
 
                     }
                 }
@@ -565,4 +599,8 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
     }
+
+
+
+
 }

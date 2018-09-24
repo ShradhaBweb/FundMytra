@@ -42,6 +42,8 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:27.1.1"
     implementation 'com.github.lzyzsd:circleprogress:1.2.1'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.libRG:customtextview:1.6'
+    implementation 'net.skoumal.fragmentback:fragment-back:0.2.3'
 
 
 }

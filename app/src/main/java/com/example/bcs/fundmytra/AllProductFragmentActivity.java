@@ -1,10 +1,12 @@
 package com.example.bcs.fundmytra;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,12 +20,15 @@ import android.widget.Toast;
 
 import com.viewpagerindicator.CirclePageIndicator;
 
+import net.skoumal.fragmentback.BackFragment;
+
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class AllProductFragmentActivity extends Fragment {
+public class AllProductFragmentActivity extends Fragment implements BackFragment{
+
 
     private static final String TAG = "MainActivity";
 
@@ -64,57 +69,58 @@ public class AllProductFragmentActivity extends Fragment {
         gridView=(GridView)view.findViewById(R.id.gridView);
         viewPager=(ViewPager)view.findViewById(R.id.viewPage);
         circlePageIndicator = (CirclePageIndicator)view. findViewById(R.id.circlePagerIndicator);
+
+
+        getImages();
         arrayList=new ArrayList<>();
         arrayList=populateList();
         init();
-        getImages();
+
+
 
         return view;
     }
+
     private void getImages(){
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
-        mImageUrls.add(R.drawable.car_loan);
+        mImageUrls.add(R.drawable.card_loanicon);
         mNames.add("Credit Card");
 
-        mImageUrls.add(R.drawable.credit_card);
+        mImageUrls.add(R.drawable.two_wheeler);
         mNames.add("Two Wheeler Loan");
 
-        mImageUrls.add(R.drawable.personal_loan);
+        mImageUrls.add(R.drawable.personal_loanicon);
         mNames.add("Personal Loan");
 
-        mImageUrls.add(R.drawable.car_loan);
+        mImageUrls.add(R.drawable.home_loanicon);
         mNames.add("Home Loan");
 
 
-        mImageUrls.add(R.drawable.credit_card);
+        mImageUrls.add(R.drawable.against_property_loanicon);
         mNames.add("Loan Against Property");
 
-        mImageUrls.add(R.drawable.car_loan);
+        mImageUrls.add(R.drawable.balance_laonicon);
         mNames.add("Home Loan Balance Transfer");
 
 
-        mImageUrls.add(R.drawable.car_loan);
+        mImageUrls.add(R.drawable.contraction_loan);
         mNames.add("Site & Contruction Loan");
 
-        mImageUrls.add(R.drawable.credit_card);
+        mImageUrls.add(R.drawable.car_loanicon);
         mNames.add("Car Loan");
 
-        mImageUrls.add(R.drawable.car_loan);
+        mImageUrls.add(R.drawable.user_car_loanicon);
         mNames.add("Used Car Loan");
 
-        mImageUrls.add(R.drawable.car_loan);
+        mImageUrls.add(R.drawable.topcar_loanicon);
         mNames.add("Top up Car Loan");
 
-        mImageUrls.add(R.drawable.credit_card);
+        mImageUrls.add(R.drawable.commercial_loanicon);
         mNames.add("Commercial Vehicle Loan");
 
-        mImageUrls.add(R.drawable.personal_loan);
+        mImageUrls.add(R.drawable.best_offereicon);
         mNames.add("For Best Offeres");
-
-
-
-
 
         initGridView();
     }
@@ -208,4 +214,22 @@ public class AllProductFragmentActivity extends Fragment {
         });
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
+    public boolean onBackPressed() {
+
+        assert getFragmentManager() != null;
+        getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        return true;
+    }
+
+    @Override
+    public int getBackPriority() {
+        return LOW_BACK_PRIORITY + 1;
+    }
 }
