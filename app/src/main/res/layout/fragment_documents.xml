@@ -24,7 +24,7 @@
         android:layout_below="@+id/txt_proof"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginRight="15dp">
 
 
 
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/credit_card"
+            android:src="@drawable/camera"
             android:layout_alignParentRight="true"
             android:buttonTint="#000"
 
@@ -60,7 +60,7 @@
         android:layout_below="@+id/rel_adharfront"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginRight="15dp">
 
 
 
@@ -80,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/credit_card"
+            android:src="@drawable/camera"
             android:layout_alignParentRight="true"
             android:buttonTint="#000"
 
@@ -109,7 +109,7 @@
         android:layout_below="@+id/txt_idproof"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginRight="15dp">
 
 
 
@@ -129,7 +129,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/credit_card"
+            android:src="@drawable/camera"
             android:layout_alignParentRight="true"
             android:buttonTint="#000"
 
@@ -145,7 +145,7 @@
         android:layout_below="@+id/rel-drivefront"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginRight="15dp">
 
 
 
@@ -165,7 +165,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/credit_card"
+            android:src="@drawable/camera"
             android:layout_alignParentRight="true"
             android:buttonTint="#000"
 
@@ -181,7 +181,7 @@
         android:layout_below="@+id/rel-driveback"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginRight="15dp">
 
 
 
@@ -201,7 +201,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/credit_card"
+            android:src="@drawable/camera"
             android:layout_alignParentRight="true"
             android:buttonTint="#000"
 
@@ -217,7 +217,7 @@
         android:layout_below="@+id/rel-passportfront"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginRight="15dp">
 
 
 
@@ -237,7 +237,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/credit_card"
+            android:src="@drawable/camera"
             android:layout_alignParentRight="true"
             android:buttonTint="#000"
             />
@@ -252,7 +252,7 @@
         android:layout_below="@+id/rel-passportback"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginRight="15dp">
 
 
 
@@ -272,7 +272,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/credit_card"
+            android:src="@drawable/camera"
             android:layout_alignParentRight="true"
             android:buttonTint="#000"
             />
@@ -301,7 +301,7 @@
         android:layout_below="@+id/txt_bank"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginRight="15dp">
 
 
 
@@ -321,7 +321,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/credit_card"
+            android:src="@drawable/camera"
             android:layout_alignParentRight="true"
             android:buttonTint="#000"
 
