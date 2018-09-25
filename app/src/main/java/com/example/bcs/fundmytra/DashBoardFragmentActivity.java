@@ -146,7 +146,6 @@ public class DashBoardFragmentActivity extends Fragment implements View.OnClickL
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
 
-
             }
 
             @Override
@@ -257,6 +256,4 @@ public class DashBoardFragmentActivity extends Fragment implements View.OnClickL
             }
         });
     }
-
-
 }

@@ -111,6 +111,7 @@
     </LinearLayout>
 
       <Button
+          android:id="@+id/singUpBtn"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_below="@+id/edit2"
@@ -121,7 +122,8 @@
           android:fontFamily="@font/montserrat"
           android:text="@string/signup"
           android:textColor="@color/white"
-          android:textSize="18sp" />
+          android:textSize="18sp"
+          />
   </RelativeLayout>
 
 

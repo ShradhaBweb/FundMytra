@@ -1,14 +1,10 @@
 package com.example.bcs.fundmytra;
-
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
+
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,14 +16,13 @@ import android.widget.Toast;
 
 import com.viewpagerindicator.CirclePageIndicator;
 
-import net.skoumal.fragmentback.BackFragment;
 
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class AllProductFragmentActivity extends Fragment implements BackFragment{
+public class AllProductFragmentActivity extends Fragment {
 
 
     private static final String TAG = "MainActivity";
@@ -134,10 +129,10 @@ public class AllProductFragmentActivity extends Fragment implements BackFragment
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i){
                     case 0:
-                        Toast.makeText(getContext(),"position zero",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),"position zero",Toast.LENGTH_LONG).show();
                         break;
                     case 1:
-                        Toast.makeText(getContext(),"position one",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),"position one",Toast.LENGTH_LONG).show();
                         break;
                 }
             }
@@ -163,7 +158,7 @@ public class AllProductFragmentActivity extends Fragment implements BackFragment
 
 
 
-        AllProductPageAdapter adapter = new AllProductPageAdapter(getContext(), arrayList);
+        AllProductPageAdapter adapter = new AllProductPageAdapter(getActivity(), arrayList);
         viewPager.setAdapter(adapter);
 
         viewPager.setOffscreenPageLimit(adapter.getCount());
@@ -214,22 +209,24 @@ public class AllProductFragmentActivity extends Fragment implements BackFragment
         });
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
 
-    }
 
-    @Override
-    public boolean onBackPressed() {
 
-        assert getFragmentManager() != null;
-        getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        return true;
-    }
 
-    @Override
-    public int getBackPriority() {
-        return LOW_BACK_PRIORITY + 1;
-    }
+
+
+
+
+//    @Override
+//    public boolean onBackPressed() {
+//
+//        assert getFragmentManager() != null;
+//        getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//        return true;
+//    }
+//
+//    @Override
+//    public int getBackPriority() {
+//        return LOW_BACK_PRIORITY + 1;
+//    }
 }
