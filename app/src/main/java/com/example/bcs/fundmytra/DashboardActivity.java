@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
@@ -25,7 +24,6 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +50,6 @@ import android.widget.Toast;
 import com.github.siyamed.shapeimageview.CircularImageView;
 import com.viewpagerindicator.CirclePageIndicator;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -66,8 +63,6 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
 
 public class DashboardActivity extends AppCompatActivity
         implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
-
-private AllProductFragmentActivity allProductFragmentActivity;
 
     private ImageButton imgbtn1,imgbtn2;
     private TextView txt1,txt2;
@@ -84,13 +79,11 @@ private AllProductFragmentActivity allProductFragmentActivity;
     int k;
     int l;
     DrawerLayout drawer;
-    private final static String TAG_FRAGMENT = "TAG_FRAGMENT";
 
     ExpandableListAdapter expandableListAdapter;
     ExpandableListView expandableListView;
     List<MenuModel> headerList = new ArrayList<>();
     HashMap<MenuModel, List<MenuModel>> childList = new HashMap<>();
-    private AllProductFragmentActivity selectedFragment;
 
     private static final String TAG = "MainActivity";
 
@@ -104,23 +97,17 @@ private AllProductFragmentActivity allProductFragmentActivity;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard2);
 
-        if (savedInstanceState == null){
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragmentContainer,new DashBoardFragmentActivity(),"DashboadrFragment");
-            fragmentTransaction.commit();
-        }
+        imgbtn1=(ImageButton)findViewById(R.id.backButton);
+        imgbtn2=(ImageButton)findViewById(R.id.frontButton);
+        imgbtn1.setVisibility(View.INVISIBLE);
 
-        prepareMenuData();
-        populateExpandableList();
-
-
+        getImages();
+        arrayList=new ArrayList<>();
+        arrayList=populateList();
+        init();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-
-
 
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -217,27 +204,178 @@ private AllProductFragmentActivity allProductFragmentActivity;
         }
     }
 
-    @Override
-    public void onBackPressed() {
+    private void getImages(){
+        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+
+        mImageUrls.add(R.drawable.car_loan);
+        mNames.add("Car Loan");
+
+        mImageUrls.add(R.drawable.credit_card);
+        mNames.add("Credit Card");
+
+        mImageUrls.add(R.drawable.personal_loan);
+        mNames.add("Personal Loan");
+
+        mImageUrls.add(R.drawable.car_loan);
+        mNames.add("Car Loan");
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        }else {
-            super.onBackPressed();
-        }
-//        } else if (allProduct instanceof AllProductFragmentActivity && allProduct.isVisible()){
-////            FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
-////            ft.replace(R.id.constraintLayout,new AllProductFragmentActivity(),"AllProduct");
-////            ft.commit();
-//        }
+        mImageUrls.add(R.drawable.credit_card);
+        mNames.add("Credit Card");
+
+        mImageUrls.add(R.drawable.car_loan);
+        mNames.add("Personal Loan");
 
 
+        mImageUrls.add(R.drawable.car_loan);
+        mNames.add("Car Loan");
+
+        mImageUrls.add(R.drawable.credit_card);
+        mNames.add("Credit Card");
+
+        mImageUrls.add(R.drawable.car_loan);
+        mNames.add("Personal Loan");
+
+        initRecyclerView();
 
     }
 
+    private void initRecyclerView(){
+        Log.d(TAG, "initRecyclerView: init recyclerview");
 
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new RecyclerViewAdapter(this, mNames, mImageUrls);
+        recyclerView.setAdapter(adapter);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView1, int dx, int dy) {
+                super.onScrolled(recyclerView1, dx, dy);
+                LinearLayoutManager llm = (LinearLayoutManager) recyclerView.getLayoutManager();
+                i =llm.findFirstCompletelyVisibleItemPosition();
+
+                k=mImageUrls.size()-1;
+                Log.e("totalPosition", String.valueOf(k));
+                Log.e("firstPosition", String.valueOf(i));
+                if (i==k ){
+                    imgbtn2.setVisibility(View.INVISIBLE);
+                    imgbtn1.setVisibility(View.VISIBLE);
+                } else if (i>0 && i<k){
+                    imgbtn1.setVisibility(View.VISIBLE);
+                    imgbtn2.setVisibility(View.VISIBLE);
+                }else if (i==0){
+                    imgbtn1.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+    }
+    private ArrayList<Integer> populateList(){
+
+        ArrayList<Integer> list = new ArrayList<>();
+
+        for(int i = 0; i < IMAGES.length; i++){
+
+
+            list.add(IMAGES[i]);
+        }
+
+        return list;
+    }
+
+    public void init() {
+
+        PagerContainer mContainer = (PagerContainer) findViewById(R.id.pager_container);
+
+        final ViewPager pager = mContainer.getViewPager();
+
+        expandableListView = findViewById(R.id.expandableListView);
+
+        PageAdapter adapter = new PageAdapter(this, arrayList);
+        pager.setAdapter(adapter);
+
+        pager.setOffscreenPageLimit(adapter.getCount());
+
+        pager.setClipChildren(false);
+
+        mContainer.setPageItemClickListener(new PageItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(DashboardActivity.this, "position:" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        boolean showRotate = getIntent().getBooleanExtra("showRotate", true);
+
+        if (showRotate) {
+            new CoverFlow.Builder()
+                    .with(pager)
+                    .scale(0.3f)
+                    .pagerMargin(0f)
+                    .spaceSize(0f)
+                    .rotationY(0f)
+                    .build();
+        }
+        CirclePageIndicator circlePageIndicator = (CirclePageIndicator) findViewById(R.id.circlePagerIndicator);
+        circlePageIndicator.setViewPager(pager);
+        final float density = getResources().getDisplayMetrics().density;
+        circlePageIndicator.setRadius(5 * density);
+        NUM_PAGE =arrayList.size();
+
+        final Handler handler = new Handler();
+        final Runnable update = new Runnable() {
+            @Override
+            public void run() {
+                if (currentPage == NUM_PAGE) {
+                    currentPage = 0;
+                }
+                pager.setCurrentItem(currentPage++, true);
+            }
+        };
+        Timer swipeTime = new Timer();
+        swipeTime.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(update);
+            }
+        }, 3000, 3000);
+
+
+        circlePageIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                currentPage = position;
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
@@ -411,9 +549,9 @@ private AllProductFragmentActivity allProductFragmentActivity;
 //                        onBackPressed();
 //                    }
                 }
+
                 return false;
             }
         });
     }
-
 }
