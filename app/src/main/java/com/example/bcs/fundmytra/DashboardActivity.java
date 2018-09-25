@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
@@ -25,12 +23,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
+
 import com.viewpagerindicator.CirclePageIndicator;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import me.crosswall.lib.coverflow.CoverFlow;
 import me.crosswall.lib.coverflow.core.PageItemClickListener;
 import me.crosswall.lib.coverflow.core.PagerContainer;
@@ -351,25 +352,15 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
             });
         }
 
-
-        @Override
-        public void onBackPressed() {
-
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            if (drawer.isDrawerOpen(GravityCompat.START)) {
-                drawer.closeDrawer(GravityCompat.START);
-
-
-            } else {
-
-                if (getFragmentManager().getBackStackEntryCount() == 0) {
-                    this.finish();
-                  //  getFragmentManager().popBackStack();
-                } else {
-                    getFragmentManager().popBackStack();
-                }
-            }
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
         }
+    }
 
         @Override
         public boolean onCreateOptionsMenu(Menu menu) {
@@ -508,24 +499,19 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
                 @Override
                 public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
 
-                    if (headerList.get(groupPosition).isGroup) {
-                        System.out.println("Group position : " + groupPosition);
-                        if (groupPosition == 1) {
-                       //     Intent intent = new Intent(DashboardActivity.this, MyAccountsFragment.class);
-                         //   startActivity(intent);
-
-
-                            //Calling MyAccountsFragment
-                           // Fragment fragment;
-                           // String ad=fragment.getClass().getNmae();
-                            Fragment fragment=new MyAccountsFragment() ;
-                            FragmentManager fragmentManager= getSupportFragmentManager();
-                       //     ft =getSupportFragmentManager().beginTransaction();
-                            fragmentManager.beginTransaction().replace(R.id.fragmentContainer,fragment).addToBackStack(null).commit();
-
-
-                                     }
-
+                if (headerList.get(groupPosition).isGroup) {
+                    System.out.println("Group position : "+groupPosition);
+                    if(groupPosition == 1){
+                        Intent intent = new Intent(DashboardActivity.this, MyAccountsActivity.class);
+                        startActivity(intent);
+                    }else if(groupPosition == 3){
+                        AllProductFragmentActivity fragment = new AllProductFragmentActivity();
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragment_container, fragment);
+                        transaction.commit();
+                    }
+                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                    drawer.closeDrawer(GravityCompat.START);
 //                    if (!headerList.get(groupPosition).hasChildren) {
 //                        WebView webView = findViewById(R.id.webView);
 //                        webView.loadUrl(headerList.get(groupPosition).url);
@@ -554,12 +540,10 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
                 }
             });
             }
-
 public static void callFragment(){
 
             pt.replace(R.id.fragmentContainer, new TrackApplicationFragment()).addToBackStack(null).commit();
 
 
         }
-
     }
