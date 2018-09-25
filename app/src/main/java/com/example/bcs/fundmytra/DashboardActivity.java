@@ -471,8 +471,8 @@ public class DashboardActivity extends AppCompatActivity
                 if (headerList.get(groupPosition).isGroup) {
                     System.out.println("Group position : "+groupPosition);
                     if(groupPosition == 1){
-                        Intent intent = new Intent(DashboardActivity.this, MyAccountsActivity.class);
-                        startActivity(intent);
+//                        Intent intent = new Intent(DashboardActivity.this, MyAccountsActivity.class);
+//                        startActivity(intent);
                     }
 //                    if (!headerList.get(groupPosition).hasChildren) {
 //                        WebView webView = findViewById(R.id.webView);
