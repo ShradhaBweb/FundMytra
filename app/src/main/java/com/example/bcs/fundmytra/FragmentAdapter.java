@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class FragmentAdapter extends FragmentPagerAdapter {
     private int numOfTabs;
-
+private FragmentManager fm;
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
@@ -32,10 +32,10 @@ public class FragmentAdapter extends FragmentPagerAdapter {
 
     private Context mContext;
 
-    public FragmentAdapter(Context context, FragmentManager fm, int numOfTabs) {
+    public FragmentAdapter( Context context,FragmentManager fm, int numOfTabs) {
         super(fm);
-        mContext = context;
-        this.numOfTabs = numOfTabs;
+       mContext = context;
+       this.numOfTabs = numOfTabs;
     }
 
     @Override
