@@ -10,7 +10,8 @@ import retrofit2.http.Query;
 
 public interface APIService {
 
-    
+
+
     @POST("master_api/otp_verification")
 
     Call<Post> verifyPost(@Body Post post);
