@@ -72,6 +72,7 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
         imageButton=(ImageButton)findViewById(R.id.button12);
 
 
+        
 //        btn10.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
