@@ -52,6 +52,62 @@ public class SignupActivity extends AppCompatActivity {
                     if (email.matches(emailPattern)) {
                         if (mobile.matches(mobilePattern)) {
                             model = new EmailMobileModel(email, mobile);
+                            progressBar = new ProgressDialog(v.getContext());
+                            progressBar.setCancelable(true);
+                            progressBar.setMessage("Loading...");
+                            progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                            progressBar.setProgress(0);
+                            progressBar.setMax(100);
+                            progressBar.show();
+
+
+                            mAPIService.savePost(model).enqueue(new Callback<JsonElement>() {
+
+
+                                @Override
+                                public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                                    Gson gson =
+                                            new GsonBuilder()
+                                                    .registerTypeAdapter(Data.class, new MyDeserializer())
+                                                    .create();
+
+                                    if (response.code() == 200) {
+                                        progressBar.dismiss();
+
+                                        Toast.makeText(SignupActivity.this,"Successfully Signed up",Toast.LENGTH_SHORT).show();
+
+                                        Data c = gson.fromJson(new Gson().toJson(response.body()), Data.class);
+                                        System.out.println(c.id);
+
+                                        Toast.makeText(SignupActivity.this, "Id" + c.id, Toast.LENGTH_SHORT).show();
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("ID",c.id);
+                                        bundle.putString("email",email);
+                                        Intent intent=new Intent(SignupActivity.this,OtpActivity.class);
+                                        intent.putExtras(bundle);
+                                        startActivity(intent);
+
+                                    } else {
+                                        progressBar.dismiss();
+                                        System.out.println(response.code());
+                                        if (response.code() == 406) {
+                                            Toast.makeText(SignupActivity.this, "Plz Verify ur email and mobile once again", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<JsonElement> call, Throwable t) {
+                                    progressBar.dismiss();
+                                    System.out.println(t.getMessage());
+                                    Log.e("socket",t.toString());
+                                    Log.e("socket",t.getMessage());
+                                    if (t.getMessage().contains("Failed to connect")) {
+                                        Toast.makeText(SignupActivity.this, "Check your  Internet Connection", Toast.LENGTH_SHORT).show();
+                                    }
+                                    call.cancel();
+                                }
+                            });
                         }
                         else {
                             Toast.makeText(SignupActivity.this,"Enter Valid Mobile number",Toast.LENGTH_SHORT).show();
@@ -62,62 +118,7 @@ public class SignupActivity extends AppCompatActivity {
                 }else {
                     Toast.makeText(SignupActivity.this,"Empty",Toast.LENGTH_SHORT).show();
                 }
-
-
-               progressBar = new ProgressDialog(v.getContext());
-                progressBar.setCancelable(true);
-                progressBar.setMessage("Loading...");
-                progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                progressBar.setProgress(0);
-                progressBar.setMax(100);
-                progressBar.show();
-
-
-                mAPIService.savePost(model).enqueue(new Callback<JsonElement>() {
-
-
-                        @Override
-                        public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                            Gson gson =
-                                    new GsonBuilder()
-                                            .registerTypeAdapter(Data.class, new MyDeserializer())
-                                            .create();
-
-                            if (response.code() == 200) {
-                                progressBar.dismiss();
-
-                                Toast.makeText(SignupActivity.this,"Successfully Signed up",Toast.LENGTH_SHORT).show();
-
-                                Data c = gson.fromJson(new Gson().toJson(response.body()), Data.class);
-                                System.out.println(c.id);
-
-                                Toast.makeText(SignupActivity.this, "Id" + c.id, Toast.LENGTH_SHORT).show();
-                                Bundle bundle = new Bundle();
-                                bundle.putString("ID",c.id);
-                                bundle.putString("email",email);
-                                Intent intent=new Intent(SignupActivity.this,OtpActivity.class);
-                                intent.putExtras(bundle);
-                                startActivity(intent);
-
-                                } else {
-                                progressBar.dismiss();
-                                System.out.println(response.code());
-                                Toast.makeText(SignupActivity.this,"Plz Verify ur email and mobile once again",Toast.LENGTH_SHORT).show();
-                                }
-                        }
-
-                        @Override
-                        public void onFailure(Call<JsonElement> call, Throwable t) {
-                            progressBar.dismiss();
-                            System.out.println(t.getMessage());
-                            Toast.makeText(SignupActivity.this,"Check your  Internet Connection",Toast.LENGTH_SHORT).show();
-
-                            call.cancel();
-                        }
-                    });
-
-
-            }
+                }
             });
 
         click_here_to_login.setOnClickListener(new View.OnClickListener() {
