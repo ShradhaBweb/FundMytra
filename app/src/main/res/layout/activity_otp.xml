@@ -87,6 +87,26 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/margin_gridTop_horizantal">
+                >
+            <!--<com.chaos.view.PinView-->
+                <!--android:id="@+id/pinView"-->
+                <!--style="@style/PinWidget.PinView"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="0"-->
+                <!--android:inputType="number"-->
+                <!--android:padding="5dp"-->
+                <!--android:textColor="@color/fundRed"-->
+                <!--android:textSize="18sp"-->
+                <!--app:itemCount="6"-->
+                <!--app:itemHeight="50dp"-->
+                <!--app:itemRadius="4dp"-->
+                <!--app:itemSpacing="10dp"-->
+                <!--app:itemWidth="36dp"-->
+                <!--app:lineWidth="2dp"-->
+                <!--app:viewType="rectangle"  />-->
+
+
             <EditText
                 android:id="@+id/otp_text1"
                 android:layout_width="match_parent"
@@ -140,6 +160,32 @@
                 android:maxLength="1"
                 android:gravity="center"
                 android:imeOptions="actionNext"
+                android:layout_marginEnd="@dimen/spacing_medium"
+                />
+            <EditText
+                android:id="@+id/otp_text5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/editbox"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:hint="@string/hint"
+                android:maxLength="1"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:layout_marginEnd="@dimen/spacing_medium"
+                />
+            <EditText
+                android:id="@+id/otp_text6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/editbox"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:hint="@string/hint"
+                android:maxLength="1"
+                android:gravity="center"
+                android:imeOptions="actionNext"
 
                 />
         </LinearLayout>
@@ -165,6 +211,7 @@
                     android:id="@+id/button1"
                     android:text="@string/number1"
                     android:textColor="@color/fundRed"
+                    android:itemBackground="#f20202"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:onClick="onClick"
@@ -296,6 +343,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="ok"
+                        android:textColor="@color/fundRed"
                         android:onClick="onClick"
                         style="?android:attr/borderlessButtonStyle"
                     />

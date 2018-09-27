@@ -1,4 +1,13 @@
-package com.example.bcs.fundmytra;
-
-public class MainApplication {
-}
+//package com.example.bcs.fundmytra;
+//
+//import android.app.Application;
+//
+//public class MainApplication extends Application {
+//    public static ApiManager apiManager;
+//
+//    @Override
+//    public void onCreate() {
+//        super.onCreate();
+//        apiManager = ApiManager.getInstance();
+//    }
+//}
