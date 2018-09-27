@@ -1,8 +1,8 @@
 package com.example.bcs.fundmytra;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.content.Context;
+
+
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -12,28 +12,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
-import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
-import android.view.Gravity;
-import android.view.MenuInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupMenu;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -47,7 +29,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.github.siyamed.shapeimageview.CircularImageView;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
@@ -60,12 +41,10 @@ import me.crosswall.lib.coverflow.CoverFlow;
 import me.crosswall.lib.coverflow.core.PageItemClickListener;
 import me.crosswall.lib.coverflow.core.PagerContainer;
 
-
 public class DashboardActivity extends AppCompatActivity
-        implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private ImageButton imgbtn1,imgbtn2;
-    private TextView txt1,txt2;
 
     private CirclePageIndicator circlePageIndicator;
     private int currentPage = 0;
@@ -77,8 +56,6 @@ public class DashboardActivity extends AppCompatActivity
     RecyclerViewAdapter adapter;
     int i;
     int k;
-    int l;
-    DrawerLayout drawer;
 
     ExpandableListAdapter expandableListAdapter;
     ExpandableListView expandableListView;
@@ -89,9 +66,6 @@ public class DashboardActivity extends AppCompatActivity
 
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<Integer> mImageUrls = new ArrayList<>();
-    CircularImageView circularImageView;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,7 +83,6 @@ public class DashboardActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -118,6 +91,9 @@ public class DashboardActivity extends AppCompatActivity
 //                        .setAction("Action", null).show();
 //            }
 //        });
+
+        prepareMenuData();
+        populateExpandableList();
 
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -141,24 +117,6 @@ public class DashboardActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
-
-    public  void showMenu(View view){
-        PopupMenu popupMenu=new PopupMenu(this,view);
-        MenuInflater inflater=popupMenu.getMenuInflater();
-        inflater.inflate(R.menu.dashboard,popupMenu.getMenu());
-        popupMenu.show();
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                int id=menuItem.getItemId();
-                if (id==R.id.action_settings){
-                    Toast.makeText(getApplicationContext(),"menuItem",Toast.LENGTH_LONG).show();
-                }
-                return false;
-            }
-        });
-
     }
 
     public void onClick(View v) {
@@ -384,40 +342,41 @@ public class DashboardActivity extends AppCompatActivity
 //        return true;
 //    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            Toast.makeText(getApplicationContext(),"menuItem",Toast.LENGTH_LONG).show();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-//
-//        if (id == R.id.nav_camera) {
-//            // Handle the camera action
-//        } else if (id == R.id.nav_gallery) {
-//
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
 
-//         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        drawer.closeDrawer(GravityCompat.START);
+        if (id == R.id.nav_home) {
+            // Handle the camera action
+        } else if (id == R.id.nav_accounts) {
+
+        } else if (id == R.id.nav_applications) {
+
+        } else if (id == R.id.nav_products) {
+
+        } else if (id == R.id.nav_referEarn) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -504,8 +463,6 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     private void populateExpandableList() {
-        expandableListView=(ExpandableListView)findViewById(R.id.expandableListView);
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         expandableListAdapter = new ExpandableListAdapter(this, headerList, childList);
         expandableListView.setAdapter(expandableListAdapter);
@@ -517,20 +474,25 @@ public class DashboardActivity extends AppCompatActivity
                 if (headerList.get(groupPosition).isGroup) {
                     System.out.println("Group position : "+groupPosition);
                     if(groupPosition == 1){
-
+                        MyAccountFragment fragment= new MyAccountFragment();
+                        android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragmentContainer, fragment); // fragment container id in first parameter is the  container(Main layout id) of Activity
+                        transaction.addToBackStack(null);  // this will manage backstack
+                        transaction.commit();
+                    }else if(groupPosition == 3){
+                        AllProductFragment fragment= new AllProductFragment();
+                        android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragmentContainer, fragment); // fragment container id in first parameter is the  container(Main layout id) of Activity
+                        transaction.addToBackStack(null);  // this will manage backstack
+                        transaction.commit();
                     }
+                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                    drawer.closeDrawer(GravityCompat.START);
 //                    if (!headerList.get(groupPosition).hasChildren) {
 //                        WebView webView = findViewById(R.id.webView);
 //                        webView.loadUrl(headerList.get(groupPosition).url);
 //                        onBackPressed();
 //                    }
-                    if (groupPosition == 3){
-                        AllProductFragmentActivity allProductFragmentActivity=new AllProductFragmentActivity();
-                        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.fragmentContainer,allProductFragmentActivity);
-                        transaction.addToBackStack(null);
-                        transaction.commit();
-                    }
                 }
 
                 return false;
