@@ -19,7 +19,7 @@ public class LoginSignupActivity extends AppCompatActivity {
 
     }
     public void init(){
-        signup=(Button)findViewById(R.id.signup);
+        signup=(Button)findViewById(R.id.signup_1);
         login = (Button)findViewById(R.id.login);
     }
 
