@@ -25,6 +25,7 @@ import java.util.TimerTask;
  * A simple {@link Fragment} subclass.
  */
 public class AllProductFragment extends Fragment {
+    private static final String TAG = "MainActivity";
 
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<Integer> mImageUrls = new ArrayList<>();
@@ -60,49 +61,45 @@ public class AllProductFragment extends Fragment {
         return view;
     }
     private void getImages(){
-//        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
-        mImageUrls.add(R.drawable.car_loan);
+        mImageUrls.add(R.drawable.card_loanicon);
         mNames.add("Credit Card");
 
-        mImageUrls.add(R.drawable.credit_card);
+        mImageUrls.add(R.drawable.two_wheeler);
         mNames.add("Two Wheeler Loan");
 
-        mImageUrls.add(R.drawable.personal_loan);
+        mImageUrls.add(R.drawable.personal_loanicon);
         mNames.add("Personal Loan");
 
-        mImageUrls.add(R.drawable.car_loan);
+        mImageUrls.add(R.drawable.home_loanicon);
         mNames.add("Home Loan");
 
 
-        mImageUrls.add(R.drawable.credit_card);
+        mImageUrls.add(R.drawable.against_property_loanicon);
         mNames.add("Loan Against Property");
 
-        mImageUrls.add(R.drawable.car_loan);
+        mImageUrls.add(R.drawable.balance_laonicon);
         mNames.add("Home Loan Balance Transfer");
 
 
-        mImageUrls.add(R.drawable.car_loan);
+        mImageUrls.add(R.drawable.contraction_loan);
         mNames.add("Site & Contruction Loan");
 
-        mImageUrls.add(R.drawable.credit_card);
+        mImageUrls.add(R.drawable.car_loanicon);
         mNames.add("Car Loan");
 
-        mImageUrls.add(R.drawable.car_loan);
+        mImageUrls.add(R.drawable.user_car_loanicon);
         mNames.add("Used Car Loan");
 
-        mImageUrls.add(R.drawable.car_loan);
+        mImageUrls.add(R.drawable.topcar_loanicon);
         mNames.add("Top up Car Loan");
 
-        mImageUrls.add(R.drawable.credit_card);
+        mImageUrls.add(R.drawable.commercial_loanicon);
         mNames.add("Commercial Vehicle Loan");
 
-        mImageUrls.add(R.drawable.personal_loan);
+        mImageUrls.add(R.drawable.best_offereicon);
         mNames.add("For Best Offeres");
-
-
-
-
 
         initGridView();
     }

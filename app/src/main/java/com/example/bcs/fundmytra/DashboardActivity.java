@@ -490,9 +490,10 @@ public class DashboardActivity extends AppCompatActivity
                         transaction.addToBackStack(null);  // this will manage backstack
                         transaction.commit();
                     }else if(groupPosition == 3){
-                        AllProductFragmentActivity fragment = new AllProductFragmentActivity();
+                        AllProductFragment fragment = new AllProductFragment();
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.fragmentContainer, fragment);
+                        transaction.addToBackStack(null);
                         transaction.commit();
                     }
                     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
