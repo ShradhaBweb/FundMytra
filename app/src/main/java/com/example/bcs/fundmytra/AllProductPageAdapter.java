@@ -20,7 +20,6 @@ public class AllProductPageAdapter  extends PagerAdapter {
     private Context context;
 
 
-
     public AllProductPageAdapter(Context context, ArrayList<Integer> IMAGES) {
         this.context = context;
         this.IMAGES = IMAGES;

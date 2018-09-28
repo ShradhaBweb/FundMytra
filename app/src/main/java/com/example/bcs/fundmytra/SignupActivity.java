@@ -118,8 +118,8 @@ public class SignupActivity extends AppCompatActivity {
                 }else {
                     Toast.makeText(SignupActivity.this,"Empty",Toast.LENGTH_SHORT).show();
                 }
-                }
-            });
+            }
+        });
 
         click_here_to_login.setOnClickListener(new View.OnClickListener() {
             @Override
