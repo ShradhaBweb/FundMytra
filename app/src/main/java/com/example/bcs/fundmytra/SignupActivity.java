@@ -1,28 +1,26 @@
 package com.example.bcs.fundmytra;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class SignupActivity extends AppCompatActivity {
-    private static final String TAG ="signUp" ;
     public EditText phone_num,email_id;
     public TextView click_here_to_login;
-    private Button button;
-    private APIService apiService;
-
+    public Button sign_up;
+    String email,mobile;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    String mobilePattern = "[0-9]{10}";
+    EmailMobileModel model;
+    ProgressDialog progressBar;
+    private APIService mAPIService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        apiService=ApiUrls.getAPIService();
 
         init();
         listeners();
@@ -50,17 +48,7 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
-        button.setOnClickListener(new View.OnClickListener() {
-
-            String id="12";
-            String otp="226611";
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
-
 
     private void init() {
         phone_num=(EditText)findViewById(R.id.input_phone);
