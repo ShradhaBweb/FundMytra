@@ -1,12 +1,15 @@
 package com.example.bcs.fundmytra;
 
+
+
+import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,7 +25,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.viewpagerindicator.CirclePageIndicator;
@@ -97,7 +99,7 @@ public class DashboardActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(false);
-        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.menu, getApplicationContext().getTheme());
+        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.menu2, getApplicationContext().getTheme());
         toggle.setHomeAsUpIndicator(drawable);
         toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override
@@ -321,37 +323,40 @@ public class DashboardActivity extends AppCompatActivity
         });
     }
 
+
     @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+    public void onBackPressed(){
+        android.app.FragmentManager fm = getFragmentManager();
+        if (fm.getBackStackEntryCount() > 0) {
+            Log.i("MainActivity", "popping backstack");
+            fm.popBackStack();
         } else {
+            Log.i("MainActivity", "nothing on backstack, calling super");
             super.onBackPressed();
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.dashboard, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.dashboard, menu);
+//        return true;
+//    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -362,7 +367,6 @@ public class DashboardActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             // Handle the camera action
         } else if (id == R.id.nav_accounts) {
-
 
         } else if (id == R.id.nav_applications) {
 
@@ -471,9 +475,20 @@ public class DashboardActivity extends AppCompatActivity
                 if (headerList.get(groupPosition).isGroup) {
                     System.out.println("Group position : "+groupPosition);
                     if(groupPosition == 1){
-//                        Intent intent = new Intent(DashboardActivity.this, MyAccountsActivity.class);
-//                        startActivity(intent);
+                        MyAccountFragment fragment= new MyAccountFragment();
+                        android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragmentContainer, fragment); // fragment container id in first parameter is the  container(Main layout id) of Activity
+                        transaction.addToBackStack(null);  // this will manage backstack
+                        transaction.commit();
+                    }else if(groupPosition == 3){
+                        AllProductFragment fragment= new AllProductFragment();
+                        android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragmentContainer, fragment); // fragment container id in first parameter is the  container(Main layout id) of Activity
+                        transaction.addToBackStack(null);  // this will manage backstack
+                        transaction.commit();
                     }
+                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                    drawer.closeDrawer(GravityCompat.START);
 //                    if (!headerList.get(groupPosition).hasChildren) {
 //                        WebView webView = findViewById(R.id.webView);
 //                        webView.loadUrl(headerList.get(groupPosition).url);
@@ -502,4 +517,5 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
     }
+
 }

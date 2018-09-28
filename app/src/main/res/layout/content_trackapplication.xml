@@ -4,25 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
-    tools:context=".TrackApplicationActivity">
+    android:background="#fff">
 
-
-
+<LinearLayout
+    android:id="@+id/top"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/trackapp"
         android:gravity="center_horizontal"
         android:fontFamily="@font/montserrat"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:id="@+id/txt_myapp"
-
         android:textColor="#000"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="40dp"
-        />
+        android:layout_marginTop="40dp" />
 
 
     <ImageView
@@ -34,11 +34,11 @@
         android:src="@drawable/credit_card"
         android:layout_marginTop="20dp"
         />
-
+</LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/img_phone"
+        android:layout_below="@+id/top"
         android:layout_marginTop="30dp">
 
         <EditText
@@ -63,15 +63,30 @@
             android:layout_below="@+id/edit_employee"/>
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
             android:layout_marginTop="35dp"
             android:fontFamily="@font/montserrat"
             android:id="@+id/edit_annual"
             android:layout_marginLeft="40dp"
+            android:textStyle="bold"
             android:layout_below="@+id/view_emp"
             android:text="Mobile no"
+            android:textColor="#FFE4E3E3"/>
+        <TextView
+            android:id="@+id/vertified"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@null"
+            android:layout_marginTop="35dp"
+            android:textSize="18dp"
+            android:layout_marginRight="30dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat"
+            android:layout_below="@+id/view_emp"
+            android:text="Vertified"
             android:textColor="#FFE4E3E3"/>
 
         <View
