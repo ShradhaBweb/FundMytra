@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bcs.fundmytra">
+<uses-permission android:name="android.permission.INTERNET"/>
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
@@ -23,7 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
         <activity android:name=".HomeActivity" />
+
+
+
         <activity android:name=".LoginSignupActivity"/>
         <activity android:name=".SignupActivity"/>
 
@@ -37,11 +43,18 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".LoginActivity" />
+
         <activity android:name=".OtpActivity" />
-        <activity android:name=".DashboardActivity"/>
-        <activity android:name=".MyAccountsActivity"/>
-        <activity android:name=".TrackApplicationActivity"/>
-        <activity android:name=".AllProductsActivity"></activity>
+        <activity
+            android:name=".DashboardActivity"
+            android:label="@string/title_activity_dashboard"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".AllProductsActivity">
+
+        </activity>
+
+
+
     </application>
 
 </manifest>

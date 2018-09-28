@@ -28,12 +28,10 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:id="@+id/img_phone"
         android:layout_below="@+id/txt_myapp"
         android:src="@drawable/credit_card"
-        android:layout_marginTop="20dp"
-        />
+        android:layout_marginTop="20dp" />
 </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"

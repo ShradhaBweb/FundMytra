@@ -29,7 +29,6 @@ private FragmentManager fm;
                 return null;
         }
     }
-
     private Context mContext;
 
     public FragmentAdapter( Context context,FragmentManager fm, int numOfTabs) {
