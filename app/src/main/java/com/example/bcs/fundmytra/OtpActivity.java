@@ -1,6 +1,7 @@
 package com.example.bcs.fundmytra;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,9 +31,9 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
     TextView txt1,txt2,txt3,txt4,txt5;
     String phone="123456789";
     APIService apiService;
-    String id="32";
-    String otp="120765";
-    private ProgressBar progressBar;
+    String id,email,otp;
+
+    private ProgressDialog progressBar;
     private PinView pinview;
 
     @Override
@@ -40,6 +41,13 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_otp);
+
+        Intent intent=getIntent();
+        email=intent.getStringExtra("email");
+        id=intent.getStringExtra("ID");
+
+        Log.e("id",id);
+        Log.e("email",email);
         apiService=ApiUrls.getAPIService();
 
         txt1=(TextView)findViewById(R.id.phone_number);
@@ -47,7 +55,7 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
         txt3=(TextView)findViewById(R.id.text2);
         txt4=(TextView)findViewById(R.id.text3);
         txt5=(TextView)findViewById(R.id.text4);
-        txt1.append(phone);
+        txt1.append(email);
 
 
         edt1=(EditText)findViewById(R.id.otp_text1);
@@ -70,58 +78,6 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
         btn9=(Button)findViewById(R.id.button9);
         btn10=(Button)findViewById(R.id.button10);
         imageButton=(ImageButton)findViewById(R.id.button12);
-
-
-        
-//        btn10.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Post post=new Post(id,otp);
-//                Log.e("id",post.getId());
-//                Log.e("otp",post.getOtp());
-//                apiService.verifyPost(post).enqueue(new Callback<Post>() {
-//                    @Override
-//                    public void onResponse(Call<Post> call, Response<Post> response) {
-//                        Post responseUser=response.body();
-//                        if (response.code() == 200){
-//                            System.out.println(response.code());
-//                            System.out.println(response);
-//                            System.out.println(response.body());
-//                            System.out.println("response"+response.body().toString());
-//                            System.out.println("id"+responseUser.getOtp());
-//                        }else {
-//                            assert responseUser != null;
-//                           System.out.println("responseCode"+response.code());
-//
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<Post> call, Throwable t) {
-//                        System.out.println("response"+t.getMessage());
-//
-//                    }
-//                });
-//            }
-//
-//
-//        });
-
-
-
-
-       // listener();
-
-    }
-
-
-    public void listener(){
-        btn10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_LONG).show();
-            }
-        });
 
     }
 
@@ -426,19 +382,48 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
             String otpNumbers6=edt6.getText().toString().trim();
             int numbers1,numbers2,numbers3,numbers4,numbers5,numbers6;
 
-       //    Log.e("number",otpNumbers);
-//             numbers2= Integer.valueOf(otpMunbers2);
-//             numbers3= Integer.valueOf(otpNumbers3);
-//             numbers4= Integer.valueOf(otpMunbers4);
-//             numbers5= Integer.valueOf(otpNumbers5);
-//             numbers6= Integer.valueOf(otpMunbers6);
-            String otp1=otpNumbers1+""+otpNumbers2 +""+otpNumbers3+""+otpNumbers4+""+otpNumbers5+""+otpNumbers6;
-           // int otp=Integer.valueOf(otp1);
-       //     int n=Integer.parseInt(otp1);
-           Log.e("numbers", String.valueOf(otp1));
-           int lenght=String.valueOf(otp1).length();
+             otp=otpNumbers1+""+otpNumbers2 +""+otpNumbers3+""+otpNumbers4+""+otpNumbers5+""+otpNumbers6;
+
+           Log.e("numbers", String.valueOf(otp));
+           int lenght=String.valueOf(otp).length();
            if (lenght==6){
-               Log.e("6 digit",otp1);
+               Log.e("6 digit",otp);
+               progressBar = new ProgressDialog(view.getContext());
+               progressBar.setCancelable(true);
+               progressBar.setMessage("Loading...");
+               progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+               progressBar.setProgress(0);
+               progressBar.setMax(100);
+               progressBar.show();
+               Post post=new Post(id,otp);
+               apiService.verifyPost(post).enqueue(new Callback<Post>() {
+                   @Override
+                   public void onResponse(Call<Post> call, Response<Post> response) {
+                       if (response.code()==200){
+                           progressBar.dismiss();
+                           Toast.makeText(getApplicationContext(),"valid otp",Toast.LENGTH_LONG).show();
+
+                       }else {
+                           System.out.println(response.code());
+                           if (response.code()==406){
+                               progressBar.dismiss();
+                               Toast.makeText(getApplicationContext(),"Invalid otp numbers or incurrent numbers",Toast.LENGTH_LONG).show();
+                           }
+
+                       }
+                   }
+
+                   @Override
+                   public void onFailure(Call<Post> call, Throwable t) {
+                       progressBar.dismiss();
+                       System.out.println(t.getMessage());
+                       if (t.getMessage().contains("Failed to connect")) {
+                           Toast.makeText(OtpActivity.this, "Check your  Internet Connection", Toast.LENGTH_SHORT).show();
+                       }
+                       call.cancel();
+
+                   }
+               });
            }
           // Log.e("integer", String.valueOf(n));
 

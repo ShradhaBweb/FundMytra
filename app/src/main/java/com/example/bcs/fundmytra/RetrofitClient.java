@@ -8,10 +8,8 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-<<<<<<< HEAD
 import okhttp3.logging.HttpLoggingInterceptor;
-=======
->>>>>>> 4ff157014131657b8740186b7690629c3f38aec1
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -41,7 +39,6 @@ public class RetrofitClient {
         });
 
 
-     //   Data1 c = gson.fromJson(myDeserializer, Data1.class);
         OkHttpClient client = httpClient.build();
 
         Retrofit retrofit;

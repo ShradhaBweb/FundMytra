@@ -492,7 +492,7 @@ public class DashboardActivity extends AppCompatActivity
                     }else if(groupPosition == 3){
                         AllProductFragmentActivity fragment = new AllProductFragmentActivity();
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.fragment_container, fragment);
+                        transaction.replace(R.id.fragmentContainer, fragment);
                         transaction.commit();
                     }
                     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
