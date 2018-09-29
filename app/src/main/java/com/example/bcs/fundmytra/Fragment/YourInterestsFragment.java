@@ -1,4 +1,4 @@
-package com.example.bcs.fundmytra;
+package com.example.bcs.fundmytra.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class DocumentsFragment extends Fragment{
-    public DocumentsFragment() {
+import com.example.bcs.fundmytra.R;
+
+public class YourInterestsFragment extends Fragment {
+    public YourInterestsFragment() {
 // Required empty public constructor
     }
 
@@ -20,8 +22,7 @@ public class DocumentsFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_documents, container, false);
-
+        return inflater.inflate(R.layout.fragment_yourinterests, container, false);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.bcs.fundmytra;
+package com.example.bcs.fundmytra.Adapter;
 
 import android.content.Context;
 import android.os.Parcelable;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.bcs.fundmytra.R;
 import com.github.siyamed.shapeimageview.RoundedImageView;
 
 import java.util.ArrayList;

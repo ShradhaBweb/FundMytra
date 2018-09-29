@@ -1,4 +1,4 @@
-package com.example.bcs.fundmytra;
+package com.example.bcs.fundmytra.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bcs.fundmytra.APIService;
+import com.example.bcs.fundmytra.ApiUtils;
+import com.example.bcs.fundmytra.Data;
+import com.example.bcs.fundmytra.Model.EmailMobileModel;
+import com.example.bcs.fundmytra.MyDeserializer;
+import com.example.bcs.fundmytra.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;

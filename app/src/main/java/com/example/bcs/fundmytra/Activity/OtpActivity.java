@@ -1,4 +1,4 @@
-package com.example.bcs.fundmytra;
+package com.example.bcs.fundmytra.Activity;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -6,21 +6,28 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.chaos.view.PinView;
+//import com.chaos.view.PinView;
+import com.example.bcs.fundmytra.APIService;
+import com.example.bcs.fundmytra.ApiUrls;
+import com.example.bcs.fundmytra.Data;
+import com.example.bcs.fundmytra.Model.Data1;
+import com.example.bcs.fundmytra.MyDeserializer;
+import com.example.bcs.fundmytra.Post;
+import com.example.bcs.fundmytra.R;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.POST;
 
 public class OtpActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -31,10 +38,11 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
     TextView txt1,txt2,txt3,txt4,txt5;
     String phone="123456789";
     APIService apiService;
-    String id,email,otp;
+    Data c;
+    String id1,email,otp;
 
     private ProgressDialog progressBar;
-    private PinView pinview;
+//    private PinView pinview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +52,11 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
 
         Intent intent=getIntent();
         email=intent.getStringExtra("email");
-        id=intent.getStringExtra("ID");
+        id1=intent.getStringExtra("ID");
 
-        Log.e("id",id);
+        Log.e("id",id1);
         Log.e("email",email);
-        apiService=ApiUrls.getAPIService();
+        apiService= ApiUrls.getAPIService();
 
         txt1=(TextView)findViewById(R.id.phone_number);
         txt2=(TextView)findViewById(R.id.text1);
@@ -395,13 +403,27 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                progressBar.setProgress(0);
                progressBar.setMax(100);
                progressBar.show();
-               Post post=new Post(id,otp);
-               apiService.verifyPost(post).enqueue(new Callback<Post>() {
+               Post post=new Post(id1,otp);
+               apiService.verifyPost(post).enqueue(new Callback<JsonElement>() {
                    @Override
-                   public void onResponse(Call<Post> call, Response<Post> response) {
+                   public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                       Gson gson =
+                               new GsonBuilder()
+                                       .registerTypeAdapter(Data.class, new MyDeserializer())
+                                       .create();
                        if (response.code()==200){
                            progressBar.dismiss();
                            Toast.makeText(getApplicationContext(),"valid otp",Toast.LENGTH_LONG).show();
+                           c = gson.fromJson(new Gson().toJson(response.body()), Data.class);
+                           System.out.println(c.id);
+
+                           Bundle bundle = new Bundle();
+                           bundle.putString("customer_id",c.id);
+//                           bundle.putString("email",email);
+                           Intent intent=new Intent(OtpActivity.this,PasswordConfirmation.class);
+                           intent.putExtras(bundle);
+                           startActivity(intent);
+
 
                        }else {
                            System.out.println(response.code());
@@ -414,7 +436,7 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                    }
 
                    @Override
-                   public void onFailure(Call<Post> call, Throwable t) {
+                   public void onFailure(Call<JsonElement> call, Throwable t) {
                        progressBar.dismiss();
                        System.out.println(t.getMessage());
                        if (t.getMessage().contains("Failed to connect")) {

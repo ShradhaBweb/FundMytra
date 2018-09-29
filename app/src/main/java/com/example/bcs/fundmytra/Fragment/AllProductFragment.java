@@ -1,13 +1,11 @@
+package com.example.bcs.fundmytra.Fragment;
 
-package com.example.bcs.fundmytra;
+
 import android.os.Bundle;
 import android.os.Handler;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,18 +13,20 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.example.bcs.fundmytra.Adapter.AllProductGridAdapter;
+import com.example.bcs.fundmytra.Adapter.AllProductPageAdapter;
+import com.example.bcs.fundmytra.R;
 import com.viewpagerindicator.CirclePageIndicator;
-
 
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class AllProductFragmentActivity extends Fragment {
-
-
-    private static final String TAG = "MainActivity";
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class AllProductFragment extends Fragment {
 
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<Integer> mImageUrls = new ArrayList<>();
@@ -42,86 +42,74 @@ public class AllProductFragmentActivity extends Fragment {
     private Integer[] IMAGES = {R.drawable.prequalityone, R.drawable.prequalityone, R.drawable.prequalityone};
     private ArrayList<Integer> arrayList;
 
-
-    public AllProductFragmentActivity() {
-
+    public AllProductFragment() {
+        // Required empty public constructor
     }
 
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        if (container!=null){
-            container.removeAllViews();
-        }
-        View view= inflater.inflate(R.layout.fragment_all_product, container, false);
+        View view = inflater.inflate(R.layout.fragment_all_product2, container, false);
         gridView=(GridView)view.findViewById(R.id.gridView);
         viewPager=(ViewPager)view.findViewById(R.id.viewPage);
         circlePageIndicator = (CirclePageIndicator)view. findViewById(R.id.circlePagerIndicator);
-
-
-        getImages();
         arrayList=new ArrayList<>();
         arrayList=populateList();
         init();
-
-
-
+        getImages();
         return view;
     }
-
     private void getImages(){
-        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+//        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
-        mImageUrls.add(R.drawable.card_loanicon);
+        mImageUrls.add(R.drawable.car_loan);
         mNames.add("Credit Card");
 
-        mImageUrls.add(R.drawable.two_wheeler);
+        mImageUrls.add(R.drawable.credit_card);
         mNames.add("Two Wheeler Loan");
 
-        mImageUrls.add(R.drawable.personal_loanicon);
+        mImageUrls.add(R.drawable.personal_loan);
         mNames.add("Personal Loan");
 
-        mImageUrls.add(R.drawable.home_loanicon);
+        mImageUrls.add(R.drawable.car_loan);
         mNames.add("Home Loan");
 
 
-        mImageUrls.add(R.drawable.against_property_loanicon);
+        mImageUrls.add(R.drawable.credit_card);
         mNames.add("Loan Against Property");
 
-        mImageUrls.add(R.drawable.balance_laonicon);
+        mImageUrls.add(R.drawable.car_loan);
         mNames.add("Home Loan Balance Transfer");
 
 
-        mImageUrls.add(R.drawable.contraction_loan);
+        mImageUrls.add(R.drawable.car_loan);
         mNames.add("Site & Contruction Loan");
 
-        mImageUrls.add(R.drawable.car_loanicon);
+        mImageUrls.add(R.drawable.credit_card);
         mNames.add("Car Loan");
 
-        mImageUrls.add(R.drawable.user_car_loanicon);
+        mImageUrls.add(R.drawable.car_loan);
         mNames.add("Used Car Loan");
 
-        mImageUrls.add(R.drawable.topcar_loanicon);
+        mImageUrls.add(R.drawable.car_loan);
         mNames.add("Top up Car Loan");
 
-        mImageUrls.add(R.drawable.commercial_loanicon);
+        mImageUrls.add(R.drawable.credit_card);
         mNames.add("Commercial Vehicle Loan");
 
-        mImageUrls.add(R.drawable.best_offereicon);
+        mImageUrls.add(R.drawable.personal_loan);
         mNames.add("For Best Offeres");
+
+
+
+
 
         initGridView();
     }
     private void initGridView() {
-        Log.d(TAG, "initRecyclerView: init recyclerview");
+//        Log.d(TAG, "initRecyclerView: init recyclerview");
         adapter=new AllProductGridAdapter(getActivity(),mNames,mImageUrls);
         gridView.setAdapter(adapter);
 
@@ -130,10 +118,10 @@ public class AllProductFragmentActivity extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i){
                     case 0:
-                        Toast.makeText(getActivity(),"position zero",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),"position zero",Toast.LENGTH_LONG).show();
                         break;
                     case 1:
-                        Toast.makeText(getActivity(),"position one",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),"position one",Toast.LENGTH_LONG).show();
                         break;
                 }
             }
@@ -159,7 +147,7 @@ public class AllProductFragmentActivity extends Fragment {
 
 
 
-        AllProductPageAdapter adapter = new AllProductPageAdapter(getActivity(), arrayList);
+        AllProductPageAdapter adapter = new AllProductPageAdapter(getContext(), arrayList);
         viewPager.setAdapter(adapter);
 
         viewPager.setOffscreenPageLimit(adapter.getCount());
@@ -209,25 +197,4 @@ public class AllProductFragmentActivity extends Fragment {
             }
         });
     }
-
-
-
-
-
-
-
-
-
-//    @Override
-//    public boolean onBackPressed() {
-//
-//        assert getFragmentManager() != null;
-//        getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-//        return true;
-//    }
-//
-//    @Override
-//    public int getBackPriority() {
-//        return LOW_BACK_PRIORITY + 1;
-//    }
 }

@@ -1,4 +1,4 @@
-package com.example.bcs.fundmytra;
+package com.example.bcs.fundmytra.Fragment;
 
 import android.content.Context;
 import android.net.Uri;
@@ -17,6 +17,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bcs.fundmytra.PageAdapter;
+import com.example.bcs.fundmytra.R;
+import com.example.bcs.fundmytra.RecyclerViewAdapter;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;

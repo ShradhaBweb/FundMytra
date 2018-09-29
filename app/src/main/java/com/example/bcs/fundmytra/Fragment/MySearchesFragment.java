@@ -1,14 +1,16 @@
-package com.example.bcs.fundmytra;
+package com.example.bcs.fundmytra.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
+
+import com.example.bcs.fundmytra.Adapter.CustomAdapter;
+import com.example.bcs.fundmytra.Model.DataModel;
+import com.example.bcs.fundmytra.R;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.bcs.fundmytra;
+package com.example.bcs.fundmytra.Fragment;
 
 
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.bcs.fundmytra.Adapter.FragmentAdapter;
+import com.example.bcs.fundmytra.R;
 
 
 /**

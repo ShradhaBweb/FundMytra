@@ -1,15 +1,11 @@
-package com.example.bcs.fundmytra;
+package com.example.bcs.fundmytra.Activity;
 
 
 
-import android.app.FragmentTransaction;
-import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,12 +17,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.bcs.fundmytra.Fragment.AllProductFragment;
+import com.example.bcs.fundmytra.Adapter.ExpandableListAdapter;
+import com.example.bcs.fundmytra.Model.MenuModel;
+import com.example.bcs.fundmytra.Fragment.MyAccountFragment;
+import com.example.bcs.fundmytra.PageAdapter;
+import com.example.bcs.fundmytra.R;
+import com.example.bcs.fundmytra.RecyclerViewAdapter;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;

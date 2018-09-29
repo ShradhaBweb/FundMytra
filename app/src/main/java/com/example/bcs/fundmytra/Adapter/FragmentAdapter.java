@@ -1,10 +1,18 @@
-package com.example.bcs.fundmytra;
+package com.example.bcs.fundmytra.Adapter;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.example.bcs.fundmytra.Fragment.DocumentsFragment;
+import com.example.bcs.fundmytra.Fragment.MyApplicationsFragment;
+import com.example.bcs.fundmytra.Fragment.MyProfileFragment;
+import com.example.bcs.fundmytra.Fragment.MySearchesFragment;
+import com.example.bcs.fundmytra.Fragment.SalaryInformationFragment;
+import com.example.bcs.fundmytra.Fragment.YourInterestsFragment;
+import com.example.bcs.fundmytra.R;
 
 public class FragmentAdapter extends FragmentPagerAdapter {
     private int numOfTabs;

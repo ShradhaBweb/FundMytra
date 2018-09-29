@@ -1,4 +1,4 @@
-package com.example.bcs.fundmytra;
+package com.example.bcs.fundmytra.Activity;
 
 import android.content.Intent;
 import android.os.Build;
@@ -17,6 +17,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.example.bcs.fundmytra.PrefManager;
+import com.example.bcs.fundmytra.R;
 
 public class IntroductionActivity extends AppCompatActivity {
 

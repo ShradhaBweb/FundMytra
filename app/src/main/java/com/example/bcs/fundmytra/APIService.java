@@ -1,6 +1,7 @@
 package com.example.bcs.fundmytra;
 
 
+import com.example.bcs.fundmytra.Model.EmailMobileModel;
 import com.google.gson.JsonElement;
 
 
@@ -17,7 +18,10 @@ public interface APIService {
     Call<JsonElement>  savePost(@Body EmailMobileModel add);
 
     @POST("master_api/otp_verification")
-    Call<Post> verifyPost(@Body Post post);
+    Call<JsonElement> verifyPost(@Body Post post);
+
+    @POST("admin_app/master_api/update_password")
+    Call<JsonElement> password(@Body Password post);
 
 
 }
