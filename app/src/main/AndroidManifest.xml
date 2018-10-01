@@ -24,7 +24,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
         <activity android:name=".HomeActivity" />
+
+
+
+
         <activity android:name=".LoginSignupActivity"/>
         <activity android:name=".SignupActivity"/>
 
@@ -38,11 +44,17 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".LoginActivity" />
+
         <activity android:name=".OtpActivity" />
         <activity
             android:name=".DashboardActivity"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme" />
+
+
+
+
+        <activity android:name=".MyAccountsActivity"/>
 
     </application>
 

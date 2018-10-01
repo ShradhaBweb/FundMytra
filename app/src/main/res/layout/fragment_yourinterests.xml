@@ -18,8 +18,8 @@
         <ImageView
             android:id="@+id/img_shop"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/car_loan"
+            android:layout_height="40dp"
+            android:src="@drawable/shop"
 
             />
 
@@ -62,8 +62,8 @@
         <ImageView
             android:id="@+id/img_movie"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/car_loan" />
+            android:layout_height="40dp"
+            android:src="@drawable/movie" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -101,8 +101,8 @@
         <ImageView
             android:id="@+id/img_food"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/car_loan"
+            android:layout_height="40dp"
+            android:src="@drawable/food"
 
             />
 
@@ -147,8 +147,8 @@
         <ImageView
             android:id="@+id/img_travel"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/car_loan"
+            android:layout_height="40dp"
+            android:src="@drawable/travel"
 
             />
 
@@ -190,8 +190,8 @@
         <ImageView
             android:id="@+id/img_fitness"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/car_loan"
+            android:layout_height="40dp"
+            android:src="@drawable/fitness"
 
             />
 
