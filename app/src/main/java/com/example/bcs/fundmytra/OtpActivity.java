@@ -58,6 +58,7 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
         Log.e("auth_id",Auth_id);
         apiService=ApiUtils.getOtpService(Auth_id);
 
+
         
         txt1=(TextView)findViewById(R.id.phone_number);
         txt2=(TextView)findViewById(R.id.text1);
