@@ -4,6 +4,7 @@ package com.example.bcs.fundmytra;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -114,6 +115,8 @@ public class AllProductFragment extends Fragment {
                 switch (i){
                     case 0:
                         Toast.makeText(getContext(),"position zero",Toast.LENGTH_LONG).show();
+                        Fragment fragment=new CreditCardActivity();
+                        loadFragment(fragment);
                         break;
                     case 1:
                         Toast.makeText(getContext(),"position one",Toast.LENGTH_LONG).show();
@@ -124,6 +127,7 @@ public class AllProductFragment extends Fragment {
 
 
     }
+
     private ArrayList<Integer> populateList(){
 
         ArrayList<Integer> list = new ArrayList<>();
@@ -191,5 +195,15 @@ public class AllProductFragment extends Fragment {
 
             }
         });
+    }
+
+    private void loadFragment(final Fragment fragment) {
+        assert getFragmentManager() != null;
+        final FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentContainer,fragment);
+        fragmentTransaction.addToBackStack(fragment.getClass().getName());
+      //  getFragmentManager().popBackStackImmediate(fragment.getClass().getName(),0);
+        fragmentTransaction.commit();
+
     }
 }

@@ -48,7 +48,9 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
 
         Log.e("id",id);
         Log.e("email",email);
-        apiService=ApiUrls.getAPIService();
+        //apiService=ApiUrls.getAPIService();
+
+
 
         txt1=(TextView)findViewById(R.id.phone_number);
         txt2=(TextView)findViewById(R.id.text1);
@@ -80,6 +82,7 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
         imageButton=(ImageButton)findViewById(R.id.button12);
 
     }
+
 
 
 
@@ -380,7 +383,6 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
             String otpNumbers4=edt4.getText().toString().trim();
             String otpNumbers5=edt5.getText().toString().trim();
             String otpNumbers6=edt6.getText().toString().trim();
-            int numbers1,numbers2,numbers3,numbers4,numbers5,numbers6;
 
              otp=otpNumbers1+""+otpNumbers2 +""+otpNumbers3+""+otpNumbers4+""+otpNumbers5+""+otpNumbers6;
 
