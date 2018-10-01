@@ -41,8 +41,8 @@ public class PasswordConfirmation extends AppCompatActivity {
 //        email=intent.getStringExtra("email");
         id=intent.getStringExtra("customer_id");
         auth_id=intent.getStringExtra("auth_id");
-        id=intent.getStringExtra("email");
-        auth_id=intent.getStringExtra("mobile");
+        email=intent.getStringExtra("email");
+        mobile=intent.getStringExtra("mobile");
         init();
 
         listener();

@@ -437,7 +437,7 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                             if (response.code()==406){
                                 progressBar.dismiss();
 
-                               
+
                             }
                         } else {
                             progressBar.dismiss();
