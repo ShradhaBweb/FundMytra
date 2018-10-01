@@ -81,7 +81,6 @@ public class LoginActivity extends AppCompatActivity {
                                         Data c = gson.fromJson(new Gson().toJson(response.body()), Data.class);
                                         System.out.println(c.id);
                                         System.out.println(c.auth_id);
-                                        Toast.makeText(LoginActivity.this, "Id" + c.id, Toast.LENGTH_SHORT).show();
                                         Bundle bundle = new Bundle();
                                         bundle.putString("id", c.id);
                                         bundle.putString("auth_id", c.auth_id);
