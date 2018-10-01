@@ -29,10 +29,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation "com.android.support:design:27.1.1"
 
-<<<<<<<<< Temporary merge branch 1
+
     implementation "com.android.support:design:27.1.1"
-=========
->>>>>>>>> Temporary merge branch 2
 
     implementation 'com.fxn769:numpad:1.0'
     implementation 'com.github.bumptech.glide:glide:4.7.1'
@@ -44,7 +42,6 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     implementation "com.android.support:recyclerview-v7:27.1.1"
     implementation "com.android.support:recyclerview-v7:27.1.1"
-<<<<<<<<< Temporary merge branch 1
 
     implementation 'com.github.bumptech.glide:glide:4.7.1'
 
@@ -68,10 +65,9 @@ dependencies {
     implementation 'com.chaos.view:pinview:1.2.0'
 
     implementation 'com.libRG:customtextview:1.1'
-=========
     implementation 'com.github.lzyzsd:circleprogress:1.2.1'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 
->>>>>>>>> Temporary merge branch 2
+
 
 }

@@ -34,6 +34,8 @@
             android:groupIndicator="@null"
             />
 
+        
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/logoutButton"
             android:layout_width="wrap_content"
@@ -48,7 +50,7 @@
             app:elevation="0dp"
             app:fabSize="normal"/>
 
-        
+
 
     </android.support.design.widget.NavigationView>
 

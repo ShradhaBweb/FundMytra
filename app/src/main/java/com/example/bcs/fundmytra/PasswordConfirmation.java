@@ -47,6 +47,8 @@ public class PasswordConfirmation extends AppCompatActivity {
 
         listener();
 
+
+
         mAPIService= ApiUtils.getPasswordService(auth_id);
     }
 
