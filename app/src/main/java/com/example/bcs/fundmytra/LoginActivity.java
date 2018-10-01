@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Intent intent=getIntent();
         confirm_Pass=intent.getStringExtra("password");
-        Log.e("pass",confirm_Pass);
+//          Log.e("pass",confirm_Pass);
         mAPIService= ApiUtils.getLoginService();
         init();
         listeners();
@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                 pass = password.getText().toString().trim();
                 if (!TextUtils.isEmpty(emailPhone) && !TextUtils.isEmpty(pass)) {
                     if (emailPhone.matches(emailPattern) || (emailPhone.matches(mobilePattern))) {
-                        if (pass.equals(confirm_Pass)) {
+
                             loginModel = new LoginModel(emailPhone, pass);
 
 
@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                                         System.out.println(c.auth_id);
                                         Toast.makeText(LoginActivity.this, "Id" + c.id, Toast.LENGTH_SHORT).show();
                                         Bundle bundle = new Bundle();
-                                        bundle.putString("ID", c.id);
+                                        bundle.putString("id", c.id);
                                         bundle.putString("auth_id", c.auth_id);
 
                                         Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
@@ -109,9 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                                     call.cancel();
                                 }
                             });
-                        } else {
-                            Toast.makeText(LoginActivity.this, "Plz Enter Valid password", Toast.LENGTH_SHORT).show();
-                        }
+
                     } else {
                         Toast.makeText(LoginActivity.this, "enter valid mobile no or email_id", Toast.LENGTH_SHORT).show();
                     }
