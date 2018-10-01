@@ -30,6 +30,7 @@
 
 
 
+
         <activity android:name=".LoginSignupActivity"/>
         <activity android:name=".SignupActivity"/>
 
@@ -45,15 +46,16 @@
         <activity android:name=".LoginActivity" />
 
         <activity android:name=".OtpActivity" />
+
         <activity
             android:name=".DashboardActivity"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme" />
-        <activity android:name=".AllProductsActivity">
-
-        </activity>
 
 
+
+
+        <activity android:name=".MyAccountsActivity"/>
 
     </application>
 

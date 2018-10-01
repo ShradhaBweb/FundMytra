@@ -1,19 +1,34 @@
 package com.example.bcs.fundmytra;
 
 
+<<<<<<<<< Temporary merge branch 1
+=========
+
+>>>>>>>>> Temporary merge branch 2
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+<<<<<<<<< Temporary merge branch 1
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+=========
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.view.ViewPager;
+>>>>>>>>> Temporary merge branch 2
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+<<<<<<<<< Temporary merge branch 1
 import android.widget.ImageButton;
+=========
+>>>>>>>>> Temporary merge branch 2
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -22,6 +37,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
+<<<<<<<<< Temporary merge branch 1
+=========
+import android.widget.ImageButton;
+import android.widget.ImageView;
+>>>>>>>>> Temporary merge branch 2
 import android.widget.Toast;
 
 import com.viewpagerindicator.CirclePageIndicator;
@@ -36,9 +56,14 @@ import me.crosswall.lib.coverflow.CoverFlow;
 import me.crosswall.lib.coverflow.core.PageItemClickListener;
 import me.crosswall.lib.coverflow.core.PagerContainer;
 
+<<<<<<<<< Temporary merge branch 1
 
     public class DashboardActivity extends AppCompatActivity
             implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
+=========
+public class DashboardActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
+>>>>>>>>> Temporary merge branch 2
 
     private ImageButton imgbtn1,imgbtn2;
 
@@ -47,6 +72,14 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
         private int NUM_PAGE = 0;
        public static FragmentTransaction ft,pt;
 
+<<<<<<<<< Temporary merge branch 1
+=========
+    private Integer[] IMAGES = {R.drawable.employee1, R.drawable.employee1, R.drawable.employee1};
+    private ArrayList<Integer> arrayList;
+    RecyclerViewAdapter adapter;
+    int i;
+    int k;
+>>>>>>>>> Temporary merge branch 2
 
         RecyclerView recyclerView;
 
@@ -56,6 +89,7 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
         int i;
         int k;
 
+<<<<<<<<< Temporary merge branch 1
         ExpandableListAdapter expandableListAdapter;
         ExpandableListView expandableListView;
         List<MenuModel> headerList = new ArrayList<>();
@@ -190,6 +224,65 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
 
         private void getImages() {
             Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+=========
+    private ArrayList<String> mNames = new ArrayList<>();
+    private ArrayList<Integer> mImageUrls = new ArrayList<>();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_dashboard2);
+
+        imgbtn1=(ImageButton)findViewById(R.id.backButton);
+        imgbtn2=(ImageButton)findViewById(R.id.frontButton);
+        imgbtn1.setVisibility(View.INVISIBLE);
+
+        getImages();
+        arrayList=new ArrayList<>();
+        arrayList=populateList();
+        init();
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
+
+        prepareMenuData();
+        populateExpandableList();
+
+
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.setDrawerIndicatorEnabled(false);
+        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.menu, getApplicationContext().getTheme());
+        toggle.setHomeAsUpIndicator(drawable);
+        toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (drawer.isDrawerVisible(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                } else {
+                    drawer.openDrawer(GravityCompat.START);
+                }
+            }
+        });
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public void onClick(View v) {
+        switch (v.getId()) {
+>>>>>>>>> Temporary merge branch 2
 
             mImageUrls.add(R.drawable.car_loan);
             mNames.add("Car Loan");
@@ -269,7 +362,28 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
             for (int i = 0; i < IMAGES.length; i++) {
 
 
+<<<<<<<<< Temporary merge branch 1
                 list.add(IMAGES[i]);
+=========
+            @Override
+            public void onScrolled(RecyclerView recyclerView1, int dx, int dy) {
+                super.onScrolled(recyclerView1, dx, dy);
+                LinearLayoutManager llm = (LinearLayoutManager) recyclerView.getLayoutManager();
+                i =llm.findFirstCompletelyVisibleItemPosition();
+
+                k=mImageUrls.size()-1;
+                Log.e("totalPosition", String.valueOf(k));
+                Log.e("firstPosition", String.valueOf(i));
+                if (i==k ){
+                    imgbtn2.setVisibility(View.INVISIBLE);
+                    imgbtn1.setVisibility(View.VISIBLE);
+                } else if (i>0 && i<k){
+                    imgbtn1.setVisibility(View.VISIBLE);
+                    imgbtn2.setVisibility(View.VISIBLE);
+                }else if (i==0){
+                    imgbtn1.setVisibility(View.INVISIBLE);
+                }
+>>>>>>>>> Temporary merge branch 2
             }
 
             return list;
@@ -352,199 +466,268 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
             });
         }
 
-    @Override
-    public void onBackPressed(){
-        android.app.FragmentManager fm = getFragmentManager();
-        if (fm.getBackStackEntryCount() > 0) {
-            Log.i("MainActivity", "popping backstack");
-            fm.popBackStack();
-        } else {
-            Log.i("MainActivity", "nothing on backstack, calling super");
-            super.onBackPressed();
+
+        @Override
+        public void onBackPressed() {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                super.onBackPressed();
+            }
         }
+
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            // Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.dashboard, menu);
+            return true;
+        }
+
+<<<<<<<<< Temporary merge branch 1
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            // Handle action bar item clicks here. The action bar will
+            // automatically handle clicks on the Home/Up button, so long
+            // as you specify a parent activity in AndroidManifest.xml.
+            int id = item.getItemId();
+
+            //noinspection SimplifiableIfStatement
+            if (id == R.id.action_settings) {
+                return true;
+            }
+=========
+            }
+        });
+    }
+>>>>>>>>> Temporary merge branch 2
+
+            return super.onOptionsItemSelected(item);
+        }
+<<<<<<<<< Temporary merge branch 1
+=========
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.dashboard, menu);
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.dashboard, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+>>>>>>>>> Temporary merge branch 2
+
+        @SuppressWarnings("StatementWithEmptyBody")
+        @Override
+        public boolean onNavigationItemSelected(MenuItem item) {
+            // Handle navigation view item clicks here.
+            int id = item.getItemId();
 
             if (id == R.id.nav_home) {
                 // Handle the camera action
             } else if (id == R.id.nav_accounts) {
 
+
+            } else if (id == R.id.nav_applications) {
+
+<<<<<<<<< Temporary merge branch 1
+            } else if (id == R.id.nav_products) {
+=========
+
         } else if (id == R.id.nav_applications) {
+>>>>>>>>> Temporary merge branch 2
 
-        } else if (id == R.id.nav_products) {
+            } else if (id == R.id.nav_referEarn) {
 
-        } else if (id == R.id.nav_referEarn) {
+            }
 
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
         }
 
+<<<<<<<<< Temporary merge branch 1
+        private void prepareMenuData() {
+
+            MenuModel menuModel = new MenuModel("Home", true, false); //Menu of Android Tutorial. No sub menus
+            headerList.add(menuModel);
+=========
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
     private void prepareMenuData() {
+>>>>>>>>> Temporary merge branch 2
 
-        MenuModel menuModel = new MenuModel("Home", true, false); //Menu of Android Tutorial. No sub menus
-        headerList.add(menuModel);
+            menuModel = new MenuModel("My Accounts", true, false);
+            headerList.add(menuModel);
 
-        menuModel = new MenuModel("My Accounts", true, false);
-        headerList.add(menuModel);
+            menuModel = new MenuModel("My Applications", true, false);
+            headerList.add(menuModel);
 
-        menuModel = new MenuModel("My Applications", true, false);
-        headerList.add(menuModel);
+            menuModel = new MenuModel("Our All Products", true, false);
+            headerList.add(menuModel);
 
-        menuModel = new MenuModel("Our All Products", true, false);
-        headerList.add(menuModel);
+            menuModel = new MenuModel("Refer & Earn", true, false);
+            headerList.add(menuModel);
+            if (!menuModel.hasChildren) {
+                childList.put(menuModel, null);
+            }
 
-        menuModel = new MenuModel("Refer & Earn", true, false);
-        headerList.add(menuModel);
-        if (!menuModel.hasChildren) {
-            childList.put(menuModel, null);
+            menuModel = new MenuModel("Loans", true, true); //Menu of Java Tutorials
+            headerList.add(menuModel);
+            List<MenuModel> childModelsList = new ArrayList<>();
+            MenuModel childModel = new MenuModel("Core Java Tutorial", false, false);
+            childModelsList.add(childModel);
+
+            childModel = new MenuModel("Java FileInputStream", false, false);
+            childModelsList.add(childModel);
+
+            childModel = new MenuModel("Java FileReader", false, false);
+            childModelsList.add(childModel);
+
+            if (menuModel.hasChildren) {
+                Log.d("API123", "here");
+                childList.put(menuModel, childModelsList);
+            }
+
+            childModelsList = new ArrayList<>();
+            menuModel = new MenuModel("Secured Loans", true, true); //Menu of Python Tutorials
+            headerList.add(menuModel);
+            childModel = new MenuModel("Python AST – Abstract Syntax Tree", false, false);
+            childModelsList.add(childModel);
+
+            childModel = new MenuModel("Python Fractions", false, false);
+            childModelsList.add(childModel);
+            if (menuModel.hasChildren) {
+                Log.d("API123", "here");
+                childList.put(menuModel, childModelsList);
+            }
+
+            childModelsList = new ArrayList<>();
+            menuModel = new MenuModel("Cards", true, true); //Menu of Python Tutorials
+            headerList.add(menuModel);
+            childModel = new MenuModel("Python AST – Abstract Syntax Tree", false, false);
+            childModelsList.add(childModel);
+
+            childModel = new MenuModel("Python Fractions", false, false);
+            childModelsList.add(childModel);
+            if (menuModel.hasChildren) {
+                Log.d("API123", "here");
+                childList.put(menuModel, childModelsList);
+            }
+
+            childModelsList = new ArrayList<>();
+            menuModel = new MenuModel("Tools", true, true); //Menu of Python Tutorials
+            headerList.add(menuModel);
+            childModel = new MenuModel("Python AST – Abstract Syntax Tree", false, false);
+            childModelsList.add(childModel);
+
+            childModel = new MenuModel("Python Fractions", false, false);
+            childModelsList.add(childModel);
+
+            if (menuModel.hasChildren) {
+                Log.d("API123", "here");
+                childList.put(menuModel, childModelsList);
+            }
+
+            if (menuModel.hasChildren) {
+                childList.put(menuModel, childModelsList);
+            }
         }
 
-        menuModel = new MenuModel("Loans", true, true); //Menu of Java Tutorials
-        headerList.add(menuModel);
-        List<MenuModel> childModelsList = new ArrayList<>();
-        MenuModel childModel = new MenuModel("Core Java Tutorial", false, false);
-        childModelsList.add(childModel);
+        private void populateExpandableList() {
 
-        childModel = new MenuModel("Java FileInputStream", false, false);
-        childModelsList.add(childModel);
+            expandableListAdapter = new ExpandableListAdapter(this, headerList, childList);
+            expandableListView.setAdapter(expandableListAdapter);
 
-        childModel = new MenuModel("Java FileReader", false, false);
-        childModelsList.add(childModel);
+            expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+                @Override
+                public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
 
-        if (menuModel.hasChildren) {
-            Log.d("API123","here");
-            childList.put(menuModel, childModelsList);
-        }
+                    if (headerList.get(groupPosition).isGroup) {
+                        System.out.println("Group position : " + groupPosition);
+                        if (groupPosition == 1) {
+                       //     Intent intent = new Intent(DashboardActivity.this, MyAccountsFragment.class);
+                         //   startActivity(intent);
 
-        childModelsList = new ArrayList<>();
-        menuModel = new MenuModel("Secured Loans", true, true); //Menu of Python Tutorials
-        headerList.add(menuModel);
-        childModel = new MenuModel("Python AST – Abstract Syntax Tree", false, false);
-        childModelsList.add(childModel);
 
-        childModel = new MenuModel("Python Fractions", false, false);
-        childModelsList.add(childModel);
-        if (menuModel.hasChildren) {
-            Log.d("API123","here");
-            childList.put(menuModel, childModelsList);
-        }
+                            //Calling MyAccountsFragment
+                          ft =getSupportFragmentManager().beginTransaction();
+                            ft.replace(R.id.fragmentContainer, new MyAccountsFragment()).commit();
 
-        childModelsList = new ArrayList<>();
-        menuModel = new MenuModel("Cards", true, true); //Menu of Python Tutorials
-        headerList.add(menuModel);
-        childModel = new MenuModel("Python AST – Abstract Syntax Tree", false, false);
-        childModelsList.add(childModel);
+                                     }
 
-        childModel = new MenuModel("Python Fractions", false, false);
-        childModelsList.add(childModel);
-        if (menuModel.hasChildren) {
-            Log.d("API123","here");
-            childList.put(menuModel, childModelsList);
-        }
 
-        childModelsList = new ArrayList<>();
-        menuModel = new MenuModel("Tools", true, true); //Menu of Python Tutorials
-        headerList.add(menuModel);
-        childModel = new MenuModel("Python AST – Abstract Syntax Tree", false, false);
-        childModelsList.add(childModel);
-
-        childModel = new MenuModel("Python Fractions", false, false);
-        childModelsList.add(childModel);
-
-        if (menuModel.hasChildren) {
-            Log.d("API123","here");
-            childList.put(menuModel, childModelsList);
-        }
-
-        if (menuModel.hasChildren) {
-            childList.put(menuModel, childModelsList);
-        }
-    }
-
-    private void populateExpandableList() {
-
-        expandableListAdapter = new ExpandableListAdapter(this, headerList, childList);
-        expandableListView.setAdapter(expandableListAdapter);
-
-        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-
+<<<<<<<<< Temporary merge branch 1
+=========
                 if (headerList.get(groupPosition).isGroup) {
                     System.out.println("Group position : "+groupPosition);
                     if(groupPosition == 1){
-
-                        MyAccountFragment fragment= new MyAccountFragment();
-                        android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.fragmentContainer, fragment); // fragment container id in first parameter is the  container(Main layout id) of Activity
-                        transaction.addToBackStack(null);  // this will manage backstack
-                        transaction.commit();
+                        Intent intent = new Intent(DashboardActivity.this, MyAccountsActivity.class);
+                        startActivity(intent);
                     }else if(groupPosition == 3){
-                        AllProductFragment fragment= new AllProductFragment();
-                        android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.fragmentContainer, fragment); // fragment container id in first parameter is the  container(Main layout id) of Activity
-                        transaction.addToBackStack(null);  // this will manage backstack
+                        AllProductFragmentActivity fragment = new AllProductFragmentActivity();
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragment_container, fragment);
                         transaction.commit();
                     }
                     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                     drawer.closeDrawer(GravityCompat.START);
+>>>>>>>>> Temporary merge branch 2
 //                    if (!headerList.get(groupPosition).hasChildren) {
 //                        WebView webView = findViewById(R.id.webView);
 //                        webView.loadUrl(headerList.get(groupPosition).url);
 //                        onBackPressed();
 //                    }
+                    }
+
+                    return false;
                 }
+            });
 
-                return false;
-            }
-        });
+            expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                @Override
+                public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 
-        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-
-                if (childList.get(headerList.get(groupPosition)) != null) {
-                    MenuModel model = childList.get(headerList.get(groupPosition)).get(childPosition);
+                    if (childList.get(headerList.get(groupPosition)) != null) {
+                        MenuModel model = childList.get(headerList.get(groupPosition)).get(childPosition);
 //                    if (model.url.length() > 0) {
 //                        WebView webView = findViewById(R.id.webView);
 //                        webView.loadUrl(model.url);
 //                        onBackPressed();
 //                    }
-                }
+                    }
 
-                return false;
+                    return false;
+                }
+            });
             }
+<<<<<<<<< Temporary merge branch 1
+public static void callFragment(){
+
+            pt.replace(R.id.fragmentContainer, new TrackApplicationFragment()).addToBackStack(null).commit();
+
+
+        }
+    }
+=========
         });
     }
-
 }
+>>>>>>>>> Temporary merge branch 2
