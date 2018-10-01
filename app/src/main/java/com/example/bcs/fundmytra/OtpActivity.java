@@ -58,8 +58,6 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
         Log.e("auth_id",Auth_id);
         apiService=ApiUtils.getOtpService(Auth_id);
 
-
-        
         txt1=(TextView)findViewById(R.id.phone_number);
         txt2=(TextView)findViewById(R.id.text1);
         txt3=(TextView)findViewById(R.id.text2);
@@ -413,16 +411,15 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                            progressBar.dismiss();
                            Toast.makeText(getApplicationContext(),"valid otp",Toast.LENGTH_LONG).show();
 
-                       }else if(response.code()==406)
-                       {
+                       }else {
                            System.out.println(response.code());
                            if (response.code()==406){
                                progressBar.dismiss();
                                Toast.makeText(getApplicationContext(),"Invalid otp numbers or incurrent numbers",Toast.LENGTH_LONG).show();
+                           }else if (response.code()==404){
+                               progressBar.dismiss();
+                               Toast.makeText(getApplicationContext(),"not Found ",Toast.LENGTH_LONG).show();
                            }
-                       } else {
-                           progressBar.dismiss();
-                           Toast.makeText(getApplicationContext(),"Invalid otp",Toast.LENGTH_LONG).show();
                        }
                    }
 

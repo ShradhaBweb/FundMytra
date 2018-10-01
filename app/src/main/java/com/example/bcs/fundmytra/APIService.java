@@ -17,7 +17,7 @@ public interface APIService {
     @POST("admin_app/master_api/app_signup")
     Call<JsonElement>  savePost(@Body EmailMobileModel add);
 
-    @POST("master_api/otp_verification")
+    @POST("admin_app/master_api/otp_verification")
     Call<Post> verifyPost(@Body Post post);
 
 

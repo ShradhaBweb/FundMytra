@@ -67,15 +67,17 @@ public class RetrofitClient {
             public Response intercept(@NonNull Chain chain) throws IOException {
                 Request original = chain.request();
                 Response response = chain.proceed(original);
+                String auth_ID=authId;
                 Log.e("AuthId",authId);
 
                 Request request = original.newBuilder()
                         .header("Content-Type", "application/json")
                         .header("Admin-Service", "fundmitra-RESTApi")
                         .header("Auth-Key", "BwebRestAPI")
-                        .header("Auth-Id",authId)
+                        .header("Auth-Id",auth_ID)
                         .method(original.method(), original.body())
                         .build();
+                Log.e("id",request.header("Auth-Id"));
 
                 return chain.proceed(request);
             }
