@@ -422,16 +422,14 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
 
                             Toast.makeText(getApplicationContext(),"valid otp",Toast.LENGTH_LONG).show();
                           //  c = gson.fromJson(new Gson().toJson(response.body()), Data.class);
-                            System.out.println(c.id);
-
                             Bundle bundle = new Bundle();
-                            bundle.putString("customer_id",c.id);
-                            bundle.putString("auth_id",c.auth_id);
-//                           bundle.putString("email",email);
+                            bundle.putString("customer_id",id);
+                            bundle.putString("auth_id",Auth_id);
+                            bundle.putString("email",email);
+                            bundle.putString("mobile",mobile);
                             Intent intent=new Intent(OtpActivity.this,PasswordConfirmation.class);
                             intent.putExtras(bundle);
                             startActivity(intent);
-
 
                         }else if(response.code()==406)
                         {
@@ -439,20 +437,7 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                             if (response.code()==406){
                                 progressBar.dismiss();
 
-                                Toast.makeText(getApplicationContext(),"Invalid otp numbers or incurrent numbers",Toast.LENGTH_LONG).show();
-                              //  c = gson.fromJson(new Gson().toJson(response.body()), Data.class);
-                              //  System.out.println(c.id);
-
-                                Bundle bundle = new Bundle();
-                                bundle.putString("customer_id",id);
-                                bundle.putString("auth_id",Auth_id);
-
-                                bundle.putString("email",email);
-                                bundle.putString("mobile",mobile);
-//                           bundle.putString("email",email);
-                                Intent intent=new Intent(OtpActivity.this,PasswordConfirmation.class);
-                                intent.putExtras(bundle);
-                                startActivity(intent);
+                               
                             }
                         } else {
                             progressBar.dismiss();
