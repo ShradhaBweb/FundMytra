@@ -60,9 +60,7 @@ public class SignupActivity extends AppCompatActivity {
                             progressBar.setMax(100);
                             progressBar.show();
 
-
                             mAPIService.savePost(model).enqueue(new Callback<JsonElement>() {
-
 
                                 @Override
                                 public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
@@ -78,11 +76,13 @@ public class SignupActivity extends AppCompatActivity {
 
                                         Data c = gson.fromJson(new Gson().toJson(response.body()), Data.class);
                                         System.out.println(c.id);
+                                        System.out.println(c.auth_id);
 
                                         Toast.makeText(SignupActivity.this, "Id" + c.id, Toast.LENGTH_SHORT).show();
                                         Bundle bundle = new Bundle();
                                         bundle.putString("ID",c.id);
                                         bundle.putString("email",email);
+                                        bundle.putString("auth_id",c.auth_id);
                                         Intent intent=new Intent(SignupActivity.this,OtpActivity.class);
                                         intent.putExtras(bundle);
                                         startActivity(intent);
@@ -99,9 +99,7 @@ public class SignupActivity extends AppCompatActivity {
                                 @Override
                                 public void onFailure(Call<JsonElement> call, Throwable t) {
                                     progressBar.dismiss();
-                                    System.out.println(t.getMessage());
-                                    Log.e("socket",t.toString());
-                                    Log.e("socket",t.getMessage());
+                                    System.out.println(t.getMessage()   );
                                     if (t.getMessage().contains("Failed to connect")) {
                                         Toast.makeText(SignupActivity.this, "Check your  Internet Connection", Toast.LENGTH_SHORT).show();
                                     }
