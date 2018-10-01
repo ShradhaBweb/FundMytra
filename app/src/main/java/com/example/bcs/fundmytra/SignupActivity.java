@@ -1,6 +1,7 @@
 package com.example.bcs.fundmytra;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -77,12 +78,17 @@ public class SignupActivity extends AppCompatActivity {
                                         Data c = gson.fromJson(new Gson().toJson(response.body()), Data.class);
                                         System.out.println(c.id);
                                         System.out.println(c.auth_id);
+                                        SharedPreferences pref = getApplicationContext().getSharedPreferences("auth_id", 0); // 0 - for private mode
+                                        SharedPreferences.Editor editor = pref.edit();
+                                        editor.putString("key_name", c.auth_id); // Storing string
 
                                         Toast.makeText(SignupActivity.this, "Id" + c.id, Toast.LENGTH_SHORT).show();
                                         Bundle bundle = new Bundle();
                                         bundle.putString("ID",c.id);
                                         bundle.putString("email",email);
+                                        bundle.putString("mobile",mobile);
                                         bundle.putString("auth_id",c.auth_id);
+
                                         Intent intent=new Intent(SignupActivity.this,OtpActivity.class);
                                         intent.putExtras(bundle);
                                         startActivity(intent);

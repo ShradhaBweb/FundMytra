@@ -51,11 +51,8 @@
             android:name=".DashboardActivity"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme" />
+        <activity android:name=".PasswordConfirmation" />
 
-
-
-
-        <activity android:name=".MyAccountsActivity"/>
 
     </application>
 
