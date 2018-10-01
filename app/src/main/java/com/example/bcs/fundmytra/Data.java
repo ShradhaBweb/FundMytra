@@ -8,6 +8,10 @@ public class Data {
     @Expose
     public String id;
 
+    @SerializedName("auth_id")
+    @Expose
+    public String auth_id;
+
 
     // Getter Methods
 

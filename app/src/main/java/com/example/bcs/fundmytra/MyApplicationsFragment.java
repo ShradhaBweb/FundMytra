@@ -27,27 +27,25 @@ public class MyApplicationsFragment extends Fragment {
                              Bundle savedInstanceState) {
 // Inflate the layout for this fragment
 
-        RelativeLayout relativeLayout=(RelativeLayout) inflater.inflate(R.layout.fragment_myapplications, container, false);
-        btn_track=(Button) relativeLayout.findViewById(R.id.btn_track);
+        View view=(View) inflater.inflate(R.layout.fragment_myapplications, container, false);
+        btn_track=(Button) view.findViewById(R.id.btn_track);
         listeners();
-        return relativeLayout;
+        return view;
 
     }
   public  void  listeners(){
       btn_track.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            Intent intent=new Intent(getActivity(),DashboardActivity.class);
-            intent.putExtra("send",1);
-            startActivity(intent);
+              Intent intent = new Intent(getActivity(), DashboardActivity.class);
+              intent.putExtra("send", 1);
+              startActivity(intent);
+//              TrackApplicationFragment fragment= new TrackApplicationFragment();
+//              android.support.v4.app.FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+//              transaction.replace(R.id.frag, fragment); // fragment container id in first parameter is the  container(Main layout id) of Activity
+//              transaction.addToBackStack(null);  // this will manage backstack
+//              transaction.commit();
 
-            //  DashboardActivity da=new DashboardActivity();
-             // da.callFragment();
-
-//                SalaryFragment fragment = new SalaryFragment();
-            //   FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-             //  transaction.replace(R.id.frame, new TrackApplicationFragment()).commit();
-//                transaction.commit();
           }
       });
     }
