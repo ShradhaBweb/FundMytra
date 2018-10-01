@@ -2,7 +2,10 @@ package com.example.bcs.fundmytra;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,10 +34,12 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
     TextView txt1,txt2,txt3,txt4,txt5;
     String phone="123456789";
     APIService apiService;
-    String id,email,otp;
+    String id,email,otp,Auth_id;
+    SharedPreferences sharedPreferences;
 
     private ProgressDialog progressBar;
     private PinView pinview;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +50,15 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
         Intent intent=getIntent();
         email=intent.getStringExtra("email");
         id=intent.getStringExtra("ID");
+        Auth_id=intent.getStringExtra("auth_id");
+
 
         Log.e("id",id);
         Log.e("email",email);
-        //apiService=ApiUrls.getAPIService();
+        Log.e("auth_id",Auth_id);
+        apiService=ApiUtils.getOtpService(Auth_id);
 
-
-
+        
         txt1=(TextView)findViewById(R.id.phone_number);
         txt2=(TextView)findViewById(R.id.text1);
         txt3=(TextView)findViewById(R.id.text2);
@@ -405,13 +412,16 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                            progressBar.dismiss();
                            Toast.makeText(getApplicationContext(),"valid otp",Toast.LENGTH_LONG).show();
 
-                       }else {
+                       }else if(response.code()==406)
+                       {
                            System.out.println(response.code());
                            if (response.code()==406){
                                progressBar.dismiss();
                                Toast.makeText(getApplicationContext(),"Invalid otp numbers or incurrent numbers",Toast.LENGTH_LONG).show();
                            }
-
+                       } else {
+                           progressBar.dismiss();
+                           Toast.makeText(getApplicationContext(),"Invalid otp",Toast.LENGTH_LONG).show();
                        }
                    }
 

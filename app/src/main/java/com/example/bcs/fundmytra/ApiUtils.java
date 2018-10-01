@@ -1,5 +1,7 @@
 package com.example.bcs.fundmytra;
 
+import android.content.SharedPreferences;
+
 import retrofit2.Retrofit;
 
 public class ApiUtils {
@@ -12,8 +14,9 @@ public class ApiUtils {
     public static APIService getAPIService() {
         return RetrofitClient.getClient(BASE_URL).create(APIService.class);
     }
-    public static APIService getOtpService(){
-        return RetrofitClient.getClient1(SUB_URL).create(APIService.class);
+    public static APIService getOtpService(String authId){
+
+        return RetrofitClient.getOtpClient(BASE_URL,authId).create(APIService.class);
 
     }
 }

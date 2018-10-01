@@ -1,6 +1,10 @@
 package com.example.bcs.fundmytra;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.io.IOException;
 
@@ -13,8 +17,10 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitClient {
+import static android.content.Context.MODE_PRIVATE;
 
+public class RetrofitClient {
+    private static SharedPreferences sharedPreferences;
 
     public static Retrofit getClient(String url) {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
@@ -52,21 +58,22 @@ public class RetrofitClient {
         return retrofit;
     }
 
-    public static Retrofit getClient1(String subUrl){
+    public  static Retrofit getOtpClient(String subUrl, final String authId){
+
+
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-
-
         httpClient.addInterceptor(new Interceptor() {
             @Override
             public Response intercept(@NonNull Chain chain) throws IOException {
                 Request original = chain.request();
                 Response response = chain.proceed(original);
-
+                Log.e("AuthId",authId);
 
                 Request request = original.newBuilder()
                         .header("Content-Type", "application/json")
                         .header("Admin-Service", "fundmitra-RESTApi")
                         .header("Auth-Key", "BwebRestAPI")
+                        .header("Auth-Id",authId)
                         .method(original.method(), original.body())
                         .build();
 
@@ -88,6 +95,12 @@ public class RetrofitClient {
         return retrofit;
     }
 
+    public static void getData(Context context){
+        SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(context);
+        String authId=sharedPreferences.getString("Auth-id","defaultValue");
+        Log.e("id",authId);
+
+    }
 }
 
 
