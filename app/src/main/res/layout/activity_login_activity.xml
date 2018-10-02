@@ -77,6 +77,7 @@
                     android:src="@drawable/email_id"
                     android:layout_marginEnd="@dimen/margin_logIcon_horizantal" />
                 <EditText
+                    android:id="@+id/email_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/fundRed"
@@ -115,6 +116,7 @@
                     android:src="@drawable/password"
                     android:layout_marginEnd="@dimen/margin_logIcon_horizantal" />
                 <EditText
+                    android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/fundRed"
