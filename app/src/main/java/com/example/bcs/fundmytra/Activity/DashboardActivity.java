@@ -20,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.bcs.fundmytra.Fragment.AllProductFragment;
@@ -51,6 +52,8 @@ public class DashboardActivity extends AppCompatActivity
     private int NUM_PAGE = 0;
     RecyclerView recyclerView;
 
+    ImageView img_expandable;
+
     private Integer[] IMAGES = {R.drawable.employee1, R.drawable.employee1, R.drawable.employee1};
     private ArrayList<Integer> arrayList;
     RecyclerViewAdapter adapter;
@@ -74,6 +77,7 @@ public class DashboardActivity extends AppCompatActivity
         imgbtn1=(ImageButton)findViewById(R.id.backButton);
         imgbtn2=(ImageButton)findViewById(R.id.frontButton);
         imgbtn1.setVisibility(View.INVISIBLE);
+
 
         getImages();
         arrayList=new ArrayList<>();
@@ -385,6 +389,7 @@ public class DashboardActivity extends AppCompatActivity
 
     private void prepareMenuData() {
 
+        img_expandable = (ImageView)findViewById(R.id.img_expandable);
         MenuModel menuModel = new MenuModel("Home", true, false); //Menu of Android Tutorial. No sub menus
         headerList.add(menuModel);
 
@@ -400,6 +405,7 @@ public class DashboardActivity extends AppCompatActivity
         menuModel = new MenuModel("Refer & Earn", true, false);
         headerList.add(menuModel);
         if (!menuModel.hasChildren) {
+//            img_expandable.setImageResource(R.drawable.plus);
             childList.put(menuModel, null);
         }
 

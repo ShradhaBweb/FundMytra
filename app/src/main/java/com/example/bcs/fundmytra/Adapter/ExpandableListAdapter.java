@@ -95,15 +95,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             img_expandable = convertView.findViewById(R.id.img_expandable);
         }
 
+        System.out.println("Group header position : "+getGroupId(groupPosition));
+//        if(parent.getChildCount() == 5 || parent.getChildCount() == 6 || parent.getChildCount() == 7){
+//            img_expandable.setImageResource(R.drawable.plus);
+//        }
         TextView lblListHeader = convertView.findViewById(R.id.lblListHeader);
 
-        if(headerTitle.equals("Home")){
-            img_expandable.setVisibility(View.INVISIBLE);
-        }
-        if(headerTitle.equals("Loans") || headerTitle.equals("Secured Loans") || headerTitle.equals("Cards") || headerTitle.equals("Tools")){
-            System.out.println("Group Position : "+headerTitle);
-            img_expandable.setImageResource(R.drawable.ic_launcher_background);
-        }
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
 

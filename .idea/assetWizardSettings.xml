@@ -34,10 +34,10 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="E:\Android Projects\F\FundMytra\FundMytra\app\src\main\res\drawable-hdpi\person.png" />
-                                      <entry key="outputName" value="person" />
+                                      <entry key="imageAsset" value="E:\Android Projects\F\FundMytra\FundMytra\app\src\main\res\drawable\plus.png" />
+                                      <entry key="outputName" value="plus" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="ffffff" />
+                                      <entry key="themeColor" value="c82636" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -115,6 +115,11 @@
                                 </PersistentState>
                               </value>
                             </entry>
+                          </map>
+                        </option>
+                        <option name="values">
+                          <map>
+                            <entry key="outputIconType" value="ACTIONBAR" />
                           </map>
                         </option>
                       </PersistentState>
