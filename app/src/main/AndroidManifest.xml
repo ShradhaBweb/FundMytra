@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bcs.fundmytra">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
@@ -11,12 +14,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/fundmytra_logo"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/fundmytra_logo_round"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".IntroductionActivity">
+        <activity android:name=".Activity.IntroductionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,24 +27,24 @@
             </intent-filter>
         </activity>
         <activity android:name=".HomeActivity" />
-        <activity android:name=".LoginSignupActivity"/>
-        <activity android:name=".SignupActivity"/>
-
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+        <activity android:name=".Activity.LoginSignupActivity" />
+        <activity android:name=".Activity.SignupActivity" />
+        <!-- <activity android:name=".MainApplication"/> -->
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".OtpActivity" />
-        <activity android:name=".DashboardActivity"/>
-        <activity android:name=".MyAccountsActivity"/>
-        <activity android:name=".TrackApplicationActivity"/>
-        <activity android:name=".AllProductsActivity"></activity>
+        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.OtpActivity" />
+        <activity android:name=".Activity.DashboardActivity" />
+        <!-- <activity android:name=".MyAccountsActivity"/> -->
+        <!-- <activity android:name=".TrackApplicationActivity"/> -->
+        <!-- <activity android:name=".AllProductsActivity"></activity> -->
+        <activity android:name=".Activity.PasswordConfirmation"></activity>
     </application>
 
 </manifest>

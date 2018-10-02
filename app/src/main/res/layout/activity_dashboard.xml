@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context=".DashboardActivity">
+    tools:context=".Activity.DashboardActivity">
 
     <me.crosswall.lib.coverflow.core.PagerContainer
         android:id="@+id/pager_container"

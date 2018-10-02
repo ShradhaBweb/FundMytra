@@ -9,7 +9,7 @@
     android:layout_marginStart="20dp"
     android:layout_marginTop="@dimen/margin_top_horizantal"
     android:orientation="vertical"
-    tools:context=".IntroductionActivity">
+    tools:context=".Activity.IntroductionActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -86,7 +86,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        
+
 
         <LinearLayout
             android:layout_width="match_parent"
