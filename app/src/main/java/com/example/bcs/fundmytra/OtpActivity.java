@@ -1,21 +1,18 @@
 package com.example.bcs.fundmytra;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import android.content.res.Configuration;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.KeyEvent;
+import android.util.TypedValue;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,11 +34,7 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
     String phone="123456789";
     APIService apiService;
     String id,email,otp,Auth_id,mobile;
-    SharedPreferences sharedPreferences;
-    Data c;
-
     private ProgressDialog progressBar;
-
     public static final String MY_PREFS_NAME = "MyPrefsFile";
 
     @Override
@@ -61,8 +54,6 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
         Log.e("email",email);
         Log.e("auth_id",Auth_id);
         apiService=ApiUtils.getOtpService(Auth_id);
-
-
 
         txt1=(TextView)findViewById(R.id.phone_number);
         txt2=(TextView)findViewById(R.id.text1);
@@ -95,10 +86,6 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
 
     }
 
-
-
-
-    @SuppressLint("ResourceType")
     @Override
     public void onClick(View view) {
         int number1=edt1.getText().toString().trim().length();
@@ -413,15 +400,8 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                 apiService.verifyPost(post).enqueue(new Callback<Post>() {
                     @Override
                     public void onResponse(Call<Post> call, Response<Post> response) {
-                        Gson gson =
-                                new GsonBuilder()
-                                        .registerTypeAdapter(Data.class, new MyDeserializer())
-                                        .create();
                         if (response.code()==200){
                             progressBar.dismiss();
-
-                            Toast.makeText(getApplicationContext(),"valid otp",Toast.LENGTH_LONG).show();
-                          //  c = gson.fromJson(new Gson().toJson(response.body()), Data.class);
                             Bundle bundle = new Bundle();
                             bundle.putString("customer_id",id);
                             bundle.putString("auth_id",Auth_id);
@@ -431,18 +411,15 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                             intent.putExtras(bundle);
                             startActivity(intent);
 
-                        }else if(response.code()==406)
-                        {
+                        }else {
                             System.out.println(response.code());
                             if (response.code()==406){
                                 progressBar.dismiss();
-
-
+                                Toast.makeText(getApplicationContext(),"Invalid otp numbers or incurrent numbers",Toast.LENGTH_LONG).show();
+                            }else if (response.code()==404){
+                                progressBar.dismiss();
+                                Toast.makeText(getApplicationContext(),"not Found ",Toast.LENGTH_LONG).show();
                             }
-                        } else {
-                            progressBar.dismiss();
-                            Toast.makeText(getApplicationContext(),"Invalid otp",Toast.LENGTH_LONG).show();
-
                         }
                     }
 

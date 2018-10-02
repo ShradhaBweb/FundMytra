@@ -22,10 +22,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    private Button  login;
+    private Button  login;  
     private EditText email_phone,password;
     String emailPhone,pass;
-    String confirm_Pass;
     LoginModel loginModel;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     String mobilePattern = "[0-9]{10}";
@@ -36,9 +35,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_activity);
 
-        Intent intent=getIntent();
-        confirm_Pass=intent.getStringExtra("password");
-//          Log.e("pass",confirm_Pass);
         mAPIService= ApiUtils.getLoginService();
         init();
         listeners();
@@ -54,8 +50,6 @@ public class LoginActivity extends AppCompatActivity {
                     if (emailPhone.matches(emailPattern) || (emailPhone.matches(mobilePattern))) {
 
                             loginModel = new LoginModel(emailPhone, pass);
-
-
                             progressBar = new ProgressDialog(v.getContext());
                             progressBar.setCancelable(true);
                             progressBar.setMessage("Loading...");
@@ -84,7 +78,6 @@ public class LoginActivity extends AppCompatActivity {
                                         Bundle bundle = new Bundle();
                                         bundle.putString("id", c.id);
                                         bundle.putString("auth_id", c.auth_id);
-
                                         Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                                         intent.putExtras(bundle);
                                         startActivity(intent);
@@ -120,9 +113,6 @@ public class LoginActivity extends AppCompatActivity {
 
         });
     }
-
-
-
 
     private void init() {
         email_phone=(EditText)findViewById(R.id.email_phone);
