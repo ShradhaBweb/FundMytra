@@ -21,4 +21,8 @@ public interface APIService {
 
     @POST("admin_app/master_api/login_app")
     Call<JsonElement> login(@Body LoginModel login);
+
+    @POST("admin_app/master_api/logout_app")
+    Call<Post> logout(@Body Post post);
+
 }

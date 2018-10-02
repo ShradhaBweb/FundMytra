@@ -38,17 +38,12 @@
     <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:fontFamily">@font/montserrat</item>
     </style>
-<<<<<<<<< Temporary merge branch 1
-=========
 
->>>>>>>>> Temporary merge branch 2
+
     <style name="CustomTextAppearanceTab" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:fontFamily">@font/montserrat</item>
     </style>
-<<<<<<<<< Temporary merge branch 1
-=========
 
->>>>>>>>> Temporary merge branch 2
 </resources>

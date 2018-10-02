@@ -1,5 +1,7 @@
 package com.example.bcs.fundmytra;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -24,18 +26,15 @@ import retrofit2.http.POST;
 
 public class OtpActivity extends AppCompatActivity implements View.OnClickListener{
 
-    EditText edt1,edt2,edt3,edt4;
-    Button btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btn12;
+    private static final String TAG ="OtpActivity" ;
+    EditText edt1,edt2,edt3,edt4,edt5,edt6;
+    Button btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btn12,btn10;
     ImageButton imageButton;
     TextView txt1,txt2,txt3,txt4,txt5;
     String phone="123456789";
     APIService apiService;
     String id,email,otp,Auth_id,mobile;
-    SharedPreferences sharedPreferences;
-    Data c;
-
     private ProgressDialog progressBar;
-
     public static final String MY_PREFS_NAME = "MyPrefsFile";
 
     @Override
@@ -56,20 +55,21 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
         Log.e("auth_id",Auth_id);
         apiService=ApiUtils.getOtpService(Auth_id);
 
-
-
         txt1=(TextView)findViewById(R.id.phone_number);
         txt2=(TextView)findViewById(R.id.text1);
         txt3=(TextView)findViewById(R.id.text2);
         txt4=(TextView)findViewById(R.id.text3);
         txt5=(TextView)findViewById(R.id.text4);
-        txt1.append(phone);
+        txt1.append(email);
 
 
         edt1=(EditText)findViewById(R.id.otp_text1);
         edt2=(EditText)findViewById(R.id.otp_text2);
         edt3=(EditText)findViewById(R.id.otp_text3);
         edt4=(EditText)findViewById(R.id.otp_text4);
+        edt5=(EditText)findViewById(R.id.otp_text5);
+        edt6=(EditText)findViewById(R.id.otp_text6);
+
 
         btn0=(Button)findViewById(R.id.button0);
         btn1=(Button)findViewById(R.id.button1);
@@ -81,10 +81,10 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
         btn7=(Button)findViewById(R.id.button7);
         btn8=(Button)findViewById(R.id.button8);
         btn9=(Button)findViewById(R.id.button9);
+        btn10=(Button)findViewById(R.id.button10);
         imageButton=(ImageButton)findViewById(R.id.button12);
 
     }
-
 
     @Override
     public void onClick(View view) {
@@ -92,6 +92,9 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
         int number2=edt2.getText().toString().trim().length();
         int number3=edt3.getText().toString().trim().length();
         int number4=edt4.getText().toString().trim().length();
+        int number5=edt5.getText().toString().trim().length();
+        int number6=edt6.getText().toString().trim().length();
+
         if (view.getId()==R.id.button1){
             edt2.requestFocus();
             Log.e("buttom","one");
@@ -109,6 +112,16 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                     } else {
                         if (number4==0){
                             edt4.setText("1");
+                            edt5.requestFocus();
+                        } else {
+                            if (number5==0){
+                                edt5.setText("1");
+                                edt6.requestFocus();
+                            }else {
+                                if (number6==0){
+                                    edt6.setText("1");
+                                }
+                            }
                         }
                     }
                 }
@@ -131,6 +144,16 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                     }else {
                         if (number4==0){
                             edt4.setText("2");
+                            edt5.requestFocus();
+                        } else {
+                            if (number5==0){
+                                edt5.setText("2");
+                                edt6.requestFocus();
+                            }else {
+                                if (number6==0){
+                                    edt6.setText("2");
+                                }
+                            }
                         }
                     }
                 }
@@ -153,6 +176,16 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                     }else {
                         if (number4==0){
                             edt4.setText("3");
+                            edt5.requestFocus();
+                        } else {
+                            if (number5==0){
+                                edt5.setText("3");
+                                edt6.requestFocus();
+                            }else {
+                                if (number6==0){
+                                    edt6.setText("3");
+                                }
+                            }
                         }
                     }
                 }
@@ -175,6 +208,16 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                     }else {
                         if (number4==0){
                             edt4.setText("4");
+                            edt5.requestFocus();
+                        } else {
+                            if (number5==0){
+                                edt5.setText("4");
+                                edt6.requestFocus();
+                            }else {
+                                if (number6==0){
+                                    edt6.setText("4");
+                                }
+                            }
                         }
                     }
                 }
@@ -197,6 +240,16 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                     }else {
                         if (number4==0){
                             edt4.setText("5");
+                            edt5.requestFocus();
+                        } else {
+                            if (number5==0){
+                                edt5.setText("5");
+                                edt6.requestFocus();
+                            }else {
+                                if (number6==0){
+                                    edt6.setText("5");
+                                }
+                            }
                         }
                     }
                 }
@@ -217,6 +270,16 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                     }else {
                         if (number4==0){
                             edt4.setText("6");
+                            edt5.requestFocus();
+                        } else {
+                            if (number5==0){
+                                edt5.setText("6");
+                                edt6.requestFocus();
+                            }else {
+                                if (number6==0){
+                                    edt6.setText("6");
+                                }
+                            }
                         }
                     }
                 }
@@ -237,6 +300,16 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                     }else {
                         if (number4==0){
                             edt4.setText("7");
+                            edt5.requestFocus();
+                        } else {
+                            if (number5==0){
+                                edt5.setText("7");
+                                edt6.requestFocus();
+                            }else {
+                                if (number6==0){
+                                    edt6.setText("7");
+                                }
+                            }
                         }
                     }
                 }
@@ -257,6 +330,16 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                     }else {
                         if (number4==0){
                             edt4.setText("8");
+                            edt5.requestFocus();
+                        } else {
+                            if (number5==0){
+                                edt5.setText("8");
+                                edt6.requestFocus();
+                            }else {
+                                if (number6==0){
+                                    edt6.setText("8");
+                                }
+                            }
                         }
                     }
                 }
@@ -277,6 +360,16 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                     }else {
                         if (number4==0){
                             edt4.setText("9");
+                            edt5.requestFocus();
+                        } else {
+                            if (number5==0){
+                                edt5.setText("9");
+                                edt6.requestFocus();
+                            }else {
+                                if (number6==0){
+                                    edt6.setText("9");
+                                }
+                            }
                         }
                     }
                 }
@@ -307,15 +400,8 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                 apiService.verifyPost(post).enqueue(new Callback<Post>() {
                     @Override
                     public void onResponse(Call<Post> call, Response<Post> response) {
-                        Gson gson =
-                                new GsonBuilder()
-                                        .registerTypeAdapter(Data.class, new MyDeserializer())
-                                        .create();
                         if (response.code()==200){
                             progressBar.dismiss();
-
-                            Toast.makeText(getApplicationContext(),"valid otp",Toast.LENGTH_LONG).show();
-                          //  c = gson.fromJson(new Gson().toJson(response.body()), Data.class);
                             Bundle bundle = new Bundle();
                             bundle.putString("customer_id",id);
                             bundle.putString("auth_id",Auth_id);
@@ -325,18 +411,15 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                             intent.putExtras(bundle);
                             startActivity(intent);
 
-                        }else if(response.code()==406)
-                        {
+                        }else {
                             System.out.println(response.code());
                             if (response.code()==406){
                                 progressBar.dismiss();
-
-
+                                Toast.makeText(getApplicationContext(),"Invalid otp numbers or incurrent numbers",Toast.LENGTH_LONG).show();
+                            }else if (response.code()==404){
+                                progressBar.dismiss();
+                                Toast.makeText(getApplicationContext(),"not Found ",Toast.LENGTH_LONG).show();
                             }
-                        } else {
-                            progressBar.dismiss();
-                            Toast.makeText(getApplicationContext(),"Invalid otp",Toast.LENGTH_LONG).show();
-
                         }
                     }
 
@@ -370,34 +453,59 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                     }else {
                         if (number4==0){
                             edt4.setText("0");
+                            edt5.requestFocus();
+                        } else {
+                            if (number5==0){
+                                edt5.setText("0");
+                                edt6.requestFocus();
+                            }else {
+                                if (number6==0){
+                                    edt6.setText("0");
+                                }
+                            }
                         }
                     }
                 }
             }
             Log.e("clicked","button11");
         }else if (view.getId()==R.id.button12){
+            if (number6>0){
+                edt6.getText().delete(number6-1,number6);
+                edt5.requestFocus();
 
-            if (number4>0){
-                edt4.getText().delete(number4-1,number4);
-                edt3.requestFocus();
             }else {
-                if (number3>0){
-                    edt3.getText().delete(number3-1,number3);
-                    edt2.requestFocus();
+                if (number5>0){
+                    edt5.getText().delete(number5-1,number5);
+                    edt4.requestFocus();
                 }else {
-                    if (number2>0){
-                        edt2.getText().delete(number2-1,number2);
-                        edt1.requestFocus();
+                    if (number4>0){
+                        edt4.getText().delete(number4-1,number4);
+                        edt3.requestFocus();
                     }else {
-                        if (number1>0){
-                            edt1.getText().delete(number1-1,number1);
+                        if (number3>0){
+                            edt3.getText().delete(number3-1,number3);
+                            edt2.requestFocus();
+                        }else {
+                            if (number2>0){
+                                edt2.getText().delete(number2-1,number2);
+                                edt1.requestFocus();
+                            }else {
+                                if (number1>0){
+                                    edt1.getText().delete(number1-1,number1);
 
+                                }
+                            }
                         }
                     }
+
                 }
             }
+
+
             Log.e("clicked","button12");
         }
+
+
     }
 
 }

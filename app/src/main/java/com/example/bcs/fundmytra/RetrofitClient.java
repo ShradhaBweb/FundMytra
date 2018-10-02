@@ -57,10 +57,9 @@ public class RetrofitClient {
 
         return retrofit;
     }
+    
     public static Retrofit getOtpClient(String url,final String authId) {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-
-
         httpClient.addInterceptor(new Interceptor() {
             @Override
             public Response intercept(@NonNull Chain chain) throws IOException {
@@ -95,50 +94,75 @@ public class RetrofitClient {
         return retrofit;
     }
 
-    public  static Retrofit getOtpClient(String subUrl, final String authId){
-
-
+    public static Retrofit getLogoutClient(String url,final String authId) {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(new Interceptor() {
             @Override
             public Response intercept(@NonNull Chain chain) throws IOException {
                 Request original = chain.request();
                 Response response = chain.proceed(original);
-                String auth_ID=authId;
-                Log.e("AuthId",authId);
+                Log.e("auth_id",authId);
 
                 Request request = original.newBuilder()
                         .header("Content-Type", "application/json")
                         .header("Admin-Service", "fundmitra-RESTApi")
                         .header("Auth-Key", "BwebRestAPI")
-                        .header("Auth-Id",auth_ID)
+                        .header("Auth-Id",authId)
                         .method(original.method(), original.body())
                         .build();
-                Log.e("id",request.header("Auth-Id"));
 
                 return chain.proceed(request);
             }
         });
 
 
+        //   Data1 c = gson.fromJson(myDeserializer, Data1.class);
         OkHttpClient client = httpClient.build();
 
         Retrofit retrofit;
 
         retrofit = new Retrofit.Builder()
-                .baseUrl(subUrl)
+                .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
 
         return retrofit;
     }
+    public static Retrofit getPasswordClient(String url,final String authId) {
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(@NonNull Chain chain) throws IOException {
+                Request original = chain.request();
+                Response response = chain.proceed(original);
+                Log.e("auth_id",authId);
 
-    public static void getData(Context context){
-        SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(context);
-        String authId=sharedPreferences.getString("Auth-id","defaultValue");
-        Log.e("id",authId);
+                Request request = original.newBuilder()
+                        .header("Content-Type", "application/json")
+                        .header("Admin-Service", "fundmitra-RESTApi")
+                        .header("Auth-Key", "BwebRestAPI")
+                        .header("Auth-Id",authId)
+                        .method(original.method(), original.body())
+                        .build();
 
+                return chain.proceed(request);
+            }
+        });
+
+
+        //   Data1 c = gson.fromJson(myDeserializer, Data1.class);
+        OkHttpClient client = httpClient.build();
+
+        Retrofit retrofit;
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build();
+
+        return retrofit;
     }
 }
 

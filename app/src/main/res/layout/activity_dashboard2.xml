@@ -34,7 +34,7 @@
             android:groupIndicator="@null"
             />
 
-        
+
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/logoutButton"

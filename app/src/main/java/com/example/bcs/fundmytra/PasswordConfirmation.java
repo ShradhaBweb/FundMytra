@@ -41,21 +41,18 @@ public class PasswordConfirmation extends AppCompatActivity {
 //        email=intent.getStringExtra("email");
         id=intent.getStringExtra("customer_id");
         auth_id=intent.getStringExtra("auth_id");
-        id=intent.getStringExtra("email");
-        auth_id=intent.getStringExtra("mobile");
+        email=intent.getStringExtra("email");
+        mobile=intent.getStringExtra("mobile");
+
+        Log.e("auth-Id",auth_id);
         init();
 
         listener();
-
-
 
         mAPIService= ApiUtils.getPasswordService(auth_id);
     }
 
     public void listener() {
-
-
-
 
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,15 +90,15 @@ public class PasswordConfirmation extends AppCompatActivity {
                                     Toast.makeText(PasswordConfirmation.this,"Successfully password updated",Toast.LENGTH_SHORT).show();
 
 
-                                            Bundle bundle = new Bundle();
-                                           // bundle.putString("id",);
+                                    Bundle bundle = new Bundle();
+                                    // bundle.putString("id",);
                                     bundle.putString("id",id);
                                     bundle.putString("auth_id",auth_id);
                                     bundle.putString("email",email);
                                     bundle.putString("mobile",mobile);
-                                            bundle.putString("password",password);
+                                    bundle.putString("password",password);
                                     Intent intent=new Intent(PasswordConfirmation.this,DashboardActivity.class);
-                                           intent.putExtras(bundle);
+                                    intent.putExtras(bundle);
                                     startActivity(intent);
 
                                 } else {
