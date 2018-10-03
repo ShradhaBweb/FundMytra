@@ -1,7 +1,7 @@
 package com.example.bcs.fundmytra;
 
 public class Password {
-//    private String email;
+    //    private String email;
     public String password;
     public String id;
 

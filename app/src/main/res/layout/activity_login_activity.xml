@@ -9,7 +9,7 @@
     android:layout_marginStart="20dp"
     android:layout_marginTop="@dimen/margin_top_horizantal"
     android:orientation="vertical"
-    tools:context=".Activity.IntroductionActivity">
+    tools:context=".IntroductionActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,8 +39,6 @@
                 android:fontFamily="@font/montserrat_bold"
                 android:layout_weight="1"/>
         </LinearLayout>
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -53,8 +51,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,6 +74,7 @@
                     android:src="@drawable/email_id"
                     android:layout_marginEnd="@dimen/margin_logIcon_horizantal" />
                 <EditText
+                    android:id="@+id/email_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/fundRed"
@@ -86,14 +84,11 @@
             </LinearLayout>
         </LinearLayout>
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="@dimen/margin_gridTop_horizantal"
-            >
+            android:layout_marginTop="@dimen/margin_gridTop_horizantal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -115,11 +110,12 @@
                     android:src="@drawable/password"
                     android:layout_marginEnd="@dimen/margin_logIcon_horizantal" />
                 <EditText
+                    android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/fundRed"
                     android:hint="@string/hint"
-                    android:inputType="text">
+                    android:inputType="textPassword">
                 </EditText>
             </LinearLayout>
         </LinearLayout>
