@@ -3,6 +3,7 @@ package com.example.bcs.fundmytra;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -46,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 emailPhone = email_phone.getText().toString().trim();
                 pass = password.getText().toString().trim();
+
                 if (!TextUtils.isEmpty(emailPhone) && !TextUtils.isEmpty(pass)) {
                     if (emailPhone.matches(emailPattern) || (emailPhone.matches(mobilePattern))) {
 
@@ -75,11 +77,19 @@ public class LoginActivity extends AppCompatActivity {
                                         Data c = gson.fromJson(new Gson().toJson(response.body()), Data.class);
                                         System.out.println(c.id);
                                         System.out.println(c.auth_id);
-                                        Bundle bundle = new Bundle();
-                                        bundle.putString("id", c.id);
-                                        bundle.putString("auth_id", c.auth_id);
+                                        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                                        SharedPreferences.Editor editor = pref.edit();
+                                        editor.putString("Key_emailPhone",emailPhone);
+                                        editor.putString("Key_pass",pass);
+                                        editor.putString("id",c.id);
+                                        editor.putString("auth_id",c.auth_id);
+                                        editor.commit();
+
+//                                        Bundle bundle = new Bundle();
+//                                        bundle.putString("id", c.id);
+//                                        bundle.putString("auth_id", c.auth_id);
                                         Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                                        intent.putExtras(bundle);
+                                    //    intent.putExtras(bundle);
                                         startActivity(intent);
 
                                     } else {

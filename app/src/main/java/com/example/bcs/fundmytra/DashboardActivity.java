@@ -3,6 +3,7 @@ package com.example.bcs.fundmytra;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -72,6 +73,7 @@ public class DashboardActivity extends AppCompatActivity
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<Integer> mImageUrls = new ArrayList<>();
     ProgressDialog progressBar;
+    SharedPreferences pref;
 
     APIService apiService;
 
@@ -80,11 +82,15 @@ public class DashboardActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         Intent intent1=getIntent();
 
-        id= intent1.getStringExtra("id");
-        auth_Id=intent1.getStringExtra("auth_id");
-        Log.e("id",id);
-        Log.e("auth_id",auth_Id);
+//        id= intent1.getStringExtra("id");
+//        auth_Id=intent1.getStringExtra("auth_id");
+//        Log.e("id",id);
+//        Log.e("auth_id",auth_Id);
+         pref=getApplicationContext().getSharedPreferences("MyPref", 0);
+        id=pref.getString("id","1");
+        auth_Id=pref.getString("auth_id","2");
         apiService=ApiUtils.getLogoutService(auth_Id);
+        Log.e("auth_id1111111111",auth_Id);
 
 
 
@@ -117,7 +123,8 @@ public class DashboardActivity extends AppCompatActivity
 
             @Override
             public void onClick(View view) {
-                Post post=new Post(id);
+                final Post post=new Post(id);
+                System.out.println(id);
                 progressBar = new ProgressDialog(view.getContext());
                 progressBar.setCancelable(true);
                 progressBar.setMessage("Loading...");
@@ -129,6 +136,9 @@ public class DashboardActivity extends AppCompatActivity
                     @Override
                     public void onResponse(Call<Post> call, Response<Post> response) {
                         if (response.code()==200){
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.remove("Key_emailPhone");
+                            editor.apply();
                             progressBar.dismiss();
                             Intent intent2=new Intent(DashboardActivity.this,LoginActivity.class);
                             finish();
@@ -271,8 +281,7 @@ public class DashboardActivity extends AppCompatActivity
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
 
-
-            }
+                }
 
             @Override
             public void onScrolled(RecyclerView recyclerView1, int dx, int dy) {

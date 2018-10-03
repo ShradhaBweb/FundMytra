@@ -1,6 +1,7 @@
 package com.example.bcs.fundmytra;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +50,6 @@ public class IntroductionActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_introduction);
-
 
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
@@ -135,8 +136,17 @@ public class IntroductionActivity extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(IntroductionActivity.this, LoginSignupActivity.class));
+        SharedPreferences pref=getApplicationContext().getSharedPreferences("MyPref", 0); ;
+       String emailPhone= pref.getString("Key_emailPhone",null);
+        String pass= pref.getString("Key_pass","1");
+        if (!TextUtils.isEmpty(emailPhone)){
+
+        startActivity(new Intent(IntroductionActivity.this, DashboardActivity.class));
         finish();
+    }else {
+            startActivity(new Intent(IntroductionActivity.this, LoginSignupActivity.class));
+            finish();
+        }
     }
 
     //  viewpager change listener
