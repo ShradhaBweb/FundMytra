@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,16 +30,12 @@ public class IntroductionActivity extends AppCompatActivity {
     public int dotsCount;
     private Button btnSkip, btnNext, btnBack;
     private PrefManager prefManager;
-    private static final String PREF_LOGIN = "LOGIN_PREF";
-    private static final String FLAG = "FLAG";
-    private static final String FLAGOUT = "FLAGOUT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        Intent intent=new Intent(this,LoginActivity.class);
 //        startActivity(intent);
-
 
         // Checking for first time launch - before calling setContentView()
         prefManager = new PrefManager(this);
@@ -140,20 +137,17 @@ public class IntroductionActivity extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-//        SharedPreferences preferences=getSharedPreferences(PREF_LOGIN,MODE_PRIVATE);
-//        if (preferences.contains(FLAG)){
-//            Intent intent=new Intent(this,DashboardActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }else {
-//            Intent intent=new Intent(this,LoginSignupActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
+        SharedPreferences pref=getApplicationContext().getSharedPreferences("MyPref", 0); ;
+       String emailPhone= pref.getString("Key_emailPhone",null);
+        String pass= pref.getString("Key_pass","1");
+        if (!TextUtils.isEmpty(emailPhone)){
 
-
-        startActivity(new Intent(IntroductionActivity.this, LoginSignupActivity.class));
-       finish();
+        startActivity(new Intent(IntroductionActivity.this, DashboardActivity.class));
+        finish();
+    }else {
+            startActivity(new Intent(IntroductionActivity.this, LoginSignupActivity.class));
+            finish();
+        }
     }
 
     //  viewpager change listener

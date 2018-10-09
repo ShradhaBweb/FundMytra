@@ -23,7 +23,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -32,9 +31,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
-
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.viewpagerindicator.CirclePageIndicator;
@@ -48,42 +44,50 @@ import java.util.TimerTask;
 import me.crosswall.lib.coverflow.CoverFlow;
 import me.crosswall.lib.coverflow.core.PageItemClickListener;
 import me.crosswall.lib.coverflow.core.PagerContainer;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class DashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
+
     private ImageButton imgbtn1,imgbtn2;
+
     private CirclePageIndicator circlePageIndicator;
     private int currentPage = 0;
     private int NUM_PAGE = 0;
+    public static FragmentTransaction ft,pt;
+
+
     RecyclerView recyclerView;
+
     private Integer[] IMAGES = {R.drawable.employee1, R.drawable.employee1, R.drawable.employee1};
     private ArrayList<Integer> arrayList;
     RecyclerViewAdapter adapter;
     int i,k;
-    String id,auth_Id;
+    String id,auth_Id,email,mobile;
     ExpandableListAdapter expandableListAdapter;
     ExpandableListView expandableListView;
     List<MenuModel> headerList = new ArrayList<>();
     HashMap<MenuModel, List<MenuModel>> childList = new HashMap<>();
+
     private static final String TAG = "MainActivity";
+
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<Integer> mImageUrls = new ArrayList<>();
     ProgressDialog progressBar;
+    SharedPreferences preferences;
 
     APIService apiService;
-    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        pref=getApplicationContext().getSharedPreferences("MyPref", 0);
-        id=pref.getString("id","1");
-        auth_Id=pref.getString("auth_id","2");
+        preferences=getApplicationContext().getSharedPreferences("MyPref",0);
+        id= preferences.getString("id","1");
+        auth_Id=preferences.getString("auth_id","1");
+        email=preferences.getString("email","1");
+        mobile=preferences.getString("mobile","1");
+
         apiService=ApiUtils.getLogoutService(auth_Id);
         Log.e("auth_id1111111111",auth_Id);
         final Intent intent= getIntent();
@@ -101,14 +105,27 @@ public class DashboardActivity extends AppCompatActivity
         imgbtn2=(ImageButton)findViewById(R.id.frontButton);
         imgbtn1.setVisibility(View.INVISIBLE);
 
+        pt=getSupportFragmentManager().beginTransaction();
         getImages();
         arrayList=new ArrayList<>();
         arrayList=populateList();
         init();
 
-
-
-
+//            @Override
+//            protected void onCreate (Bundle savedInstanceState){
+//                super.onCreate(savedInstanceState);
+//                setContentView(R.layout.activity_dashboard);
+//                imgbtn1 = (ImageButton) findViewById(R.id.backButton);
+//                imgbtn2 = (ImageButton) findViewById(R.id.frontButton);
+//                imgbtn1.setVisibility(View.INVISIBLE);
+//
+//                getImages();
+//                arrayList = new ArrayList<>();
+//                arrayList = populateList();
+//                init();
+//
+//            }
+//            @Override
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -117,8 +134,8 @@ public class DashboardActivity extends AppCompatActivity
 
             @Override
             public void onClick(View view) {
-
-                apiService=ApiUtils.getLogoutService(auth_Id);
+                final Post post=new Post(id);
+                System.out.println(id);
                 progressBar = new ProgressDialog(view.getContext());
                 progressBar.setCancelable(true);
                 progressBar.setMessage("Loading...");
@@ -126,13 +143,14 @@ public class DashboardActivity extends AppCompatActivity
                 progressBar.setProgress(0);
                 progressBar.setMax(100);
                 progressBar.show();
-                Post post=new Post(id);
                 apiService.logout(post).enqueue(new Callback<Post>() {
                     @Override
                     public void onResponse(Call<Post> call, Response<Post> response) {
                         if (response.code()==200){
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.remove("email");
+                            editor.apply();
                             progressBar.dismiss();
-//
                             Intent intent2=new Intent(DashboardActivity.this,LoginActivity.class);
                             finish();
                             intent2.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -151,12 +169,11 @@ public class DashboardActivity extends AppCompatActivity
 //
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
-            }
-        });
+//            }
+//        });
 
         prepareMenuData();
         populateExpandableList();
-
 
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -164,7 +181,7 @@ public class DashboardActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(false);
-        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.menu, getApplicationContext().getTheme());
+        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.menu3, getApplicationContext().getTheme());
         toggle.setHomeAsUpIndicator(drawable);
         toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override
@@ -180,10 +197,6 @@ public class DashboardActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        final SharedPreferences.Editor editor = getSharedPreferences("LOGIN_PREF", MODE_PRIVATE).edit();
-        editor.putString("FLAG","LoggedIn");
-        editor.apply();
     }
 
     public void onClick(View v) {
@@ -191,16 +204,16 @@ public class DashboardActivity extends AppCompatActivity
 
             case R.id.backButton:
                 LinearLayoutManager llb = (LinearLayoutManager) recyclerView.getLayoutManager();
-                llb.scrollToPosition(llb.findFirstVisibleItemPosition() -1);
+                llb.scrollToPosition(llb.findFirstVisibleItemPosition() - 1);
 
-                int k=mImageUrls.size()-1;
-                int l=llb.findLastVisibleItemPosition()-1;
+                int k = mImageUrls.size() - 1;
+                int l = llb.findLastVisibleItemPosition() - 1;
                 Log.e("backPosition", String.valueOf(l));
-                if (i==0){
+                if (i == 0) {
                     imgbtn1.setVisibility(View.INVISIBLE);
                     imgbtn2.setVisibility(View.VISIBLE);
 
-                }else if (i>=0){
+                } else if (i >= 0) {
                     imgbtn1.setVisibility(View.VISIBLE);
                     imgbtn2.setVisibility(View.VISIBLE);
                 }
@@ -208,14 +221,14 @@ public class DashboardActivity extends AppCompatActivity
             case R.id.frontButton:
                 LinearLayoutManager layoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
                 LinearLayoutManager llm = (LinearLayoutManager) recyclerView.getLayoutManager();
-                llm.scrollToPosition(llm.findLastVisibleItemPosition() +1);
+                llm.scrollToPosition(llm.findLastVisibleItemPosition() + 1);
 
-                k=mImageUrls.size()-1;
+                k = mImageUrls.size() - 1;
                 Log.e("position", String.valueOf(i));
-                if (i==k){
+                if (i == k) {
                     imgbtn2.setVisibility(View.INVISIBLE);
                     imgbtn1.setVisibility(View.VISIBLE);
-                } else if (i>0){
+                } else if (i > 0) {
                     imgbtn1.setVisibility(View.VISIBLE);
                 }
                 break;
@@ -229,7 +242,7 @@ public class DashboardActivity extends AppCompatActivity
         }
     }
 
-    private void getImages(){
+    private void getImages() {
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
         mImageUrls.add(R.drawable.car_loan);
@@ -265,7 +278,7 @@ public class DashboardActivity extends AppCompatActivity
 
     }
 
-    private void initRecyclerView(){
+    private void initRecyclerView() {
         Log.d(TAG, "initRecyclerView: init recyclerview");
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -285,28 +298,29 @@ public class DashboardActivity extends AppCompatActivity
             public void onScrolled(RecyclerView recyclerView1, int dx, int dy) {
                 super.onScrolled(recyclerView1, dx, dy);
                 LinearLayoutManager llm = (LinearLayoutManager) recyclerView.getLayoutManager();
-                i =llm.findFirstCompletelyVisibleItemPosition();
+                i = llm.findFirstCompletelyVisibleItemPosition();
 
-                k=mImageUrls.size()-1;
+                k = mImageUrls.size() - 1;
                 Log.e("totalPosition", String.valueOf(k));
                 Log.e("firstPosition", String.valueOf(i));
-                if (i==k ){
+                if (i == k) {
                     imgbtn2.setVisibility(View.INVISIBLE);
                     imgbtn1.setVisibility(View.VISIBLE);
-                } else if (i>0 && i<k){
+                } else if (i > 0 && i < k) {
                     imgbtn1.setVisibility(View.VISIBLE);
                     imgbtn2.setVisibility(View.VISIBLE);
-                }else if (i==0){
+                } else if (i == 0) {
                     imgbtn1.setVisibility(View.INVISIBLE);
                 }
             }
         });
     }
-    private ArrayList<Integer> populateList(){
+
+    private ArrayList<Integer> populateList() {
 
         ArrayList<Integer> list = new ArrayList<>();
 
-        for(int i = 0; i < IMAGES.length; i++){
+        for (int i = 0; i < IMAGES.length; i++) {
 
 
             list.add(IMAGES[i]);
@@ -353,7 +367,7 @@ public class DashboardActivity extends AppCompatActivity
         circlePageIndicator.setViewPager(pager);
         final float density = getResources().getDisplayMetrics().density;
         circlePageIndicator.setRadius(5 * density);
-        NUM_PAGE =arrayList.size();
+        NUM_PAGE = arrayList.size();
 
         final Handler handler = new Handler();
         final Runnable update = new Runnable() {
@@ -393,36 +407,38 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+    public void onBackPressed(){
+        android.app.FragmentManager fm = getFragmentManager();
+        if (fm.getBackStackEntryCount() > 0) {
+            Log.i("MainActivity", "popping backstack");
+            fm.popBackStack();
         } else {
+            Log.i("MainActivity", "nothing on backstack, calling super");
             super.onBackPressed();
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.dashboard, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.dashboard, menu);
+//        return true;
+//    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -433,7 +449,6 @@ public class DashboardActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             // Handle the camera action
         } else if (id == R.id.nav_accounts) {
-
 
         } else if (id == R.id.nav_applications) {
 
@@ -549,10 +564,10 @@ public class DashboardActivity extends AppCompatActivity
                         transaction.addToBackStack(null);  // this will manage backstack
                         transaction.commit();
                     }else if(groupPosition == 3){
-                        AllProductFragment fragment = new AllProductFragment();
-                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.fragmentContainer, fragment);
-                        transaction.addToBackStack(null);
+                        AllProductFragment fragment= new AllProductFragment();
+                        android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragmentContainer, fragment); // fragment container id in first parameter is the  container(Main layout id) of Activity
+                        transaction.addToBackStack(null);  // this will manage backstack
                         transaction.commit();
                     }
                     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -585,4 +600,5 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
     }
+
 }

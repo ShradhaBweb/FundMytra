@@ -2,10 +2,12 @@ package com.example.bcs.fundmytra;
 
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,10 +29,12 @@ public class MyAccountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view=(View) inflater.inflate(R.layout.fragment_my_account, container, false);
 
-        TabItem tabprofile = view.findViewById(R.id.my_profile);
+       // Log.e("auth-id",auth_id);
+        TabItem  tabprofile = view.findViewById(R.id.my_profile);
         TabItem tabsearches = view.findViewById(R.id.my_searches);
         TabItem tabaplication = view.findViewById(R.id.my_application);
         TabItem tabinterest = view.findViewById(R.id.salary_info);
@@ -51,6 +55,7 @@ public class MyAccountFragment extends Fragment {
         adapter = new FragmentAdapter(getActivity(), getChildFragmentManager(),tabLayout.getTabCount());
 
     }
+
     private void listeners() {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -69,5 +74,4 @@ public class MyAccountFragment extends Fragment {
             }
         });
     }
-
 }

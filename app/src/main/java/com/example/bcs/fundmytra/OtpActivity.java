@@ -1,18 +1,22 @@
 package com.example.bcs.fundmytra;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +38,11 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
     String phone="123456789";
     APIService apiService;
     String id,email,otp,Auth_id,mobile;
+    SharedPreferences sharedPreferences;
+    Data c;
+
     private ProgressDialog progressBar;
+
     public static final String MY_PREFS_NAME = "MyPrefsFile";
 
     @Override
@@ -43,17 +51,24 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
 
         setContentView(R.layout.activity_otp);
 
-        Intent intent=getIntent();
-        email=intent.getStringExtra("email");
-        id=intent.getStringExtra("ID");
-        Auth_id=intent.getStringExtra("auth_id");
-        mobile=intent.getStringExtra("mobile");
+//        Intent intent=getIntent();
+//        email=intent.getStringExtra("email");
+//        id=intent.getStringExtra("ID");
+//        Auth_id=intent.getStringExtra("auth_id");
+//        mobile=intent.getStringExtra("mobile");
+        SharedPreferences preferences=getApplicationContext().getSharedPreferences("MyPref",0);
+       id= preferences.getString("id","1");
+       Auth_id=preferences.getString("auth_id","1");
+       email=preferences.getString("email","1");
+       mobile=preferences.getString("mobile","1");
 
 
         Log.e("id",id);
         Log.e("email",email);
         Log.e("auth_id",Auth_id);
         apiService=ApiUtils.getOtpService(Auth_id);
+
+
 
         txt1=(TextView)findViewById(R.id.phone_number);
         txt2=(TextView)findViewById(R.id.text1);
@@ -86,6 +101,10 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
 
     }
 
+
+
+
+    @SuppressLint("ResourceType")
     @Override
     public void onClick(View view) {
         int number1=edt1.getText().toString().trim().length();
@@ -400,26 +419,33 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                 apiService.verifyPost(post).enqueue(new Callback<Post>() {
                     @Override
                     public void onResponse(Call<Post> call, Response<Post> response) {
+                        Gson gson =
+                                new GsonBuilder()
+                                        .registerTypeAdapter(Data.class, new MyDeserializer())
+                                        .create();
                         if (response.code()==200){
                             progressBar.dismiss();
-                            Bundle bundle = new Bundle();
-                            bundle.putString("customer_id",id);
-                            bundle.putString("auth_id",Auth_id);
-                            bundle.putString("email",email);
-                            bundle.putString("mobile",mobile);
+//                            Bundle bundle = new Bundle();
+//                            bundle.putString("customer_id",id);
+//                            bundle.putString("auth_id",Auth_id);
+//                            bundle.putString("email",email);
+//                            bundle.putString("mobile",mobile);
                             Intent intent=new Intent(OtpActivity.this,PasswordConfirmation.class);
                             intent.putExtras(bundle);
                             startActivity(intent);
 
-                        }else {
+                        }else if(response.code()==406)
+                        {
                             System.out.println(response.code());
                             if (response.code()==406){
                                 progressBar.dismiss();
-                                Toast.makeText(getApplicationContext(),"Invalid otp numbers or incurrent numbers",Toast.LENGTH_LONG).show();
-                            }else if (response.code()==404){
-                                progressBar.dismiss();
-                                Toast.makeText(getApplicationContext(),"not Found ",Toast.LENGTH_LONG).show();
+
+                               
                             }
+                        } else {
+                            progressBar.dismiss();
+                            Toast.makeText(getApplicationContext(),"Invalid otp",Toast.LENGTH_LONG).show();
+
                         }
                     }
 
