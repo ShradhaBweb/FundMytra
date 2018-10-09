@@ -1,6 +1,7 @@
 package com.example.bcs.fundmytra;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Context;
@@ -28,12 +29,16 @@ public class IntroductionActivity extends AppCompatActivity {
     public int dotsCount;
     private Button btnSkip, btnNext, btnBack;
     private PrefManager prefManager;
+    private static final String PREF_LOGIN = "LOGIN_PREF";
+    private static final String FLAG = "FLAG";
+    private static final String FLAGOUT = "FLAGOUT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        Intent intent=new Intent(this,LoginActivity.class);
 //        startActivity(intent);
+
 
         // Checking for first time launch - before calling setContentView()
         prefManager = new PrefManager(this);
@@ -135,8 +140,20 @@ public class IntroductionActivity extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
+//        SharedPreferences preferences=getSharedPreferences(PREF_LOGIN,MODE_PRIVATE);
+//        if (preferences.contains(FLAG)){
+//            Intent intent=new Intent(this,DashboardActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }else {
+//            Intent intent=new Intent(this,LoginSignupActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
+
+
         startActivity(new Intent(IntroductionActivity.this, LoginSignupActivity.class));
-        finish();
+       finish();
     }
 
     //  viewpager change listener

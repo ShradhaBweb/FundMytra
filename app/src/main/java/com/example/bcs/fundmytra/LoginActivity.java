@@ -31,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
     String mobilePattern = "[0-9]{10}";
     ProgressDialog progressBar;
     APIService mAPIService;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,9 @@ public class LoginActivity extends AppCompatActivity {
         mAPIService= ApiUtils.getLoginService();
         init();
         listeners();
+        final SharedPreferences.Editor editor = getSharedPreferences("LOGIN_PREF", MODE_PRIVATE).edit();
+                            editor.putString("FLAG","LoggedIn");
+                            editor.apply();
         }
 
     private void listeners() {
@@ -83,12 +88,15 @@ public class LoginActivity extends AppCompatActivity {
                                         System.out.println(c.id);
                                         System.out.println(c.auth_id);
                                         Toast.makeText(LoginActivity.this, "Id" + c.id, Toast.LENGTH_SHORT).show();
-                                        Bundle bundle = new Bundle();
-                                        bundle.putString("id", c.id);
-                                        bundle.putString("auth_id", c.auth_id);
+                                        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                                        SharedPreferences.Editor editor = pref.edit();
+                                        editor.putString("Key_emailPhone",emailPhone);
+                                        editor.putString("Key_pass",pass);
+                                        editor.putString("id",c.id);
+                                        editor.putString("auth_id",c.auth_id);
+                                        editor.commit();
 
                                         Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                                        intent.putExtras(bundle);
                                         startActivity(intent);
 
                                     } else {

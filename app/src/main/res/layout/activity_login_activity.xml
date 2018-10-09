@@ -121,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/fundRed"
                     android:hint="@string/hint"
-                    android:inputType="text">
+                    android:inputType="textPassword">
                 </EditText>
             </LinearLayout>
         </LinearLayout>

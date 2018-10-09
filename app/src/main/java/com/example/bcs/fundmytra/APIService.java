@@ -7,6 +7,7 @@ import com.google.gson.JsonElement;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface APIService {
 
@@ -24,5 +25,8 @@ public interface APIService {
 
     @POST("admin_app/master_api/logout_app")
     Call<Post> logout(@Body Post post);
+
+    @PUT("admin_app/master-api/update_profile")
+    Call<JsonElement> updateCustomer(@Body UpdateModel updateModel);
 
 }

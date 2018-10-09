@@ -3,6 +3,7 @@ package com.example.bcs.fundmytra;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -74,21 +75,17 @@ public class DashboardActivity extends AppCompatActivity
     ProgressDialog progressBar;
 
     APIService apiService;
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent1=getIntent();
 
-         id= intent1.getStringExtra("id");
-         auth_Id=intent1.getStringExtra("auth_id");
-         Log.e("id",id);
-         Log.e("auth_id",auth_Id);
-         apiService=ApiUtils.getLogoutService(auth_Id);
-
-
-
-
+        pref=getApplicationContext().getSharedPreferences("MyPref", 0);
+        id=pref.getString("id","1");
+        auth_Id=pref.getString("auth_id","2");
+        apiService=ApiUtils.getLogoutService(auth_Id);
+        Log.e("auth_id1111111111",auth_Id);
         final Intent intent= getIntent();
         final int fragmentId=intent.getIntExtra("send",2);
         if(fragmentId==1)
@@ -109,6 +106,8 @@ public class DashboardActivity extends AppCompatActivity
         arrayList=populateList();
         init();
 
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -117,7 +116,8 @@ public class DashboardActivity extends AppCompatActivity
 
             @Override
             public void onClick(View view) {
-                Post post=new Post(id);
+
+                apiService=ApiUtils.getLogoutService(auth_Id);
                 progressBar = new ProgressDialog(view.getContext());
                 progressBar.setCancelable(true);
                 progressBar.setMessage("Loading...");
@@ -125,11 +125,13 @@ public class DashboardActivity extends AppCompatActivity
                 progressBar.setProgress(0);
                 progressBar.setMax(100);
                 progressBar.show();
+                Post post=new Post(id);
                 apiService.logout(post).enqueue(new Callback<Post>() {
                     @Override
                     public void onResponse(Call<Post> call, Response<Post> response) {
                         if (response.code()==200){
                             progressBar.dismiss();
+//
                             Intent intent2=new Intent(DashboardActivity.this,LoginActivity.class);
                             finish();
                             intent2.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -177,6 +179,10 @@ public class DashboardActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        final SharedPreferences.Editor editor = getSharedPreferences("LOGIN_PREF", MODE_PRIVATE).edit();
+        editor.putString("FLAG","LoggedIn");
+        editor.apply();
     }
 
     public void onClick(View v) {
