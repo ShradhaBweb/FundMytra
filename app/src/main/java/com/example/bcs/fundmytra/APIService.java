@@ -4,6 +4,7 @@ package com.example.bcs.fundmytra;
 import com.google.gson.JsonElement;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface APIService {
@@ -22,4 +23,7 @@ public interface APIService {
 
     @POST("admin_app/master_api/logout_app")
     Call<Post> logout(@Body Post post);
+
+    @GET("admin_app/master_api/my_profile")
+    Call<JsonElement> myprofile();
 }

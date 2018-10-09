@@ -1,6 +1,7 @@
 package com.example.bcs.fundmytra;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabItem;
@@ -32,9 +33,9 @@ public class MyAccountFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view=(View) inflater.inflate(R.layout.fragment_my_account, container, false);
-      //  String auth_id= PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext()).getString("auth_id","s");
-
-       // Log.e("auth-id",auth_id);
+        SharedPreferences preferences= getContext().getApplicationContext().getSharedPreferences("MyPref",0);
+        String s=preferences.getString("auth_id","sssss");
+        Log.e("auth_id in Fragment",s);
         TabItem  tabprofile = view.findViewById(R.id.my_profile);
         TabItem tabsearches = view.findViewById(R.id.my_searches);
         TabItem tabaplication = view.findViewById(R.id.my_application);
@@ -42,7 +43,6 @@ public class MyAccountFragment extends Fragment {
         TabItem tabsalaryinformation = view.findViewById(R.id.documents);
         tabLayout = (TabLayout) view.findViewById(R.id.simpleTabLayout);
         viewPager = (ViewPager)view. findViewById(R.id.viewpager);
-
 
         init();
         viewPager.setAdapter(adapter);

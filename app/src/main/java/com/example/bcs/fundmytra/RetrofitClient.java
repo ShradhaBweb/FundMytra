@@ -38,7 +38,7 @@ public class RetrofitClient {
         });
 
 
-     //   Data1 c = gson.fromJson(myDeserializer, Data1.class);
+     //   MyProfileData c = gson.fromJson(myDeserializer, MyProfileData.class);
         OkHttpClient client = httpClient.build();
 
         Retrofit retrofit;
@@ -74,7 +74,7 @@ public class RetrofitClient {
         });
 
 
-        //   Data1 c = gson.fromJson(myDeserializer, Data1.class);
+        //   MyProfileData c = gson.fromJson(myDeserializer, MyProfileData.class);
         OkHttpClient client = httpClient.build();
 
         Retrofit retrofit;
@@ -111,7 +111,7 @@ public class RetrofitClient {
         });
 
 
-        //   Data1 c = gson.fromJson(myDeserializer, Data1.class);
+        //   MyProfileData c = gson.fromJson(myDeserializer, MyProfileData.class);
         OkHttpClient client = httpClient.build();
 
         Retrofit retrofit;
@@ -146,7 +146,7 @@ public class RetrofitClient {
         });
 
 
-        //   Data1 c = gson.fromJson(myDeserializer, Data1.class);
+        //   MyProfileData c = gson.fromJson(myDeserializer, MyProfileData.class);
         OkHttpClient client = httpClient.build();
 
         Retrofit retrofit;
@@ -183,7 +183,7 @@ public class RetrofitClient {
         });
 
 
-        //   Data1 c = gson.fromJson(myDeserializer, Data1.class);
+        //   MyProfileData c = gson.fromJson(myDeserializer, MyProfileData.class);
         OkHttpClient client = httpClient.build();
 
         Retrofit retrofit;
