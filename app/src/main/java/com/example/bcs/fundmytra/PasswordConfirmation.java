@@ -2,6 +2,7 @@ package com.example.bcs.fundmytra;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -39,10 +40,16 @@ public class PasswordConfirmation extends AppCompatActivity {
         setContentView(R.layout.activity_password_confirmation);
         Intent intent=getIntent();
 //        email=intent.getStringExtra("email");
-        id=intent.getStringExtra("customer_id");
-        auth_id=intent.getStringExtra("auth_id");
-        email=intent.getStringExtra("email");
-        mobile=intent.getStringExtra("mobile");
+//        id=intent.getStringExtra("customer_id");
+//        auth_id=intent.getStringExtra("auth_id");
+//        email=intent.getStringExtra("email");
+//        mobile=intent.getStringExtra("mobile");
+        SharedPreferences preferences=getApplicationContext().getSharedPreferences("MyPref",0);
+        id= preferences.getString("id","1");
+        auth_id=preferences.getString("auth_id","1");
+        email=preferences.getString("email","1");
+        mobile=preferences.getString("mobile","1");
+
 
         Log.e("auth-Id",auth_id);
         init();
@@ -88,17 +95,7 @@ public class PasswordConfirmation extends AppCompatActivity {
                                     progressBar.dismiss();
 
                                     Toast.makeText(PasswordConfirmation.this,"Successfully password updated",Toast.LENGTH_SHORT).show();
-
-
-                                    Bundle bundle = new Bundle();
-                                    // bundle.putString("id",);
-                                    bundle.putString("id",id);
-                                    bundle.putString("auth_id",auth_id);
-                                    bundle.putString("email",email);
-                                    bundle.putString("mobile",mobile);
-                                    bundle.putString("password",password);
                                     Intent intent=new Intent(PasswordConfirmation.this,DashboardActivity.class);
-                                    intent.putExtras(bundle);
                                     startActivity(intent);
 
                                 } else {

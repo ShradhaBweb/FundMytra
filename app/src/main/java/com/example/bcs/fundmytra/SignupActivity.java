@@ -78,19 +78,16 @@ public class SignupActivity extends AppCompatActivity {
                                         Data c = gson.fromJson(new Gson().toJson(response.body()), Data.class);
                                         System.out.println(c.id);
                                         System.out.println(c.auth_id);
-                                        SharedPreferences pref = getApplicationContext().getSharedPreferences("auth_id", 0); // 0 - for private mode
+                                        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
                                         SharedPreferences.Editor editor = pref.edit();
-                                        editor.putString("key_name", c.auth_id); // Storing string
+                                        editor.putString("id", c.id);
+                                        editor.putString("email", email);
+                                        editor.putString("mobile", mobile);
+                                        editor.putString("auth_id", c.auth_id);
+                                        editor.apply();// Storing string
 
                                         Toast.makeText(SignupActivity.this, "Id" + c.id, Toast.LENGTH_SHORT).show();
-                                        Bundle bundle = new Bundle();
-                                        bundle.putString("ID",c.id);
-                                        bundle.putString("email",email);
-                                        bundle.putString("mobile",mobile);
-                                        bundle.putString("auth_id",c.auth_id);
-
                                         Intent intent=new Intent(SignupActivity.this,OtpActivity.class);
-                                        intent.putExtras(bundle);
                                         startActivity(intent);
 
                                     } else {
@@ -122,8 +119,8 @@ public class SignupActivity extends AppCompatActivity {
                 }else {
                     Toast.makeText(SignupActivity.this,"Empty",Toast.LENGTH_SHORT).show();
                 }
-                }
-            });
+            }
+        });
 
         click_here_to_login.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -64,7 +64,7 @@ public class DashboardActivity extends AppCompatActivity
     private ArrayList<Integer> arrayList;
     RecyclerViewAdapter adapter;
     int i,k;
-    String id,auth_Id;
+    String id,auth_Id,email,mobile;
     ExpandableListAdapter expandableListAdapter;
     ExpandableListView expandableListView;
     List<MenuModel> headerList = new ArrayList<>();
@@ -73,28 +73,22 @@ public class DashboardActivity extends AppCompatActivity
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<Integer> mImageUrls = new ArrayList<>();
     ProgressDialog progressBar;
-    SharedPreferences pref;
+    SharedPreferences preferences;
 
     APIService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent1=getIntent();
 
-//        id= intent1.getStringExtra("id");
-//        auth_Id=intent1.getStringExtra("auth_id");
-//        Log.e("id",id);
-//        Log.e("auth_id",auth_Id);
-         pref=getApplicationContext().getSharedPreferences("MyPref", 0);
-        id=pref.getString("id","1");
-        auth_Id=pref.getString("auth_id","2");
+        preferences=getApplicationContext().getSharedPreferences("MyPref",0);
+        id= preferences.getString("id","1");
+        auth_Id=preferences.getString("auth_id","1");
+        email=preferences.getString("email","1");
+        mobile=preferences.getString("mobile","1");
+
         apiService=ApiUtils.getLogoutService(auth_Id);
         Log.e("auth_id1111111111",auth_Id);
-
-
-
-
         final Intent intent= getIntent();
         final int fragmentId=intent.getIntExtra("send",2);
         if(fragmentId==1)
@@ -136,8 +130,8 @@ public class DashboardActivity extends AppCompatActivity
                     @Override
                     public void onResponse(Call<Post> call, Response<Post> response) {
                         if (response.code()==200){
-                            SharedPreferences.Editor editor = pref.edit();
-                            editor.remove("Key_emailPhone");
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.remove("email");
                             editor.apply();
                             progressBar.dismiss();
                             Intent intent2=new Intent(DashboardActivity.this,LoginActivity.class);
@@ -281,7 +275,7 @@ public class DashboardActivity extends AppCompatActivity
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
 
-                }
+            }
 
             @Override
             public void onScrolled(RecyclerView recyclerView1, int dx, int dy) {

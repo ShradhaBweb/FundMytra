@@ -23,7 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    private Button  login;  
+    private Button  login;
     private EditText email_phone,password;
     String emailPhone,pass;
     LoginModel loginModel;
@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         mAPIService= ApiUtils.getLoginService();
         init();
         listeners();
-        }
+    }
 
     private void listeners() {
         login.setOnClickListener(new View.OnClickListener() {
@@ -51,73 +51,73 @@ public class LoginActivity extends AppCompatActivity {
                 if (!TextUtils.isEmpty(emailPhone) && !TextUtils.isEmpty(pass)) {
                     if (emailPhone.matches(emailPattern) || (emailPhone.matches(mobilePattern))) {
 
-                            loginModel = new LoginModel(emailPhone, pass);
-                            progressBar = new ProgressDialog(v.getContext());
-                            progressBar.setCancelable(true);
-                            progressBar.setMessage("Loading...");
-                            progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                            progressBar.setProgress(0);
-                            progressBar.setMax(100);
-                            progressBar.show();
+                        loginModel = new LoginModel(emailPhone, pass);
+                        progressBar = new ProgressDialog(v.getContext());
+                        progressBar.setCancelable(true);
+                        progressBar.setMessage("Loading...");
+                        progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                        progressBar.setProgress(0);
+                        progressBar.setMax(100);
+                        progressBar.show();
 
-                            mAPIService.login(loginModel).enqueue(new Callback<JsonElement>() {
+                        mAPIService.login(loginModel).enqueue(new Callback<JsonElement>() {
 
-                                @Override
-                                public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                                    Gson gson =
-                                            new GsonBuilder()
-                                                    .registerTypeAdapter(Data.class, new MyDeserializer())
-                                                    .create();
+                            @Override
+                            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                                Gson gson =
+                                        new GsonBuilder()
+                                                .registerTypeAdapter(Data.class, new MyDeserializer())
+                                                .create();
 
-                                    if (response.code() == 200) {
-                                        progressBar.dismiss();
+                                if (response.code() == 200) {
+                                    progressBar.dismiss();
 
-                                        Toast.makeText(LoginActivity.this, "Successfully Signed up", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "Successfully Signed up", Toast.LENGTH_SHORT).show();
 
-                                        Data c = gson.fromJson(new Gson().toJson(response.body()), Data.class);
-                                        System.out.println(c.id);
-                                        System.out.println(c.auth_id);
-                                        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-                                        SharedPreferences.Editor editor = pref.edit();
-                                        editor.putString("Key_emailPhone",emailPhone);
-                                        editor.putString("Key_pass",pass);
-                                        editor.putString("id",c.id);
-                                        editor.putString("auth_id",c.auth_id);
-                                        editor.commit();
+                                    Data c = gson.fromJson(new Gson().toJson(response.body()), Data.class);
+                                    System.out.println(c.id);
+                                    System.out.println(c.auth_id);
+                                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                                    SharedPreferences.Editor editor = pref.edit();
+                                    editor.putString("email",emailPhone);
+                                    editor.putString("Key_pass",pass);
+                                    editor.putString("id",c.id);
+                                    editor.putString("auth_id",c.auth_id);
+                                    editor.commit();
 
 //                                        Bundle bundle = new Bundle();
 //                                        bundle.putString("id", c.id);
 //                                        bundle.putString("auth_id", c.auth_id);
-                                        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                                     //    intent.putExtras(bundle);
-                                        startActivity(intent);
+                                    startActivity(intent);
 
-                                    } else {
-                                        progressBar.dismiss();
-                                        System.out.println(response.code());
-                                        if (response.code() == 406) {
-                                            Toast.makeText(LoginActivity.this, "Plz Verify ur email and mobile once again", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<JsonElement> call, Throwable t) {
+                                } else {
                                     progressBar.dismiss();
-                                    System.out.println(t.getMessage());
-                                    if (t.getMessage().contains("Failed to connect")) {
-                                        Toast.makeText(LoginActivity.this, "Check your  Internet Connection", Toast.LENGTH_SHORT).show();
+                                    System.out.println(response.code());
+                                    if (response.code() == 406) {
+                                        Toast.makeText(LoginActivity.this, "Plz Verify ur email and mobile once again", Toast.LENGTH_SHORT).show();
                                     }
-                                    call.cancel();
                                 }
-                            });
+                            }
+
+                            @Override
+                            public void onFailure(Call<JsonElement> call, Throwable t) {
+                                progressBar.dismiss();
+                                System.out.println(t.getMessage());
+                                if (t.getMessage().contains("Failed to connect")) {
+                                    Toast.makeText(LoginActivity.this, "Check your  Internet Connection", Toast.LENGTH_SHORT).show();
+                                }
+                                call.cancel();
+                            }
+                        });
 
                     } else {
                         Toast.makeText(LoginActivity.this, "enter valid mobile no or email_id", Toast.LENGTH_SHORT).show();
                     }
                 }else{
                     Toast.makeText(LoginActivity.this, "Fields are empty", Toast.LENGTH_SHORT).show();
-                    }
+                }
 
             }
 
