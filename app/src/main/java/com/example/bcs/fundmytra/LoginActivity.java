@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Intent intent=getIntent();
         confirm_Pass=intent.getStringExtra("password");
-        Log.e("pass",confirm_Pass);
+        System.out.println(confirm_Pass);
         mAPIService= ApiUtils.getLoginService();
         init();
         listeners();

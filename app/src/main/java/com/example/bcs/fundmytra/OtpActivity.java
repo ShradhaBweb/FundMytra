@@ -41,6 +41,7 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
     SharedPreferences sharedPreferences;
     Data c;
 
+
     private ProgressDialog progressBar;
 
     public static final String MY_PREFS_NAME = "MyPrefsFile";
@@ -431,7 +432,7 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
 //                            bundle.putString("email",email);
 //                            bundle.putString("mobile",mobile);
                             Intent intent=new Intent(OtpActivity.this,PasswordConfirmation.class);
-                            intent.putExtras(bundle);
+                           // intent.putExtras(bundle);
                             startActivity(intent);
 
                         }else if(response.code()==406)

@@ -33,9 +33,7 @@ public class Post {
         this.id = id;
         this.otp = otp;
     }
-    public Post(String id){
-        this.id=id;
-    }
+
 
 
 
