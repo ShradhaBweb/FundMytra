@@ -34,11 +34,11 @@
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/write"/>
             <RelativeLayout
+                android:id="@+id/graph"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_toStartOf="@+id/write"
-                android:layout_toEndOf="@+id/customer_email"
                 android:layout_below="@id/contact_info"
                 android:layout_marginEnd="00dp"
                 android:orientation="vertical">
@@ -77,13 +77,16 @@
                     android:fontFamily="@font/montserrat"
                     android:textStyle="bold"/>
             </RelativeLayout>
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/graph"
                 android:layout_below="@+id/contact_info"
                 android:layout_marginTop="20dp">
                 <ImageButton
+                    android:id="@+id/person_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/name"
@@ -93,21 +96,26 @@
                     android:id="@+id/customer_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/person_icon"
                     android:layout_gravity="center"
+                    android:maxLines="2"
                     android:text="@string/name"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     android:fontFamily="@font/montserrat"
                     android:layout_marginStart="20dp"
                     android:textStyle="normal"/>
-            </LinearLayout>
-            <LinearLayout
+            </RelativeLayout>
+            <RelativeLayout
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/name"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/graph"
                 android:layout_marginTop="20dp">
                 <ImageButton
+                    android:id="@+id/email_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/email"
@@ -119,15 +127,15 @@
                     android:id="@+id/customer_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/email_icon"
                     android:text="@string/email"
                     android:textColor="@color/black"
-                    android:maxLines="2"
                     android:textSize="14sp"
                     android:fontFamily="@font/montserrat"
                     android:layout_marginStart="20dp"
                     android:textStyle="normal"/>
 
-            </LinearLayout>
+            </RelativeLayout>
         </RelativeLayout>
 
         <RelativeLayout

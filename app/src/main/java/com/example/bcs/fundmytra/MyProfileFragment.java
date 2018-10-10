@@ -48,6 +48,7 @@ public class MyProfileFragment extends Fragment {
                 System.out.println("response"+data.getEmail());
                 System.out.println("response"+data.getLogin_code());
                 System.out.println("response"+data.getMobile_no());
+                System.out.println("response"+data.getId());
                 System.out.println("response"+data.getName());
                 System.out.println("response"+response.body());
 
@@ -57,12 +58,17 @@ public class MyProfileFragment extends Fragment {
                    if (data.getName()==null){
                        name.setText("No Name");
                     }else {
-                       name.setText(data.getName());
+                      name.setText(data.getName());
                    }
                         if (data.getEmail().length()>20){
-
+                       String email_id=data.getEmail();
+                       String[] splitString=email_id.split("@");
+                       String afterSplit =splitString[0]+"\n"+splitString[1];
+                            email.setText(data.getEmail());
+                        }else {
+                            email.setText(data.getEmail());
                         }
-                       email.setText(data.getEmail());
+
                         num.setText(data.getMobile_no());
 
                         Toast.makeText(getContext(),"profile showing",Toast.LENGTH_SHORT).show();
