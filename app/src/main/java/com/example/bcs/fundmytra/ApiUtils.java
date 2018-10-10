@@ -28,4 +28,8 @@ public class ApiUtils {
     public static APIService getLogoutService(String authId){
         return RetrofitClient.getLogoutClient(BASE_URL,authId).create(APIService.class);
     }
+    public static APIService getMyprofile(String authId){
+
+        return RetrofitClient.getMyprofile(BASE_URL,authId).create(APIService.class);
+    }
 }

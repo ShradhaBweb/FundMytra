@@ -25,5 +25,5 @@ public interface APIService {
     Call<Post> logout(@Body Post post);
 
     @GET("admin_app/master_api/my_profile")
-    Call<JsonElement> myprofile();
+    Call<MyProfileData> myprofile();
 }

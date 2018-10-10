@@ -47,8 +47,11 @@ public class MyAccountFragment extends Fragment {
         init();
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
         listeners();
+
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
         return view;
     }
     private void init() {
