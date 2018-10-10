@@ -59,7 +59,9 @@ public class MyProfileFragment extends Fragment {
                     }else {
                        name.setText(data.getName());
                    }
+                        if (data.getEmail().length()>20){
 
+                        }
                        email.setText(data.getEmail());
                         num.setText(data.getMobile_no());
 
