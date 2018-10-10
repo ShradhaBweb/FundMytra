@@ -34,8 +34,8 @@ public class MySearchesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 // Inflate the layout for this fragment
-        RelativeLayout relativeLayout=(RelativeLayout) inflater.inflate(R.layout.fragment_mysearches, container, false);
-        listView = (ListView)relativeLayout.findViewById(R.id.simpleListView);
+        View view=(View) inflater.inflate(R.layout.fragment_mysearches, container, false);
+        listView = (ListView)view.findViewById(R.id.simpleListView);
         ArrayList<DataModel> moviesList = new ArrayList<>();
         moviesList.add(new DataModel(R.drawable.car, "Car Loan" , "searched on","10-10-2018 at 03:45PM"));
         moviesList.add(new DataModel(R.drawable.house, "House Loan" , "searched on","10-10-2018 at 03:45PM"));
@@ -43,7 +43,7 @@ public class MySearchesFragment extends Fragment {
         moviesList.add(new DataModel(R.drawable.top_up, "Top up Car loan" , "searched on","10-10-2018 at 03:45PM"));
         mAdapter = new CustomAdapter(getContext(),moviesList);
         listView.setAdapter(mAdapter);
-        return relativeLayout;
+        return view;
     }
 
 }

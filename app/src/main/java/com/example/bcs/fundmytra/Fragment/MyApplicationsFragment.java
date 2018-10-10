@@ -16,7 +16,7 @@ import com.example.bcs.fundmytra.R;
 public class MyApplicationsFragment extends Fragment {
     Button btn_track;
     public MyApplicationsFragment() {
-// Required empty public constructor
+        // Required empty public constructor
     }
 
     @Override
@@ -27,7 +27,7 @@ public class MyApplicationsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-// Inflate the layout for this fragment
+        // Inflate the layout for this fragment
 
         View view=(View) inflater.inflate(R.layout.fragment_myapplications, container, false);
         btn_track=(Button) view.findViewById(R.id.btn_track);

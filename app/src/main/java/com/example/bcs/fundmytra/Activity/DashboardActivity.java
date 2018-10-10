@@ -1,35 +1,42 @@
-package com.example.bcs.fundmytra.Activity;
+package com.example.bcs.fundmytra;
 
 
-
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.view.ViewPager;
+
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
+
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
+
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.bcs.fundmytra.Fragment.AllProductFragment;
-import com.example.bcs.fundmytra.Adapter.ExpandableListAdapter;
-import com.example.bcs.fundmytra.Model.MenuModel;
-import com.example.bcs.fundmytra.Fragment.MyAccountFragment;
-import com.example.bcs.fundmytra.PageAdapter;
-import com.example.bcs.fundmytra.R;
-import com.example.bcs.fundmytra.RecyclerViewAdapter;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
@@ -41,43 +48,67 @@ import java.util.TimerTask;
 import me.crosswall.lib.coverflow.CoverFlow;
 import me.crosswall.lib.coverflow.core.PageItemClickListener;
 import me.crosswall.lib.coverflow.core.PagerContainer;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
     private ImageButton imgbtn1,imgbtn2;
-
     private CirclePageIndicator circlePageIndicator;
     private int currentPage = 0;
     private int NUM_PAGE = 0;
     RecyclerView recyclerView;
-
-    ImageView img_expandable;
-
     private Integer[] IMAGES = {R.drawable.employee1, R.drawable.employee1, R.drawable.employee1};
     private ArrayList<Integer> arrayList;
     RecyclerViewAdapter adapter;
-    int i;
-    int k;
-
+    int i,k;
+    String id,auth_Id;
     ExpandableListAdapter expandableListAdapter;
     ExpandableListView expandableListView;
     List<MenuModel> headerList = new ArrayList<>();
     HashMap<MenuModel, List<MenuModel>> childList = new HashMap<>();
-
     private static final String TAG = "MainActivity";
-
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<Integer> mImageUrls = new ArrayList<>();
+    ProgressDialog progressBar;
+    SharedPreferences pref;
+
+    APIService apiService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent1=getIntent();
+
+//        id= intent1.getStringExtra("id");
+//        auth_Id=intent1.getStringExtra("auth_id");
+//        Log.e("id",id);
+//        Log.e("auth_id",auth_Id);
+         pref=getApplicationContext().getSharedPreferences("MyPref", 0);
+        id=pref.getString("id","1");
+        auth_Id=pref.getString("auth_id","2");
+        apiService=ApiUtils.getLogoutService(auth_Id);
+        Log.e("auth_id1111111111",auth_Id);
+
+
+
+
+        final Intent intent= getIntent();
+        final int fragmentId=intent.getIntExtra("send",2);
+        if(fragmentId==1)
+        {
+            FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragmentContainer,new TrackApplicationFragment()).commit();
+        }
+
+
         setContentView(R.layout.activity_dashboard2);
 
         imgbtn1=(ImageButton)findViewById(R.id.backButton);
         imgbtn2=(ImageButton)findViewById(R.id.frontButton);
         imgbtn1.setVisibility(View.INVISIBLE);
-
 
         getImages();
         arrayList=new ArrayList<>();
@@ -87,17 +118,52 @@ public class DashboardActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.logoutButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                final Post post=new Post(id);
+                System.out.println(id);
+                progressBar = new ProgressDialog(view.getContext());
+                progressBar.setCancelable(true);
+                progressBar.setMessage("Loading...");
+                progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressBar.setProgress(0);
+                progressBar.setMax(100);
+                progressBar.show();
+                apiService.logout(post).enqueue(new Callback<Post>() {
+                    @Override
+                    public void onResponse(Call<Post> call, Response<Post> response) {
+                        if (response.code()==200){
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.remove("Key_emailPhone");
+                            editor.apply();
+                            progressBar.dismiss();
+                            Intent intent2=new Intent(DashboardActivity.this,LoginActivity.class);
+                            finish();
+                            intent2.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            startActivity(intent2);
+                        }else {
+                            Toast.makeText(getApplicationContext(),"",Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Post> call, Throwable t) {
+
+                    }
+                });
+
+//
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
-//            }
-//        });
+            }
+        });
 
         prepareMenuData();
         populateExpandableList();
+
 
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -105,7 +171,7 @@ public class DashboardActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(false);
-        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.menu2, getApplicationContext().getTheme());
+        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.menu, getApplicationContext().getTheme());
         toggle.setHomeAsUpIndicator(drawable);
         toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override
@@ -215,8 +281,7 @@ public class DashboardActivity extends AppCompatActivity
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
 
-
-            }
+                }
 
             @Override
             public void onScrolled(RecyclerView recyclerView1, int dx, int dy) {
@@ -329,40 +394,37 @@ public class DashboardActivity extends AppCompatActivity
         });
     }
 
-
     @Override
-    public void onBackPressed(){
-        android.app.FragmentManager fm = getFragmentManager();
-        if (fm.getBackStackEntryCount() > 0) {
-            Log.i("MainActivity", "popping backstack");
-            fm.popBackStack();
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
         } else {
-            Log.i("MainActivity", "nothing on backstack, calling super");
             super.onBackPressed();
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.dashboard, menu);
-//        return true;
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.dashboard, menu);
+        return true;
+    }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -373,6 +435,7 @@ public class DashboardActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             // Handle the camera action
         } else if (id == R.id.nav_accounts) {
+
 
         } else if (id == R.id.nav_applications) {
 
@@ -389,7 +452,6 @@ public class DashboardActivity extends AppCompatActivity
 
     private void prepareMenuData() {
 
-        img_expandable = (ImageView)findViewById(R.id.img_expandable);
         MenuModel menuModel = new MenuModel("Home", true, false); //Menu of Android Tutorial. No sub menus
         headerList.add(menuModel);
 
@@ -405,7 +467,6 @@ public class DashboardActivity extends AppCompatActivity
         menuModel = new MenuModel("Refer & Earn", true, false);
         headerList.add(menuModel);
         if (!menuModel.hasChildren) {
-//            img_expandable.setImageResource(R.drawable.plus);
             childList.put(menuModel, null);
         }
 
@@ -483,16 +544,17 @@ public class DashboardActivity extends AppCompatActivity
                 if (headerList.get(groupPosition).isGroup) {
                     System.out.println("Group position : "+groupPosition);
                     if(groupPosition == 1){
+
                         MyAccountFragment fragment= new MyAccountFragment();
                         android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.fragmentContainer, fragment); // fragment container id in first parameter is the  container(Main layout id) of Activity
                         transaction.addToBackStack(null);  // this will manage backstack
                         transaction.commit();
                     }else if(groupPosition == 3){
-                        AllProductFragment fragment= new AllProductFragment();
-                        android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.fragmentContainer, fragment); // fragment container id in first parameter is the  container(Main layout id) of Activity
-                        transaction.addToBackStack(null);  // this will manage backstack
+                        AllProductFragment fragment = new AllProductFragment();
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragmentContainer, fragment);
+                        transaction.addToBackStack(null);
                         transaction.commit();
                     }
                     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -525,5 +587,4 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
     }
-
 }
