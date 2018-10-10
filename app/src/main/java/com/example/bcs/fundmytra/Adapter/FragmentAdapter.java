@@ -60,7 +60,7 @@ private FragmentManager fm;
             case 2:
                 return new MyApplicationsFragment();
             case 3:
-            return new SalaryInformationFragment();
+                return new SalaryInformationFragment();
             case 4:
                 return new DocumentsFragment();
             case 5:

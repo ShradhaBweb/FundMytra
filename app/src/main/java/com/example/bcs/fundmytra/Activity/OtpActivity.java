@@ -1,11 +1,14 @@
 package com.example.bcs.fundmytra.Activity;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,21 +16,17 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.chaos.view.PinView;
 import com.example.bcs.fundmytra.APIService;
-import com.example.bcs.fundmytra.ApiUrls;
-import com.example.bcs.fundmytra.Data;
-import com.example.bcs.fundmytra.Model.Data1;
-import com.example.bcs.fundmytra.MyDeserializer;
+import com.example.bcs.fundmytra.ApiUtils;
 import com.example.bcs.fundmytra.Post;
 import com.example.bcs.fundmytra.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.POST;
 
 public class OtpActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -38,11 +37,9 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
     TextView txt1,txt2,txt3,txt4,txt5;
     String phone="123456789";
     APIService apiService;
-    Data c;
-    String id1,email,otp;
-
+    String id,email,otp,Auth_id,mobile;
     private ProgressDialog progressBar;
-//    private PinView pinview;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +49,15 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
 
         Intent intent=getIntent();
         email=intent.getStringExtra("email");
-        id1=intent.getStringExtra("ID");
+        id=intent.getStringExtra("ID");
+        Auth_id=intent.getStringExtra("auth_id");
+        mobile=intent.getStringExtra("mobile");
 
-        Log.e("id",id1);
+
+        Log.e("id",id);
         Log.e("email",email);
-        apiService= ApiUrls.getAPIService();
+        Log.e("auth_id",Auth_id);
+        apiService= ApiUtils.getOtpService(Auth_id);
 
         txt1=(TextView)findViewById(R.id.phone_number);
         txt2=(TextView)findViewById(R.id.text1);
@@ -89,9 +90,6 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
 
     }
 
-
-
-    @SuppressLint("ResourceType")
     @Override
     public void onClick(View view) {
         int number1=edt1.getText().toString().trim().length();
@@ -388,66 +386,60 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
             String otpNumbers4=edt4.getText().toString().trim();
             String otpNumbers5=edt5.getText().toString().trim();
             String otpNumbers6=edt6.getText().toString().trim();
-            int numbers1,numbers2,numbers3,numbers4,numbers5,numbers6;
 
-             otp=otpNumbers1+""+otpNumbers2 +""+otpNumbers3+""+otpNumbers4+""+otpNumbers5+""+otpNumbers6;
+            otp=otpNumbers1+""+otpNumbers2 +""+otpNumbers3+""+otpNumbers4+""+otpNumbers5+""+otpNumbers6;
 
-           Log.e("numbers", String.valueOf(otp));
-           int lenght=String.valueOf(otp).length();
-           if (lenght==6){
-               Log.e("6 digit",otp);
-               progressBar = new ProgressDialog(view.getContext());
-               progressBar.setCancelable(true);
-               progressBar.setMessage("Loading...");
-               progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-               progressBar.setProgress(0);
-               progressBar.setMax(100);
-               progressBar.show();
-               Post post=new Post(id1,otp);
-               apiService.verifyPost(post).enqueue(new Callback<JsonElement>() {
-                   @Override
-                   public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                       Gson gson =
-                               new GsonBuilder()
-                                       .registerTypeAdapter(Data.class, new MyDeserializer())
-                                       .create();
-                       if (response.code()==200){
-                           progressBar.dismiss();
-                           Toast.makeText(getApplicationContext(),"valid otp",Toast.LENGTH_LONG).show();
-                           c = gson.fromJson(new Gson().toJson(response.body()), Data.class);
-                           System.out.println(c.id);
+            Log.e("numbers", String.valueOf(otp));
+            int lenght=String.valueOf(otp).length();
+            if (lenght==6){
+                Log.e("6 digit",otp);
+                progressBar = new ProgressDialog(view.getContext());
+                progressBar.setCancelable(true);
+                progressBar.setMessage("Loading...");
+                progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressBar.setProgress(0);
+                progressBar.setMax(100);
+                progressBar.show();
+                Post post=new Post(id,otp);
+                apiService.verifyPost(post).enqueue(new Callback<Post>() {
+                    @Override
+                    public void onResponse(Call<Post> call, Response<Post> response) {
+                        if (response.code()==200){
+                            progressBar.dismiss();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("customer_id",id);
+                            bundle.putString("auth_id",Auth_id);
+                            bundle.putString("email",email);
+                            bundle.putString("mobile",mobile);
+                            Intent intent=new Intent(OtpActivity.this,PasswordConfirmation.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
 
-                           Bundle bundle = new Bundle();
-                           bundle.putString("customer_id",c.id);
-//                           bundle.putString("email",email);
-                           Intent intent=new Intent(OtpActivity.this,PasswordConfirmation.class);
-                           intent.putExtras(bundle);
-                           startActivity(intent);
+                        }else {
+                            System.out.println(response.code());
+                            if (response.code()==406){
+                                progressBar.dismiss();
+                                Toast.makeText(getApplicationContext(),"Invalid otp numbers or incurrent numbers",Toast.LENGTH_LONG).show();
+                            }else if (response.code()==404){
+                                progressBar.dismiss();
+                                Toast.makeText(getApplicationContext(),"not Found ",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    }
 
+                    @Override
+                    public void onFailure(Call<Post> call, Throwable t) {
+                        progressBar.dismiss();
+                        System.out.println(t.getMessage());
+                        if (t.getMessage().contains("Failed to connect")) {
+                            Toast.makeText(OtpActivity.this, "Check your  Internet Connection", Toast.LENGTH_SHORT).show();
+                        }
+                        call.cancel();
 
-                       }else {
-                           System.out.println(response.code());
-                           if (response.code()==406){
-                               progressBar.dismiss();
-                               Toast.makeText(getApplicationContext(),"Invalid otp numbers or incurrent numbers",Toast.LENGTH_LONG).show();
-                           }
-
-                       }
-                   }
-
-                   @Override
-                   public void onFailure(Call<JsonElement> call, Throwable t) {
-                       progressBar.dismiss();
-                       System.out.println(t.getMessage());
-                       if (t.getMessage().contains("Failed to connect")) {
-                           Toast.makeText(OtpActivity.this, "Check your  Internet Connection", Toast.LENGTH_SHORT).show();
-                       }
-                       call.cancel();
-
-                   }
-               });
-           }
-          // Log.e("integer", String.valueOf(n));
+                    }
+                });
+            }
+            // Log.e("integer", String.valueOf(n));
 
         }
         else if (view.getId()==R.id.button0){

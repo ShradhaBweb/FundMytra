@@ -1,6 +1,7 @@
 package com.example.bcs.fundmytra;
 
 
+import com.example.bcs.fundmytra.Model.EmailMobileModel;
 import com.google.gson.JsonElement;
 import retrofit2.Call;
 import retrofit2.http.Body;

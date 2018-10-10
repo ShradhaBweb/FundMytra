@@ -1,4 +1,4 @@
-package com.example.bcs.fundmytra;
+package com.example.bcs.fundmytra.Activity;
 
 
 import android.app.ProgressDialog;
@@ -37,6 +37,17 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.bcs.fundmytra.APIService;
+import com.example.bcs.fundmytra.Adapter.ExpandableListAdapter;
+import com.example.bcs.fundmytra.ApiUtils;
+import com.example.bcs.fundmytra.Fragment.AllProductFragment;
+import com.example.bcs.fundmytra.Fragment.MyAccountFragment;
+import com.example.bcs.fundmytra.Fragment.TrackApplicationFragment;
+import com.example.bcs.fundmytra.Model.MenuModel;
+import com.example.bcs.fundmytra.PageAdapter;
+import com.example.bcs.fundmytra.Post;
+import com.example.bcs.fundmytra.R;
+import com.example.bcs.fundmytra.RecyclerViewAdapter;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
@@ -86,10 +97,10 @@ public class DashboardActivity extends AppCompatActivity
 //        auth_Id=intent1.getStringExtra("auth_id");
 //        Log.e("id",id);
 //        Log.e("auth_id",auth_Id);
-         pref=getApplicationContext().getSharedPreferences("MyPref", 0);
+        pref=getApplicationContext().getSharedPreferences("MyPref", 0);
         id=pref.getString("id","1");
         auth_Id=pref.getString("auth_id","2");
-        apiService=ApiUtils.getLogoutService(auth_Id);
+        apiService= ApiUtils.getLogoutService(auth_Id);
         Log.e("auth_id1111111111",auth_Id);
 
 
@@ -171,7 +182,7 @@ public class DashboardActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(false);
-        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.menu, getApplicationContext().getTheme());
+        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.menu2, getApplicationContext().getTheme());
         toggle.setHomeAsUpIndicator(drawable);
         toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override
@@ -281,7 +292,7 @@ public class DashboardActivity extends AppCompatActivity
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
 
-                }
+            }
 
             @Override
             public void onScrolled(RecyclerView recyclerView1, int dx, int dy) {
