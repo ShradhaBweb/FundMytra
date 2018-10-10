@@ -17,6 +17,8 @@ import com.example.bcs.fundmytra.ApiUtils;
 import com.example.bcs.fundmytra.Password;
 //import com.example.bcs.fundmytra.PasswordPost;
 import com.example.bcs.fundmytra.R;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 
 import retrofit2.Call;
@@ -31,7 +33,7 @@ public class PasswordConfirmation extends AppCompatActivity {
     Password pass;
     String id,auth_id,email,mobile;
     public APIService mAPIService;
-    ProgressDialog progressBar;
+        ProgressDialog progressBar;
     public EditText edit_password,edit_reconfirm;
 
     @Override
@@ -94,8 +96,10 @@ public class PasswordConfirmation extends AppCompatActivity {
 //                                                        .registerTypeAdapter(Data.class, new MyDeserializer())
 //                                                        .create();
                                 System.out.println("response"+response.code());
+
                                 if (response.code() == 200) {
                                     progressBar.dismiss();
+
 
                                     Toast.makeText(PasswordConfirmation.this,"Successfully password updated",Toast.LENGTH_SHORT).show();
                                     Intent intent=new Intent(PasswordConfirmation.this,DashboardActivity.class);

@@ -14,7 +14,7 @@ public class ApiUtils {
     }
     public static APIService getOtpService(String authId){
 
-        return RetrofitClient.getOtpClient( BASE_URL,authId).create(APIService.class);
+        return RetrofitClient.getOtpClient(BASE_URL,authId).create(APIService.class);
 
     } public static APIService getPasswordService(String authId){
 
@@ -22,11 +22,15 @@ public class ApiUtils {
         }
     public static APIService getLoginService(){
 
-        return RetrofitClient.getClient(BASE_URL).create(APIService.class);
+        return RetrofitClient.getLoginClient(BASE_URL).create(APIService.class);
 
     }
     public static APIService getLogoutService(String authId){
         return RetrofitClient.getLogoutClient(BASE_URL,authId).create(APIService.class);
+    }
+    public static APIService getMyprofile(String authId){
+
+        return RetrofitClient.getMyprofile(BASE_URL,authId).create(APIService.class);
     }
 
     public static APIService getUpdateService(String authId){
