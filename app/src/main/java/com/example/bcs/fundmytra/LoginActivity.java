@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     String mobilePattern = "[0-9]{10}";
     ProgressDialog progressBar;
     APIService mAPIService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
