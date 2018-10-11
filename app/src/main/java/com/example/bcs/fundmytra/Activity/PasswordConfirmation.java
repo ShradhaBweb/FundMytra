@@ -2,6 +2,7 @@ package com.example.bcs.fundmytra.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,6 +17,8 @@ import com.example.bcs.fundmytra.ApiUtils;
 import com.example.bcs.fundmytra.Password;
 //import com.example.bcs.fundmytra.PasswordPost;
 import com.example.bcs.fundmytra.R;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 
 import retrofit2.Call;
@@ -30,7 +33,7 @@ public class PasswordConfirmation extends AppCompatActivity {
     Password pass;
     String id,auth_id,email,mobile;
     public APIService mAPIService;
-    ProgressDialog progressBar;
+        ProgressDialog progressBar;
     public EditText edit_password,edit_reconfirm;
 
     @Override
@@ -39,10 +42,16 @@ public class PasswordConfirmation extends AppCompatActivity {
         setContentView(R.layout.activity_password_confirmation);
         Intent intent=getIntent();
 //        email=intent.getStringExtra("email");
-        id=intent.getStringExtra("customer_id");
-        auth_id=intent.getStringExtra("auth_id");
-        email=intent.getStringExtra("email");
-        mobile=intent.getStringExtra("mobile");
+//        id=intent.getStringExtra("customer_id");
+//        auth_id=intent.getStringExtra("auth_id");
+//        email=intent.getStringExtra("email");
+//        mobile=intent.getStringExtra("mobile");
+        SharedPreferences preferences=getApplicationContext().getSharedPreferences("MyPref",0);
+        id= preferences.getString("id","1");
+        auth_id=preferences.getString("auth_id","1");
+        email=preferences.getString("email","1");
+        mobile=preferences.getString("mobile","1");
+
 
         Log.e("auth-Id",auth_id);
         init();
@@ -84,21 +93,13 @@ public class PasswordConfirmation extends AppCompatActivity {
 //                                                        .registerTypeAdapter(Data.class, new MyDeserializer())
 //                                                        .create();
                                 System.out.println("response"+response.code());
+
                                 if (response.code() == 200) {
                                     progressBar.dismiss();
 
+
                                     Toast.makeText(PasswordConfirmation.this,"Successfully password updated",Toast.LENGTH_SHORT).show();
-
-
-                                    Bundle bundle = new Bundle();
-                                    // bundle.putString("id",);
-                                    bundle.putString("id",id);
-                                    bundle.putString("auth_id",auth_id);
-                                    bundle.putString("email",email);
-                                    bundle.putString("mobile",mobile);
-                                    bundle.putString("password",password);
                                     Intent intent=new Intent(PasswordConfirmation.this,DashboardActivity.class);
-                                    intent.putExtras(bundle);
                                     startActivity(intent);
 
                                 } else {

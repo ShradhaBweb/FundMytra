@@ -140,7 +140,7 @@ public class IntroductionActivity extends AppCompatActivity {
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
         SharedPreferences pref=getApplicationContext().getSharedPreferences("MyPref", 0); ;
-       String emailPhone= pref.getString("Key_emailPhone",null);
+       String emailPhone= pref.getString("email",null);
         String pass= pref.getString("Key_pass","1");
         if (!TextUtils.isEmpty(emailPhone)){
 

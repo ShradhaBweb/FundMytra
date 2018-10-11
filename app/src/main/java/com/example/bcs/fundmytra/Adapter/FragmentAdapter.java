@@ -1,22 +1,15 @@
-package com.example.bcs.fundmytra.Adapter;
+package com.example.bcs.fundmytra;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.bcs.fundmytra.Fragment.DocumentsFragment;
-import com.example.bcs.fundmytra.Fragment.MyApplicationsFragment;
-import com.example.bcs.fundmytra.Fragment.MyProfileFragment;
-import com.example.bcs.fundmytra.Fragment.MySearchesFragment;
-import com.example.bcs.fundmytra.Fragment.SalaryInformationFragment;
-import com.example.bcs.fundmytra.Fragment.YourInterestsFragment;
-import com.example.bcs.fundmytra.R;
-
-public class FragmentAdapter extends FragmentPagerAdapter {
+public class FragmentAdapter extends FragmentStatePagerAdapter {
     private int numOfTabs;
-private FragmentManager fm;
+    private FragmentManager fm;
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
@@ -41,8 +34,8 @@ private FragmentManager fm;
 
     public FragmentAdapter( Context context,FragmentManager fm, int numOfTabs) {
         super(fm);
-       mContext = context;
-       this.numOfTabs = numOfTabs;
+        mContext = context;
+        this.numOfTabs = numOfTabs;
     }
 
     @Override

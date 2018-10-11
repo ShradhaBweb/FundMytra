@@ -1,4 +1,4 @@
-package com.example.bcs.fundmytra.Activity;
+package com.example.bcs.fundmytra;
 
 
 import android.app.ProgressDialog;
@@ -37,17 +37,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.bcs.fundmytra.APIService;
-import com.example.bcs.fundmytra.Adapter.ExpandableListAdapter;
-import com.example.bcs.fundmytra.ApiUtils;
-import com.example.bcs.fundmytra.Fragment.AllProductFragment;
-import com.example.bcs.fundmytra.Fragment.MyAccountFragment;
-import com.example.bcs.fundmytra.Fragment.TrackApplicationFragment;
-import com.example.bcs.fundmytra.Model.MenuModel;
-import com.example.bcs.fundmytra.PageAdapter;
-import com.example.bcs.fundmytra.Post;
-import com.example.bcs.fundmytra.R;
-import com.example.bcs.fundmytra.RecyclerViewAdapter;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
@@ -75,7 +64,7 @@ public class DashboardActivity extends AppCompatActivity
     private ArrayList<Integer> arrayList;
     RecyclerViewAdapter adapter;
     int i,k;
-    String id,auth_Id;
+    String id,auth_Id,email,mobile;
     ExpandableListAdapter expandableListAdapter;
     ExpandableListView expandableListView;
     List<MenuModel> headerList = new ArrayList<>();
@@ -84,28 +73,22 @@ public class DashboardActivity extends AppCompatActivity
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<Integer> mImageUrls = new ArrayList<>();
     ProgressDialog progressBar;
-    SharedPreferences pref;
+    SharedPreferences preferences;
 
     APIService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent1=getIntent();
 
-//        id= intent1.getStringExtra("id");
-//        auth_Id=intent1.getStringExtra("auth_id");
-//        Log.e("id",id);
-//        Log.e("auth_id",auth_Id);
-        pref=getApplicationContext().getSharedPreferences("MyPref", 0);
-        id=pref.getString("id","1");
-        auth_Id=pref.getString("auth_id","2");
-        apiService= ApiUtils.getLogoutService(auth_Id);
+        preferences=getApplicationContext().getSharedPreferences("MyPref",0);
+        id= preferences.getString("id","1");
+        auth_Id=preferences.getString("auth_id","1");
+        email=preferences.getString("email","1");
+        mobile=preferences.getString("mobile","1");
+
+        apiService=ApiUtils.getLogoutService(auth_Id);
         Log.e("auth_id1111111111",auth_Id);
-
-
-
-
         final Intent intent= getIntent();
         final int fragmentId=intent.getIntExtra("send",2);
         if(fragmentId==1)
@@ -147,8 +130,8 @@ public class DashboardActivity extends AppCompatActivity
                     @Override
                     public void onResponse(Call<Post> call, Response<Post> response) {
                         if (response.code()==200){
-                            SharedPreferences.Editor editor = pref.edit();
-                            editor.remove("Key_emailPhone");
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.remove("email");
                             editor.apply();
                             progressBar.dismiss();
                             Intent intent2=new Intent(DashboardActivity.this,LoginActivity.class);
@@ -182,7 +165,7 @@ public class DashboardActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(false);
-        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.menu2, getApplicationContext().getTheme());
+        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.menu, getApplicationContext().getTheme());
         toggle.setHomeAsUpIndicator(drawable);
         toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override
