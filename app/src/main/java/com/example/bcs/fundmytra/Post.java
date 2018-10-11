@@ -1,7 +1,6 @@
 package com.example.bcs.fundmytra;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import retrofit2.http.POST;
 
 public class Post {
 
@@ -9,6 +8,16 @@ public class Post {
 
 
     private String otp;
+    private String name;
+    private String email;
+    private String mobile;
+
+    public Post(String id, String name, String email, String mobile) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.mobile = mobile;
+    }
 
     public Post(String id) {
         this.id = id;
@@ -41,5 +50,29 @@ public class Post {
     public String toString(){
         return "Post{"+"id='"+id +'\''+
                 ",otp='" +otp+'}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 }

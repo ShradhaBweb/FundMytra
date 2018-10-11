@@ -1,15 +1,34 @@
 package com.example.bcs.fundmytra.Fragment;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.JsonElement;
+
+import java.util.Objects;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,6 +42,17 @@ public class MyProfileFragment extends Fragment {
     private APIService mAPIService;
     ProgressDialog progressBar;
     TextView name,email,num;
+    ImageButton updatebtn;
+    View view;
+    String auth_id,id,edtId,edtName,edtEmail,edtMobile;
+    Post post;
+    Context context=getActivity();
+    AlertDialog.Builder alertDialogBuilder;
+    Button savebtn,cancelbtn;
+    EditText id1,name1,email1,mobile1;
+
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    String mobilePattern = "[0-9]{10}";
     public MyProfileFragment() {
 
 // Required empty public constructor
@@ -33,9 +63,10 @@ public class MyProfileFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         SharedPreferences preferences= getContext().getApplicationContext().getSharedPreferences("MyPref",0);
-        String auth_id=preferences.getString("auth_id","sssss");
+         auth_id=preferences.getString("auth_id","sssss");
+         id=preferences.getString("id","defaultValue");
         Log.e("auth_id in Fragment",auth_id);
-
+        Log.e("ID",id);
         mAPIService= ApiUtils.getMyprofile(auth_id);
 
         progressBar = new ProgressDialog(getContext());
@@ -53,7 +84,6 @@ public class MyProfileFragment extends Fragment {
                 System.out.println("response"+data.getEmail());
                 System.out.println("response"+data.getLogin_code());
                 System.out.println("response"+data.getMobile_no());
-                System.out.println("response"+data.getId());
                 System.out.println("response"+data.getName());
                 System.out.println("response"+response.body());
 

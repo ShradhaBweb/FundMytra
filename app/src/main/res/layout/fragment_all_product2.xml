@@ -41,8 +41,6 @@
             app:pageColor="#f20606"
             />
     </RelativeLayout>
-
-
         
     <RelativeLayout
         android:layout_below="@+id/headerImage"

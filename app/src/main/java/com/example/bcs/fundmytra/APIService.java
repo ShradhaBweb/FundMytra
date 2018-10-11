@@ -7,6 +7,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface APIService {
 
@@ -27,4 +28,9 @@ public interface APIService {
 
     @GET("admin_app/master_api/my_profile")
     Call<MyProfileData> myprofile();
+
+    @PUT("admin_app/master_api/update_profile")
+    Call<JsonElement> update(@Body Post post);
+
+
 }

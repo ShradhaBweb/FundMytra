@@ -44,6 +44,7 @@ public class MyAccountFragment extends Fragment {
         tabLayout = (TabLayout) view.findViewById(R.id.simpleTabLayout);
         viewPager = (ViewPager)view. findViewById(R.id.viewpager);
 
+
         init();
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

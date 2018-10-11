@@ -32,4 +32,8 @@ public class ApiUtils {
 
         return RetrofitClient.getMyprofile(BASE_URL,authId).create(APIService.class);
     }
+
+    public static APIService getUpdateService(String authId){
+        return RetrofitClient.getUpdateClient(BASE_URL,authId).create(APIService.class);
+    }
 }

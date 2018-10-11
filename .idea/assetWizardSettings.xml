@@ -18,6 +18,17 @@
                                 <PersistentState>
                                   <option name="children">
                                     <map>
+                                      <entry key="clipArt">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="paddingPercent" value="-10" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
                                       <entry key="clipartAsset">
                                         <value>
                                           <PersistentState>
@@ -33,6 +44,8 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="imageAsset" value="E:\Android Projects\F\FundMytra\FundMytra\app\src\main\res\drawable-hdpi\person.png" />
+                                      <entry key="outputName" value="logout" />
                                       <entry key="assetType" value="IMAGE" />
                                       <entry key="imageAsset" value="E:\Android Projects\F\FundMytra\FundMytra\app\src\main\res\drawable\plus.png" />
                                       <entry key="outputName" value="plus" />
