@@ -33,7 +33,7 @@ private String message;
 
     private ProfileData data;
 
-    class ProfileData {
+    public class ProfileData {
         private String id;
 
         public String getName() {

@@ -1,4 +1,4 @@
-package com.example.bcs.fundmytra;
+package com.example.bcs.fundmytra.Activity;
 
 
 import android.app.ProgressDialog;
@@ -37,6 +37,17 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.bcs.fundmytra.APIService;
+import com.example.bcs.fundmytra.Adapter.ExpandableListAdapter;
+import com.example.bcs.fundmytra.ApiUtils;
+import com.example.bcs.fundmytra.Fragment.AllProductFragment;
+import com.example.bcs.fundmytra.Fragment.TrackApplicationFragment;
+import com.example.bcs.fundmytra.Model.MenuModel;
+import com.example.bcs.fundmytra.MyAccountFragment;
+import com.example.bcs.fundmytra.PageAdapter;
+import com.example.bcs.fundmytra.Post;
+import com.example.bcs.fundmytra.R;
+import com.example.bcs.fundmytra.RecyclerViewAdapter;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
@@ -87,7 +98,7 @@ public class DashboardActivity extends AppCompatActivity
         email=preferences.getString("email","1");
         mobile=preferences.getString("mobile","1");
 
-        apiService=ApiUtils.getLogoutService(auth_Id);
+        apiService= ApiUtils.getLogoutService(auth_Id);
         Log.e("auth_id1111111111",auth_Id);
         final Intent intent= getIntent();
         final int fragmentId=intent.getIntExtra("send",2);
@@ -165,7 +176,7 @@ public class DashboardActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(false);
-        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.menu, getApplicationContext().getTheme());
+        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.menu2, getApplicationContext().getTheme());
         toggle.setHomeAsUpIndicator(drawable);
         toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override

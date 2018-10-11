@@ -14,6 +14,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import com.example.bcs.fundmytra.APIService;
+import com.example.bcs.fundmytra.ApiUtils;
+import com.example.bcs.fundmytra.MyProfileData;
 import com.example.bcs.fundmytra.R;
 
 public class MyProfileFragment extends Fragment {

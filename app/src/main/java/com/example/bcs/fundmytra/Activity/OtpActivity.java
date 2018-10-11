@@ -2,6 +2,7 @@ package com.example.bcs.fundmytra.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bcs.fundmytra.APIService;
+import com.example.bcs.fundmytra.Activity.PasswordConfirmation;
 import com.example.bcs.fundmytra.ApiUtils;
 import com.example.bcs.fundmytra.Post;
 import com.example.bcs.fundmytra.R;
@@ -47,11 +49,16 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
 
         setContentView(R.layout.activity_otp);
 
-        Intent intent=getIntent();
-        email=intent.getStringExtra("email");
-        id=intent.getStringExtra("ID");
-        Auth_id=intent.getStringExtra("auth_id");
-        mobile=intent.getStringExtra("mobile");
+//        Intent intent=getIntent();
+//        email=intent.getStringExtra("email");
+//        id=intent.getStringExtra("ID");
+//        Auth_id=intent.getStringExtra("auth_id");
+//        mobile=intent.getStringExtra("mobile");
+        SharedPreferences preferences=getApplicationContext().getSharedPreferences("MyPref",0);
+        id= preferences.getString("id","1");
+        Auth_id=preferences.getString("auth_id","1");
+        email=preferences.getString("email","1");
+        mobile=preferences.getString("mobile","1");
 
 
         Log.e("id",id);
@@ -406,13 +413,13 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                     public void onResponse(Call<Post> call, Response<Post> response) {
                         if (response.code()==200){
                             progressBar.dismiss();
-                            Bundle bundle = new Bundle();
-                            bundle.putString("customer_id",id);
-                            bundle.putString("auth_id",Auth_id);
-                            bundle.putString("email",email);
-                            bundle.putString("mobile",mobile);
+//                            Bundle bundle = new Bundle();
+//                            bundle.putString("customer_id",id);
+//                            bundle.putString("auth_id",Auth_id);
+//                            bundle.putString("email",email);
+//                            bundle.putString("mobile",mobile);
                             Intent intent=new Intent(OtpActivity.this,PasswordConfirmation.class);
-                            intent.putExtras(bundle);
+                            //   intent.putExtras(bundle);
                             startActivity(intent);
 
                         }else {
