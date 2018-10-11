@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.bcs.fundmytra.Adapter.AllProductGridAdapter;
 import com.example.bcs.fundmytra.Adapter.AllProductPageAdapter;
+import com.example.bcs.fundmytra.CreditCardActivity;
 import com.example.bcs.fundmytra.R;
 import com.viewpagerindicator.CirclePageIndicator;
 

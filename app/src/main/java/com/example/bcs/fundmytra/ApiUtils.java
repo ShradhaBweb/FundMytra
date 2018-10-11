@@ -19,7 +19,7 @@ public class ApiUtils {
     } public static APIService getPasswordService(String authId){
 
         return RetrofitClient.getPasswordClient(BASE_URL,authId).create(APIService.class);
-        }
+    }
     public static APIService getLoginService(){
 
         return RetrofitClient.getLoginClient(BASE_URL).create(APIService.class);

@@ -1,4 +1,4 @@
-package com.example.bcs.fundmytra;
+package com.example.bcs.fundmytra.Fragment;
 
 
 import android.content.SharedPreferences;
@@ -12,6 +12,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.bcs.fundmytra.FragmentAdapter;
+import com.example.bcs.fundmytra.R;
 
 
 /**

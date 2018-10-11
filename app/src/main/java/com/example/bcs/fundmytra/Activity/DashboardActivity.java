@@ -41,9 +41,9 @@ import com.example.bcs.fundmytra.APIService;
 import com.example.bcs.fundmytra.Adapter.ExpandableListAdapter;
 import com.example.bcs.fundmytra.ApiUtils;
 import com.example.bcs.fundmytra.Fragment.AllProductFragment;
+import com.example.bcs.fundmytra.Fragment.MyAccountFragment;
 import com.example.bcs.fundmytra.Fragment.TrackApplicationFragment;
 import com.example.bcs.fundmytra.Model.MenuModel;
-import com.example.bcs.fundmytra.MyAccountFragment;
 import com.example.bcs.fundmytra.PageAdapter;
 import com.example.bcs.fundmytra.Post;
 import com.example.bcs.fundmytra.R;
@@ -450,8 +450,7 @@ public class DashboardActivity extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
 
@@ -478,14 +477,14 @@ public class DashboardActivity extends AppCompatActivity
         menuModel = new MenuModel("Loans", true, true); //Menu of Java Tutorials
         headerList.add(menuModel);
         List<MenuModel> childModelsList = new ArrayList<>();
-        MenuModel childModel = new MenuModel("Core Java Tutorial", false, false);
+        MenuModel childModel = new MenuModel("Personal Loan", false, false);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Java FileInputStream", false, false);
-        childModelsList.add(childModel);
-
-        childModel = new MenuModel("Java FileReader", false, false);
-        childModelsList.add(childModel);
+//        childModel = new MenuModel("Java FileInputStream", false, false);
+//        childModelsList.add(childModel);
+//
+//        childModel = new MenuModel("Java FileReader", false, false);
+//        childModelsList.add(childModel);
 
         if (menuModel.hasChildren) {
             Log.d("API123","here");
@@ -495,10 +494,20 @@ public class DashboardActivity extends AppCompatActivity
         childModelsList = new ArrayList<>();
         menuModel = new MenuModel("Secured Loans", true, true); //Menu of Python Tutorials
         headerList.add(menuModel);
-        childModel = new MenuModel("Python AST – Abstract Syntax Tree", false, false);
+        childModel = new MenuModel("Home Loan", false, false);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Python Fractions", false, false);
+        childModel = new MenuModel("Car Loan", false, false);
+        childModelsList.add(childModel);
+        childModel = new MenuModel("Two Wheeler Loan", false, false);
+        childModelsList.add(childModel);
+        childModel = new MenuModel("Used Car Loan", false, false);
+        childModelsList.add(childModel);
+        childModel = new MenuModel("Education Loan", false, false);
+        childModelsList.add(childModel);
+        childModel = new MenuModel("Business Loan", false, false);
+        childModelsList.add(childModel);
+        childModel = new MenuModel("Loan Against Property", false, false);
         childModelsList.add(childModel);
         if (menuModel.hasChildren) {
             Log.d("API123","here");
@@ -508,23 +517,23 @@ public class DashboardActivity extends AppCompatActivity
         childModelsList = new ArrayList<>();
         menuModel = new MenuModel("Cards", true, true); //Menu of Python Tutorials
         headerList.add(menuModel);
-        childModel = new MenuModel("Python AST – Abstract Syntax Tree", false, false);
-        childModelsList.add(childModel);
-
-        childModel = new MenuModel("Python Fractions", false, false);
-        childModelsList.add(childModel);
-        if (menuModel.hasChildren) {
-            Log.d("API123","here");
-            childList.put(menuModel, childModelsList);
-        }
+//        childModel = new MenuModel("Python AST – Abstract Syntax Tree", false, false);
+//        childModelsList.add(childModel);
+//
+//        childModel = new MenuModel("Python Fractions", false, false);
+//        childModelsList.add(childModel);
+//        if (menuModel.hasChildren) {
+//            Log.d("API123","here");
+//            childList.put(menuModel, childModelsList);
+//        }
 
         childModelsList = new ArrayList<>();
         menuModel = new MenuModel("Tools", true, true); //Menu of Python Tutorials
         headerList.add(menuModel);
-        childModel = new MenuModel("Python AST – Abstract Syntax Tree", false, false);
+        childModel = new MenuModel("EMI Calculator", false, false);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Python Fractions", false, false);
+        childModel = new MenuModel("Loan Eligibility Calculator", false, false);
         childModelsList.add(childModel);
 
         if (menuModel.hasChildren) {
@@ -555,15 +564,18 @@ public class DashboardActivity extends AppCompatActivity
                         transaction.replace(R.id.fragmentContainer, fragment); // fragment container id in first parameter is the  container(Main layout id) of Activity
                         transaction.addToBackStack(null);  // this will manage backstack
                         transaction.commit();
+                        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                        drawer.closeDrawer(GravityCompat.START);
                     }else if(groupPosition == 3){
                         AllProductFragment fragment = new AllProductFragment();
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.fragmentContainer, fragment);
                         transaction.addToBackStack(null);
                         transaction.commit();
+                        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                        drawer.closeDrawer(GravityCompat.START);
                     }
-                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                    drawer.closeDrawer(GravityCompat.START);
+
 //                    if (!headerList.get(groupPosition).hasChildren) {
 //                        WebView webView = findViewById(R.id.webView);
 //                        webView.loadUrl(headerList.get(groupPosition).url);

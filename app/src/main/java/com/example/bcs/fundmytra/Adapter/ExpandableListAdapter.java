@@ -60,6 +60,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public int getChildrenCount(int groupPosition) {
 
+//        if ( this.listDataChild.get(this.listDataHeader.get(groupPosition)) == null ) {
+//            img_expandable.setVisibility( View.INVISIBLE );
+//        } else {
+//            img_expandable.setVisibility( View.VISIBLE );
+//            img_expandable.setImageResource( R.drawable.plus );
+//        }
         if (this.listDataChild.get(this.listDataHeader.get(groupPosition)) == null)
             return 0;
         else {
@@ -94,8 +100,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.list_group_header, null);
             img_expandable = convertView.findViewById(R.id.img_expandable);
         }
-
+        System.out.println("Get Child Count : "+getChildrenCount(groupPosition));
         System.out.println("Group header position : "+getGroupId(groupPosition));
+
 //        if(parent.getChildCount() == 5 || parent.getChildCount() == 6 || parent.getChildCount() == 7){
 //            img_expandable.setImageResource(R.drawable.plus);
 //        }
