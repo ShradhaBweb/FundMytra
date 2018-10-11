@@ -41,7 +41,6 @@ public class MyProfileFragment extends DialogFragment {
     View view;
     String auth_id,id,edtId,edtName,edtEmail,edtMobile;
     Post post;
-    UpdateModel updateModel;
     Context context=getActivity();
     AlertDialog.Builder alertDialogBuilder;
     Button savebtn,cancelbtn;
@@ -132,7 +131,6 @@ public class MyProfileFragment extends DialogFragment {
         return view;
     }
 
-    
     private void listener() {
         updatebtn.setOnClickListener(new View.OnClickListener() {
             @Override

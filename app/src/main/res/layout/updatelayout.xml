@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d4caca">
+    android:background="#80161616">
 
     <LinearLayout
         android:id="@+id/editlayout"
@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:inputType="number"
+            android:textColor="@color/black"
             android:background="@drawable/updateeditbox"
             android:hint="id"
             />
@@ -30,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:background="@drawable/updateeditbox"
+            android:textColor="@color/black"
             android:hint="Name"
             android:inputType="text"
             />
@@ -39,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:background="@drawable/updateeditbox"
+            android:textColor="@color/black"
             android:hint="email"
             android:inputType="text"
             />
@@ -48,6 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:background="@drawable/updateeditbox"
+            android:textColor="@color/black"
             android:hint="Mobile"
             android:inputType="number"
             />
