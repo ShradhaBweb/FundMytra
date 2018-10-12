@@ -1,43 +1,4 @@
-package com.example.bcs.fundmytra.Fragment;
-
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.bcs.fundmytra.Post;
-import com.google.gson.JsonElement;
-
-import java.util.Objects;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import com.example.bcs.fundmytra.APIService;
-import com.example.bcs.fundmytra.ApiUtils;
-import com.example.bcs.fundmytra.MyProfileData;
-import com.example.bcs.fundmytra.R;
+package com.example.bcs.fundmytra;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -78,7 +39,7 @@ public class MyProfileFragment extends DialogFragment {
     TextView name,email,num;
     ImageButton updatebtn;
     View view;
-    String auth_id,id,edtId,edtName,edtEmail,edtMobile;
+    String auth_id,id,edtId,edtName,edtEmail,edtMobile,pname,pemail,pmobile;
     Post post;
     Context context=getActivity();
     AlertDialog.Builder alertDialogBuilder;
@@ -87,6 +48,7 @@ public class MyProfileFragment extends DialogFragment {
 
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     String mobilePattern = "[0-9]{10}";
+    MyProfileData.ProfileData data;
     public MyProfileFragment() {
 
 // Required empty public constructor
@@ -97,10 +59,16 @@ public class MyProfileFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         SharedPreferences preferences= getContext().getApplicationContext().getSharedPreferences("MyPref",0);
-        auth_id=preferences.getString("auth_id","sssss");
-        id=preferences.getString("id","defaultValue");
+         auth_id=preferences.getString("auth_id","sssss");
+         id=preferences.getString("id","defaultValue");
+         pname=preferences.getString("name","defaultValue");
+         pemail=preferences.getString("email","defaultValue");
+         pmobile=preferences.getString("mobile","defaultValue");
         Log.e("auth_id in Fragment",auth_id);
         Log.e("ID",id);
+        Log.e("name",pname);
+        Log.e("email",pemail);
+        Log.e("mobile",pmobile);
         mAPIService= ApiUtils.getMyprofile(auth_id);
         apiService=ApiUtils.getUpdateService(auth_id);
 
@@ -165,8 +133,9 @@ public class MyProfileFragment extends DialogFragment {
         email =(TextView)view.findViewById(R.id.customer_email);
         num =(TextView)view.findViewById(R.id.customer_no);
         updatebtn=(ImageButton)view.findViewById(R.id.write);
-        listener();
-        init();
+         init();
+         listener();
+
         return view;
     }
 
@@ -186,6 +155,9 @@ public class MyProfileFragment extends DialogFragment {
                 mobile1=(EditText)dialogView.findViewById(R.id.mobile);
                 id1.setText(id);
                 id1.setFocusable(false);
+                name1.setText(pname);
+                email1.setText(pemail);
+                mobile1.setText(pmobile);
                 int width = LinearLayout.LayoutParams.MATCH_PARENT;
                 int height = LinearLayout.LayoutParams.MATCH_PARENT;
                 boolean focusable = true;
@@ -210,6 +182,7 @@ public class MyProfileFragment extends DialogFragment {
                         Log.e("name", String.valueOf(edtName));
                         Log.e("email", String.valueOf(edtEmail));
                         Log.e("mobile", String.valueOf(edtMobile));
+
                         if (!TextUtils.isEmpty(edtName)&& !TextUtils.isEmpty(edtEmail) && !TextUtils.isEmpty(edtMobile)){
                             if (edtEmail.matches(emailPattern) && edtMobile.matches(mobilePattern)){
                                 post=new Post(id,edtName,edtEmail,edtMobile);
@@ -287,7 +260,7 @@ public class MyProfileFragment extends DialogFragment {
         mAPIService.myprofile().enqueue(new Callback<MyProfileData>() {
             @Override
             public void onResponse(Call<MyProfileData> call, Response<MyProfileData> response) {
-                MyProfileData.ProfileData data=response.body().getData();
+                 data=response.body().getData();
                 System.out.println("response"+data.getEmail());
                 System.out.println("response"+data.getLogin_code());
                 System.out.println("response"+data.getMobile_no());
@@ -305,6 +278,14 @@ public class MyProfileFragment extends DialogFragment {
 
                     email.setText(data.getEmail());
                     num.setText(data.getMobile_no());
+
+                    pname=name.getText().toString().trim();
+                    pemail=email.getText().toString().trim();
+                    pmobile=num.getText().toString().trim();
+                    System.out.println("NAME:"+pname);
+                    System.out.println("EMAIL:"+pemail);
+                    System.out.println("MOBILE:"+pmobile);
+
 
                     Toast.makeText(getContext(),"profile showing",Toast.LENGTH_SHORT).show();
 
