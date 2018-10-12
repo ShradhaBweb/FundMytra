@@ -1,4 +1,4 @@
-package com.example.bcs.fundmytra;
+package com.example.bcs.fundmytra.Fragment;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -25,6 +25,11 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bcs.fundmytra.APIService;
+import com.example.bcs.fundmytra.ApiUtils;
+import com.example.bcs.fundmytra.MyProfileData;
+import com.example.bcs.fundmytra.Post;
+import com.example.bcs.fundmytra.R;
 import com.google.gson.JsonElement;
 
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package com.example.bcs.fundmytra;
+package com.example.bcs.fundmytra.Adapter;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -13,6 +13,7 @@ import com.example.bcs.fundmytra.Fragment.MyProfileFragment;
 import com.example.bcs.fundmytra.Fragment.MySearchesFragment;
 import com.example.bcs.fundmytra.Fragment.SalaryInformationFragment;
 import com.example.bcs.fundmytra.Fragment.YourInterestsFragment;
+import com.example.bcs.fundmytra.R;
 
 public class FragmentAdapter extends FragmentStatePagerAdapter {
     private int numOfTabs;
